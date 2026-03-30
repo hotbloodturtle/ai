@@ -26,7 +26,18 @@
       "Bash(curl *)",
       "Bash(pytest *)",
       "Bash(jest *)",
-      "Bash(rtk *)"
+      "Bash(rtk *)",
+      "Bash(adb *)",
+      "Bash(QA_DIR=*)",
+      "Bash(cd */android-qa-agent*)",
+      "Bash(*/android-qa *)",
+      "Bash(*/emulator *)",
+      "Bash(emulator *)",
+      "Bash(*/start-recording *)",
+      "Bash(*/stop-recording*)",
+      "Bash(sleep *)",
+      "Bash(for *)",
+      "Bash(lsof *)"
     ],
     "deny": []
   },
@@ -54,6 +65,7 @@
   },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": true,
     "frontend-design@claude-code-plugins": true,
     "swift-lsp@claude-plugins-official": true,
     "serena@claude-plugins-official": true,
