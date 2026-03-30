@@ -3,7 +3,7 @@
 에뮬레이터에서 앱을 자동으로 테스트하기 위한 환경 세팅 가이드.
 Claude Code가 ADB를 통해 Android 에뮬레이터를 직접 제어하고, 스크린샷을 캡처하여 테스트합니다.
 
-마지막 세팅: 2026-03-29
+마지막 세팅: 2026-03-30
 
 ---
 
@@ -49,7 +49,7 @@ source ~/.zshrc
 
 ### 확인
 ```bash
-java -version          # openjdk 21.x
+java -version          # openjdk 버전 확인
 adb --version          # Android Debug Bridge
 emulator -list-avds    # AVD 목록
 ```
@@ -158,69 +158,57 @@ adb devices
 
 ---
 
-## 6. android-qa-agent 클론
+## 6. android-qa-agent 설치
 
 ```bash
-cd ~/Documents/projects/angie
+# 클론
+cd ~/Documents/projects/angie-projects
 git clone https://github.com/tobrun/android-qa-agent.git
 cd android-qa-agent
 chmod +x android-qa android-qa-replay start-recording stop-recording
+
+# 전역 사용을 위한 심링크 등록
+mkdir -p ~/.local/bin
+ln -sf "$(pwd)/android-qa" ~/.local/bin/android-qa
+ln -sf "$(pwd)/android-qa-replay" ~/.local/bin/android-qa-replay
+ln -sf "$(pwd)/start-recording" ~/.local/bin/start-recording
+ln -sf "$(pwd)/stop-recording" ~/.local/bin/stop-recording
+```
+
+> `~/.local/bin`이 PATH에 포함되어 있어야 합니다. 없으면 `~/.zshrc`에 추가:
+> ```bash
+> export PATH="$HOME/.local/bin:$PATH"
+> ```
+
+### 확인
+```bash
+which android-qa       # ~/.local/bin/android-qa
+android-qa             # "no active recording session" 메시지가 나오면 정상
 ```
 
 ### 위치
 ```
-~/Documents/projects/angie/android-qa-agent/
+~/Documents/projects/angie-projects/android-qa-agent/
 ```
 
 ---
 
-## 7. APK 빌드 및 설치
+## 7. APK 설치 및 앱 실행
 
-### local.properties 확인
-`angie-cart/android/local.properties` 파일에 SDK 경로가 있어야 합니다:
-```
-sdk.dir=/Users/kanghaeseok/Library/Android/sdk
-```
-
-없으면 생성:
+### APK 에뮬레이터에 설치
 ```bash
-echo "sdk.dir=$HOME/Library/Android/sdk" > ~/Documents/projects/angie/angie-cart/angie-cart/android/local.properties
-```
-
-### Release APK 빌드
-```bash
-cd ~/Documents/projects/angie/angie-cart/angie-cart/android
-./gradlew assembleRelease -x lintVitalAnalyzeRelease -x lintVitalReportRelease
-```
-
-> **Metaspace OOM 발생 시**: `android/gradle.properties`의 메모리 설정 확인
-> ```
-> org.gradle.jvmargs=-Xmx4096m -XX:MaxMetaspaceSize=1024m
-> ```
-
-### APK 위치
-```
-android/app/build/outputs/apk/release/app-release.apk
-```
-
-### 에뮬레이터에 설치
-```bash
-adb install -r android/app/build/outputs/apk/release/app-release.apk
+adb install -r <앱.apk 경로>
 ```
 
 > **서명 충돌 시** (debug→release 전환 등):
 > ```bash
-> adb uninstall com.hotbloodturtle.angiecart
-> adb install android/app/build/outputs/apk/release/app-release.apk
+> adb uninstall <패키지명>
+> adb install <앱.apk 경로>
 > ```
-
----
-
-## 8. 앱 실행 및 스크린샷
 
 ### 앱 실행
 ```bash
-adb shell am start -n com.hotbloodturtle.angiecart/.MainActivity
+adb shell am start -n <패키지명>/<액티비티명>
 ```
 
 ### 스크린샷 캡처
@@ -251,24 +239,22 @@ adb shell input keyevent KEYCODE_BACK
 
 ---
 
-## 9. 빠른 시작 (이미 세팅된 환경)
+## 8. 빠른 시작 (이미 세팅된 환경)
 
 모든 세팅이 완료된 후, 테스트를 시작하려면:
 
 ```bash
-# 1. 에뮬레이터 실행
-nohup emulator -avd test_device -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect > /tmp/emulator.log 2>&1 &
+# 1. 에뮬레이터 실행 (AVD 이름은 emulator -list-avds로 확인)
+nohup emulator -avd <AVD_이름> -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect > /tmp/emulator.log 2>&1 &
 
 # 2. 부팅 대기
 adb wait-for-device && adb shell getprop sys.boot_completed
 
-# 3. APK 빌드 + 설치
-cd ~/Documents/projects/angie/angie-cart/angie-cart/android
-./gradlew assembleRelease -x lintVitalAnalyzeRelease -x lintVitalReportRelease
-adb install -r app/build/outputs/apk/release/app-release.apk
+# 3. APK 설치
+adb install -r <앱.apk 경로>
 
 # 4. 앱 실행
-adb shell am start -n com.hotbloodturtle.angiecart/.MainActivity
+adb shell am start -n <패키지명>/<액티비티명>
 
 # 5. 스크린샷 확인
 sleep 5 && adb exec-out screencap -p > /tmp/test.png
@@ -276,7 +262,7 @@ sleep 5 && adb exec-out screencap -p > /tmp/test.png
 
 ---
 
-## 10. 트러블슈팅
+## 9. 트러블슈팅
 
 ### "SDK location not found"
 ```bash
@@ -291,8 +277,8 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 ### "INSTALL_FAILED_UPDATE_INCOMPATIBLE"
 서명이 다른 APK로 교체할 때 발생:
 ```bash
-adb uninstall com.hotbloodturtle.angiecart
-adb install app-release.apk
+adb uninstall <패키지명>
+adb install <앱.apk>
 ```
 
 ### "OutOfMemoryError: Metaspace"
@@ -313,15 +299,9 @@ ps aux | grep emulator
 adb emu kill
 ```
 
-### RevenueCat "Wrong API Key" 다이얼로그
-Release 빌드에서 `test_` 키 사용 시 발생. `lib/iap/index.ts`의 `isIAPEnabled` 가드가 플레이스홀더 키일 때 자동으로 IAP를 건너뜀.
-
 ---
 
 ## 참고
 
 - **android-qa-agent 리포**: https://github.com/tobrun/android-qa-agent
-- **패키지명**: `com.hotbloodturtle.angiecart`
-- **MainActivity**: `com.hotbloodturtle.angiecart/.MainActivity`
-- **AVD 이름**: `test_device`
-- **시스템 이미지**: `android-34;google_apis;arm64-v8a`
+- **시스템 이미지 예시**: `android-34;google_apis;arm64-v8a`
