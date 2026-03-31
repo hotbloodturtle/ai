@@ -20,8 +20,7 @@ configs/
 │   ├── metric-glossary.md     # 지표 용어집 (매출, 성장, 사용자 지표)
 │   └── review-rules.md        # 검토 체크리스트 (발표자료, 코드)
 ├── hooks/                     # Claude Code 훅 스크립트
-│   ├── cbm-code-discovery-gate  # codebase-memory-mcp 우선 사용 유도 훅
-│   └── rtk-rewrite.sh          # RTK 명령어 자동 재작성 훅
+│   └── cbm-code-discovery-gate  # codebase-memory-mcp 우선 사용 유도 훅
 └── skills/                    # 커스텀 슬래시 커맨드
     ├── commit-msg/SKILL.md    # /commit-msg - 한국어 커밋 메시지 작성
     ├── daily-report/SKILL.md  # /daily-report - 일일 작업 보고서 생성
@@ -57,9 +56,7 @@ cp configs/templates/*.md ~/.claude/templates/
 
 # 훅 스크립트 복사 및 실행 권한 부여
 cp configs/hooks/cbm-code-discovery-gate ~/.claude/hooks/
-cp configs/hooks/rtk-rewrite.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/cbm-code-discovery-gate
-chmod +x ~/.claude/hooks/rtk-rewrite.sh
 
 # 스킬 복사
 for skill in commit-msg daily-report explain fix my-style refactor review start-project test translate; do
@@ -82,6 +79,7 @@ cp configs/settings.json ~/.claude/settings.json
 이 백업에서 원본과 다른 부분은 다음과 같습니다.
 
 - **settings.json**: RTK 훅 경로를 `/Users/kanghaeseok/.claude/hooks/rtk-rewrite.sh`에서 `$HOME/.claude/hooks/rtk-rewrite.sh`로 변경하여 이식성(Portability) 확보
+- **configs/**: RTK 훅 스크립트 파일 자체는 더 이상 이 저장소에 포함하지 않음. 필요하면 RTK 설치 과정에서 생성된 로컬 파일을 사용해야 함.
 - **settings.json**: 중복 플러그인 `"example-skills@anthropic-agent-skills": true` 항목 제거 (`document-skills@anthropic-agent-skills`만 유지)
 
 ## 백업 일자
