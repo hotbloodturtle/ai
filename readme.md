@@ -36,6 +36,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | 14 | RTK | 토큰 절감 | Bash 출력 압축으로 60~90% 토큰 절감 | 필수 | [rtk.md](rtk.md) |
 | 15 | planning-with-files | 스킬 | Manus 스타일 영속적 플래닝 | 선택 | [planning-with-files.md](planning-with-files.md) |
 | 16 | knowledge-work-plugins | 플러그인 | Cowork/Desktop 역할별 플러그인 | 선택 | [knowledge-work-plugins.md](knowledge-work-plugins.md) |
+| 17 | Awesome Design MD | 디자인 레퍼런스 | 54개 사이트 DESIGN.md 컬렉션 (전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
 
 ---
 
@@ -43,7 +44,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 
 | 역할 | 필수 | MCP | 추가 |
 |------|------|-----|------|
-| 웹 개발자 | Superpowers, Document-Skills | Context7, Codebase Memory | gstack, Playwright CLI |
+| 웹 개발자 | Superpowers, Document-Skills | Context7, Codebase Memory | Awesome Design MD, gstack, Playwright CLI |
 | 마케터/SEO | Document-Skills | Context7 | Marketing Skills, Claude SEO |
 | 데이터 분석가 | Document-Skills | Context7, Task Master | gstack |
 | PM/기획자 | Document-Skills | Task Master | Obsidian Skills, NotebookLM |
