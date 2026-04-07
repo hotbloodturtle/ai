@@ -37,6 +37,8 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | 15 | planning-with-files | 스킬 | Manus 스타일 영속적 플래닝 | 선택 | [planning-with-files.md](planning-with-files.md) |
 | 16 | knowledge-work-plugins | 플러그인 | Cowork/Desktop 역할별 플러그인 | 선택 | [knowledge-work-plugins.md](knowledge-work-plugins.md) |
 | 17 | Awesome Design MD | 디자인 레퍼런스 | 54개 사이트 DESIGN.md 컬렉션 (전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
+| 18 | Serena | 플러그인 + MCP | LSP 기반 시맨틱 코드 탐색/편집 | 추천 | [serena.md](serena.md) |
+| 19 | Swift LSP | 플러그인 | Swift 프로젝트용 LSP 통합 | 선택 | [swift-lsp.md](swift-lsp.md) |
 
 ---
 
