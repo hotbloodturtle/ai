@@ -162,7 +162,7 @@ adb devices
 
 ```bash
 # 클론
-cd ~/Documents/projects/angie-projects
+cd ~/Documents/projects
 git clone https://github.com/tobrun/android-qa-agent.git
 cd android-qa-agent
 chmod +x android-qa android-qa-replay start-recording stop-recording
@@ -188,7 +188,7 @@ android-qa             # "no active recording session" 메시지가 나오면 �
 
 ### 위치
 ```
-~/Documents/projects/angie-projects/android-qa-agent/
+~/Documents/projects/android-qa-agent/
 ```
 
 ### Claude Code 스킬 등록
@@ -352,7 +352,7 @@ ADB를 통해 스크린샷, UI dump, 터치, 텍스트 입력 등을 수행한�
 
 ## 도구 위치
 ```
-QA_AGENT_DIR=~/Documents/projects/angie-projects/android-qa-agent
+QA_AGENT_DIR=~/Documents/projects/android-qa-agent
 ```
 
 ## 세션 시작 워크플로
