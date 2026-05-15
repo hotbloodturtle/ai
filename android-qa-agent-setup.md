@@ -25,16 +25,33 @@ Android 에뮬레이터 (headless, -no-window)
 
 | 항목 | 확인 방법 |
 |------|----------|
-| Android Studio | 설치됨 |
-| Java (JDK) | Android Studio 내장 JDK 사용 |
+| Android Studio | `brew install --cask android-studio` |
+| Java (JDK) | Android Studio 내장 JBR 사용 (별도 설치 불필요) |
 | Python 3.8+ | `python3 --version` |
 | Claude Code | 현재 사용 중 |
+
+### Android Studio 초기 셋업 (GUI)
+
+`brew install --cask android-studio` 후 한 번 실행해 Setup Wizard를 완료해야 SDK가 셋업됩니다.
+
+```bash
+open -a "Android Studio"
+```
+
+GUI에서 **Standard** 옵션 선택 시 자동 설치되는 항목 (2026-05 검증, Apple Silicon):
+- `~/Library/Android/sdk/platform-tools` (adb)
+- `~/Library/Android/sdk/cmdline-tools/latest` (sdkmanager, avdmanager)
+- `~/Library/Android/sdk/emulator`
+- `~/Library/Android/sdk/platforms/android-36.1`
+- `~/Library/Android/sdk/build-tools/{36.1.0, 37.0.0}`
+
+따라서 **아래 2단계(cmdline-tools 수동 설치)는 GUI Setup Wizard로 진행했다면 건너뛸 수 있습니다.** system-image와 AVD만 별도로 추가하면 됩니다.
 
 ---
 
 ## 1. 환경변수 설정
 
-`~/.zshrc`에 아래 내용이 있어야 합니다:
+`~/.zshrc` 끝에 아래 3줄을 추가합니다:
 
 ```bash
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
@@ -47,12 +64,19 @@ export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/c
 source ~/.zshrc
 ```
 
+> ⚠️ Claude Code의 자동 분류기(auto mode)는 `~/.zshrc` 수정을 Self-Modification(Unauthorized Persistence)으로 분류해 차단합니다. AI 에이전트를 통한 자동 추가 대신 **vi/nano 등으로 직접 편집**해야 합니다.
+
+> ⚠️ `JAVA_HOME` 누락 시 `avdmanager`가 `Unable to locate a Java Runtime` 에러로 실패합니다 — Android Studio 내장 JBR을 명시적으로 가리켜야 합니다.
+
 ### 확인
 ```bash
-java -version          # openjdk 버전 확인
-adb --version          # Android Debug Bridge
+java -version          # openjdk 21 (Android Studio 내장 JBR)
+adb --version          # Android Debug Bridge version 1.0.x
+sdkmanager --version   # 20.x
 emulator -list-avds    # AVD 목록
 ```
+
+> `sdkmanager --version` 실행 시 `This version only understands SDK XML versions up to 3 but ... version 4 was encountered` 경고가 뜰 수 있습니다. Android Studio가 cmdline-tools보다 신버전이라서 발생하는 정보성 메시지이며 동작에는 지장 없습니다.
 
 ---
 

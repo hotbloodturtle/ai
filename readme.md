@@ -102,6 +102,7 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 |----------|------|------|
 | `~/.claude/settings.json` 편집 | Self-Modification | 사용자가 수동 편집 또는 미리 만든 JSON `cp` |
 | `~/.claude/CLAUDE.md` 편집 | Self-Modification | Bash heredoc은 한 번 통과한 사례 있음 |
+| `~/.zshrc` 편집 (Android SDK 환경변수 등) | Unauthorized Persistence | 사용자가 vi/nano로 직접 편집 |
 | `curl ... \| bash` (codebase-memory, cmux 인스톨러) | Untrusted remote code | 사용자가 터미널에서 직접 실행 |
 | 외부 레포 `install.sh` 직접 실행 (claude-seo) | Untrusted external script | 사용자가 직접 실행 |
 | `~/.claude/agents/`에 외부 .md 심링크 | Self-Modification (에이전트 등록) | AskUserQuestion으로 명시 승인 필요 |
