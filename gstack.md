@@ -25,8 +25,40 @@ gstack은 CEO, 디자이너, 엔지니어, QA, 보안 전문가 등 29개 역할
 
 ## 설치
 
-사용 중인 플랫폼의 스킬 설치 방식에 따라 공식 저장소를 참고하여 설치.
+### 사전 요구사항
+- Git
+- **Bun v1.0+ 필수** — gstack의 browse 바이너리 빌드에 사용
+- Node.js (Windows만)
 
-## 참고 사항
+### Bun 설치
+```bash
+curl -fsSL https://bun.sh/install | bash
+source ~/.zshrc
+```
 
-- Bun 런타임 필요 (curl -fsSL https://bun.sh/install | bash)
+### gstack 설치 (공식 권장 방식)
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack
+cd ~/.claude/skills/gstack && ./setup
+```
+
+`./setup`이 자동 처리:
+- Chrome / FFmpeg / Headless Shell 다운로드 (~250MB)
+- 47개 슬래시 커맨드 자동 등록 (autoplan, browse, qa, ship, review, /office-hours 등)
+- browse 바이너리 빌드
+
+### 팀 모드 (저장소 공유)
+```bash
+(cd ~/.claude/skills/gstack && ./setup --team) && \
+  ~/.claude/skills/gstack/bin/gstack-team-init required && \
+  git add .claude/ CLAUDE.md && \
+  git commit -m "require gstack for AI-assisted work"
+```
+
+### 검증된 함정
+- gstack은 **단일 디렉토리** 형태로 `~/.claude/skills/gstack`에 통째로 설치되어야 함 (개별 스킬 분할 심링크 X).
+- ~/.claude/plugins/repos/에 클론한 후 심링크하는 방식도 동작하지만, `./setup`은 디렉토리 기준으로 동작하므로 setup 스크립트 직접 실행 필요.
+
+## 참고
+
+- 업데이트: `/gstack-upgrade` 슬래시 커맨드

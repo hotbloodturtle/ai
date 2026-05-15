@@ -1,6 +1,6 @@
 # Awesome Design MD
 
-AI 에이전트를 위한 마크다운 디자인 시스템 컬렉션. 54개 유명 사이트의 디자인 토큰을 DESIGN.md 형식으로 제공.
+AI 에이전트를 위한 마크다운 디자인 시스템 컬렉션. 71개 유명 사이트의 디자인 토큰을 DESIGN.md 형식으로 제공 (2026-05 기준, 정기 추가됨).
 
 - 공식: https://github.com/VoltAgent/awesome-design-md
 - 포맷: Google Stitch DESIGN.md 표준
@@ -44,7 +44,7 @@ git clone https://github.com/VoltAgent/awesome-design-md.git ~/.claude/design-sy
 
 ### 레퍼런스
 - 디자인 레퍼런스 위치: ~/.claude/design-systems/awesome-design-md/design-md/
-- 54개 사이트의 DESIGN.md 보유 (Claude, Vercel, Linear, Notion, Stripe 등)
+- 71개 사이트의 DESIGN.md 보유 (Claude, Vercel, Linear, Notion, Stripe 등)
 
 ### Awesome Design 요청 처리 흐름
 1. 특정 스타일 지정 시 → 해당 DESIGN.md 읽고 바로 적용
@@ -130,10 +130,10 @@ open ~/.claude/design-systems/awesome-design-md/design-md/claude/preview-dark.ht
 
 ---
 
-## 포함된 54개 사이트
+## 포함된 71개 사이트 (2026-05 기준)
 
 ### AI & ML
-airbnb, claude, cohere, elevenlabs, minimax, mistral.ai, ollama, opencode.ai, replicate, runwayml, together.ai, x.ai
+claude, cohere, elevenlabs, minimax, mistral.ai, ollama, opencode.ai, replicate, runwayml, together.ai, x.ai
 
 ### 개발자 도구
 cursor, expo, linear.app, lovable, mintlify, posthog, raycast, resend, sentry, supabase, superhuman, vercel, warp, zapier
@@ -142,13 +142,19 @@ cursor, expo, linear.app, lovable, mintlify, posthog, raycast, resend, sentry, s
 clickhouse, composio, hashicorp, mongodb, sanity, stripe
 
 ### 디자인 & 생산성
-airtable, cal, clay, figma, framer, intercom, miro, notion, pinterest, webflow
+airtable, cal, clay, figma, framer, intercom, miro, notion, pinterest, slack, webflow
 
 ### 금융
-coinbase, kraken, revolut, wise
+binance, coinbase, kraken, mastercard, revolut, wise
 
-### 엔터프라이즈
-apple, bmw, ibm, nvidia, spacex, spotify, uber, voltagent
+### 자동차
+bmw, bmw-m, bugatti, ferrari, lamborghini, renault, tesla
+
+### 엔터프라이즈/브랜드
+airbnb, apple, ibm, meta, nike, nvidia, playstation, shopify, spacex, spotify, starbucks, uber, vodafone, voltagent
+
+### 미디어
+theverge, wired
 
 ---
 

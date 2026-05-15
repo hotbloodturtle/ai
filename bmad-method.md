@@ -77,6 +77,8 @@ done
 
 설치 후 어떤 프로젝트에서든 `/bmad-method:bmad-help` 등으로 호출 가능.
 
+검증된 결과: 위 패턴으로 총 **44개 스킬** 자동 등록됨 (코어 11개 + 라이프사이클 33개).
+
 업데이트: `cd ~/.claude/plugins/repos/bmad-method && git pull`
 
 ### 프로젝트 설치 (특정 프로젝트에만)

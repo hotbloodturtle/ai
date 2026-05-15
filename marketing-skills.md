@@ -37,5 +37,21 @@
 ## 공식 링크
 - GitHub: https://github.com/coreyhaines31/marketingskills
 
-## 설치
-사용 중인 플랫폼의 스킬 설치 방식에 따라 공식 저장소를 참고하여 설치.
+## 설치 (Claude Code 기준)
+
+```bash
+mkdir -p ~/.claude/plugins/repos ~/.claude/skills
+git clone --depth 1 https://github.com/coreyhaines31/marketingskills.git ~/.claude/plugins/repos/marketing-skills
+
+# 40개 스킬 일괄 심링크
+for skill in ~/.claude/plugins/repos/marketing-skills/skills/*/; do
+  ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
+done
+```
+
+설치 결과: ab-testing, ad-creative, ads, ai-seo, analytics, aso, churn-prevention, co-marketing, cold-email, community-marketing, competitor-profiling, competitors, content-strategy, copy-editing, copywriting, cro, customer-research, directory-submissions, emails, free-tools, image, launch, lead-magnets, marketing-ideas, marketing-psychology, onboarding, paywalls, popups, pricing, product-marketing, programmatic-seo, referrals, revops, sales-enablement, schema, seo-audit, signup, site-architecture, social, video (총 40개. doc 인덱스의 33개에서 증가).
+
+### 업데이트
+```bash
+cd ~/.claude/plugins/repos/marketing-skills && git pull
+```

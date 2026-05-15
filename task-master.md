@@ -22,8 +22,20 @@ MCP를 지원하는 모든 클라이언트에서 사용할 수 있다.
 
 ## 설치
 
-MCP를 지원하는 플랫폼(Claude Code, Codex, Cursor, Windsurf 등)에서 공식 저장소의 설치 가이드를 참고하여 등록.
+### Claude Code (stdio via npx)
+```bash
+claude mcp add --scope user task-master-ai -- npx -y task-master-ai
+```
+
+### 검증
+```bash
+claude mcp list
+# task-master-ai: npx -y task-master-ai - ✓ Connected
+```
+
+첫 호출 시 npx가 패키지를 다운로드하므로 잠시 시간이 걸릴 수 있음.
 
 ## 참고
 
 - Node.js 필요 (npx로 실행).
+- npm 패키지: `task-master-ai`

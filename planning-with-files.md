@@ -19,6 +19,27 @@ planning-with-files는 에이전트가 계획을 파일(plan.md)로 작성하고
 
 - GitHub: https://github.com/OthmanAdi/planning-with-files
 
-## 설치
+## 설치 (Claude Code 기준)
 
-사용 중인 플랫폼의 스킬 설치 방식에 따라 공식 저장소를 참고하여 설치.
+저장소에 6개 언어 변형(English/Spanish/Chinese/German/Traditional Chinese/Arabic)이 있으니 필요한 변형만 심링크.
+
+### 영어판 단일 설치 (권장)
+```bash
+mkdir -p ~/.claude/plugins/repos ~/.claude/skills
+git clone --depth 1 https://github.com/OthmanAdi/planning-with-files.git ~/.claude/plugins/repos/planning-with-files
+
+ln -sfn ~/.claude/plugins/repos/planning-with-files/skills/planning-with-files \
+  ~/.claude/skills/planning-with-files
+```
+
+### 다국어 변형 (전체)
+```bash
+for skill in ~/.claude/plugins/repos/planning-with-files/skills/planning-with-files*/; do
+  ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
+done
+```
+
+### 업데이트
+```bash
+cd ~/.claude/plugins/repos/planning-with-files && git pull
+```

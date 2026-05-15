@@ -26,14 +26,24 @@ Claude Code 플러그인 마켓플레이스(`claude-plugins-official`)에서 플
 
 ## 설치
 
-Claude Code 플러그인 마켓플레이스를 사용하는 경우:
+### 사전 요구사항
+```bash
+brew install uv   # Python 패키지 매니저
+```
 
+### 방법 A: Claude Code CLI (검증된 패턴)
+```bash
+claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server
+```
+
+### 방법 B: 플러그인 마켓플레이스
 ```bash
 # claude-plugins-official 마켓플레이스에서 설치
 /plugin install serena
 ```
 
-직접 MCP로 등록하는 경우 (`~/.claude/.mcp.json` 또는 프로젝트별 설정):
+### 방법 C: 수동 MCP 등록
+`~/.claude/.mcp.json` 또는 프로젝트별 설정:
 
 ```json
 {
@@ -46,8 +56,15 @@ Claude Code 플러그인 마켓플레이스를 사용하는 경우:
 }
 ```
 
+### 검증
+```bash
+claude mcp list
+# serena: uvx --from git+...  - ✓ Connected
+```
+
 ## 참고 사항
 
-- `uv` (Python 패키지 매니저) 필요
+- `uv` 필수 (`brew install uv`)
 - 프로젝트 최초 사용 시 `onboarding` 단계를 거쳐야 심볼 인덱스가 생성됨
 - Codebase Memory MCP와 역할이 유사하지만, Serena는 LSP 기반 실시간 분석에, Codebase Memory는 지식 그래프 저장에 강점이 있음
+- Claude Code 자동 분류기가 git+ URL을 untrusted로 분류할 수 있어 첫 등록 시 확인 프롬프트가 뜰 수 있음

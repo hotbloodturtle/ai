@@ -19,5 +19,21 @@ Anthropic이 공식 제공하는 범용 스킬 모음이다. PDF, XLSX, PPTX, DO
 ## 공식 링크
 - GitHub: https://github.com/anthropics/skills
 
-## 설치
-사용 중인 플랫폼(Claude Code, Codex, Cursor 등)의 플러그인/스킬 설치 방식에 따라 공식 저장소를 참고하여 설치.
+## 설치 (Claude Code 기준)
+
+```bash
+mkdir -p ~/.claude/plugins/repos ~/.claude/skills
+git clone --depth 1 https://github.com/anthropics/skills.git ~/.claude/plugins/repos/document-skills
+
+# 17개 스킬 일괄 심링크
+for skill in ~/.claude/plugins/repos/document-skills/skills/*/; do
+  ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
+done
+```
+
+설치 결과: algorithmic-art, brand-guidelines, canvas-design, claude-api, doc-coauthoring, docx, frontend-design, internal-comms, mcp-builder, pdf, pptx, skill-creator, slack-gif-creator, theme-factory, web-artifacts-builder, webapp-testing, xlsx (총 17개).
+
+### 업데이트
+```bash
+cd ~/.claude/plugins/repos/document-skills && git pull
+```

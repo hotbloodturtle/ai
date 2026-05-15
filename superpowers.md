@@ -20,5 +20,22 @@
 ## 공식 링크
 - GitHub: https://github.com/obra/superpowers
 
-## 설치
-사용 중인 플랫폼(Claude Code, Codex, Cursor 등)의 플러그인/스킬 설치 방식에 따라 공식 저장소를 참고하여 설치.
+## 설치 (Claude Code 기준)
+
+### git clone + 심링크 (검증된 패턴)
+```bash
+mkdir -p ~/.claude/plugins/repos ~/.claude/skills
+git clone --depth 1 https://github.com/obra/superpowers.git ~/.claude/plugins/repos/superpowers
+
+# 14개 스킬 일괄 심링크
+for skill in ~/.claude/plugins/repos/superpowers/skills/*/; do
+  ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
+done
+```
+
+설치 결과: brainstorming, dispatching-parallel-agents, executing-plans, finishing-a-development-branch, receiving-code-review, requesting-code-review, subagent-driven-development, systematic-debugging, test-driven-development, using-git-worktrees, using-superpowers, verification-before-completion, writing-plans, writing-skills (총 14개).
+
+### 업데이트
+```bash
+cd ~/.claude/plugins/repos/superpowers && git pull
+```

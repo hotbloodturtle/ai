@@ -213,6 +213,8 @@ Android QA 관련 명령어를 매번 수동 승인하지 않으려면 `~/.claud
 "Bash(lsof *)"
 ```
 
+> **주의**: Claude Code의 자동 모드(auto mode) 분류기는 `~/.claude/settings.json` 직접 편집을 Self-Modification으로 차단합니다. 사용자가 직접 편집기로 수정하거나, `cp` 명령으로 미리 만들어둔 JSON 파일을 덮어써야 합니다. `update-config` 스킬도 차단되는 케이스가 확인됐습니다 (2026-05).
+
 ---
 
 ## 7. APK 설치 및 앱 실행

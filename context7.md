@@ -21,8 +21,21 @@ MCP를 지원하는 모든 클라이언트에서 사용할 수 있다.
 
 ## 설치
 
-MCP를 지원하는 플랫폼(Claude Code, Codex, Cursor, Windsurf 등)에서 공식 저장소의 설치 가이드를 참고하여 등록.
+### Claude Code (HTTP 트랜스포트, 권장)
+```bash
+claude mcp add --transport http --scope user context7 https://mcp.context7.com/mcp
+```
+
+### 다른 클라이언트 (stdio via npx)
+Node.js가 있다면 `npx -y @upstash/context7-mcp` 명령을 stdio MCP로 등록.
+
+### 검증
+```bash
+claude mcp list
+# context7: https://mcp.context7.com/mcp (HTTP) - ✓ Connected
+```
 
 ## 참고
 
-- Node.js 필요 (npx로 실행).
+- 별도 API 키 불필요.
+- HTTP 트랜스포트는 npx 다운로드가 없어 첫 호출이 빠름.
