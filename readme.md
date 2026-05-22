@@ -29,6 +29,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | Task Master | MCP | PRD → 구조화된 태스크 분해 | 선택 | [task-master.md](task-master.md) |
 | Playwright CLI | 스킬 | 토큰 효율적 브라우저 자동화 | 선택 | [playwright-cli.md](playwright-cli.md) |
 | Codebase Memory | MCP | 코드 지식 그래프 + 게이트 훅 | 추천 | [codebase-memory.md](codebase-memory.md) |
+| Claude-Mem | 플러그인 + MCP | 세션 간 영속 메모리 (자동 압축/주입) | 추천 | [claude-mem.md](claude-mem.md) |
 | gstack | 스킬 | 29개 역할 가상 엔지니어링 팀 | 선택 | [gstack.md](gstack.md) |
 | cmux | 병렬 도구 | Git worktree 기반 병렬 실행 | 선택 | [cmux.md](cmux.md) |
 | claude-squad | 병렬 도구 | 터미널 멀티 에이전트 오케스트레이션 | 선택 | [claude-squad.md](claude-squad.md) |
@@ -105,6 +106,7 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 | `~/.zshrc` 편집 (Android SDK 환경변수 등) | Unauthorized Persistence | 사용자가 vi/nano로 직접 편집 |
 | `curl ... \| bash` (codebase-memory, cmux 인스톨러) | Untrusted remote code | 사용자가 터미널에서 직접 실행 |
 | 외부 레포 `install.sh` 직접 실행 (claude-seo) | Untrusted external script | 사용자가 직접 실행 |
+| `npx claude-mem status/start` 등 후속 명령 | Untrusted third-party code (npx) | 사용자가 직접 실행. 단 `npx claude-mem install`은 통과한 사례 있음 |
 | `~/.claude/agents/`에 외부 .md 심링크 | Self-Modification (에이전트 등록) | AskUserQuestion으로 명시 승인 필요 |
 
 각 도구 docs의 "검증된 함정" 섹션에도 명시.
