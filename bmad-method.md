@@ -36,48 +36,34 @@ PM, 아키텍트, 개발자, UX 디자이너 등 12개 이상의 전문 역할 �
 
 ### 전역 설치 (모든 세션에서 사용)
 
-gstack과 동일한 패턴으로, git clone 후 `~/.claude/skills/`에 심링크를 생성한다.
+gstack과 동일한 패턴으로, git clone 후 `~/.claude/skills/`에 **flat 심링크**를 생성한다.
+스킬은 `src/core-skills/`와 `src/bmm-skills/<단계>/` 아래에 있다 (레포 루트 직하가 아니라 `src/` 하위임에 주의).
+
+> ⚠️ Claude Code 스킬 탐색은 `~/.claude/skills/<스킬>/SKILL.md` **한 단계만** 스캔한다. 따라서 `~/.claude/skills/bmad-method/<스킬>/` 처럼 2단계로 중첩하면 인식되지 않는다. 반드시 **최상위로 flat 심링크**해야 한다 (`bmad-` 접두어라 충돌 없음).
 
 ```bash
 # 1. 레포 클론
 git clone --depth 1 https://github.com/bmadcode/BMAD-METHOD.git ~/.claude/plugins/repos/bmad-method
+mkdir -p ~/.claude/skills
 
-# 2. 스킬 디렉토리 생성
-mkdir -p ~/.claude/skills/bmad-method
-
-# 3. 코어 스킬 심링크 (11개)
-for skill in ~/.claude/plugins/repos/bmad-method/src/core-skills/bmad-*/; do
-    ln -sf "$skill" ~/.claude/skills/bmad-method/$(basename "$skill")
-done
-
-# 4. 라이프사이클 스킬 심링크 (30개) - 단계별로 실행
-# 1-analysis
-for skill in ~/.claude/plugins/repos/bmad-method/src/bmm-skills/1-analysis/bmad-*/; do
-    ln -sf "$skill" ~/.claude/skills/bmad-method/$(basename "$skill")
-done
-for skill in ~/.claude/plugins/repos/bmad-method/src/bmm-skills/1-analysis/research/bmad-*/; do
-    ln -sf "$skill" ~/.claude/skills/bmad-method/$(basename "$skill")
-done
-
-# 2-plan-workflows
-for skill in ~/.claude/plugins/repos/bmad-method/src/bmm-skills/2-plan-workflows/bmad-*/; do
-    ln -sf "$skill" ~/.claude/skills/bmad-method/$(basename "$skill")
-done
-
-# 3-solutioning
-for skill in ~/.claude/plugins/repos/bmad-method/src/bmm-skills/3-solutioning/bmad-*/; do
-    ln -sf "$skill" ~/.claude/skills/bmad-method/$(basename "$skill")
-done
-
-# 4-implementation
-for skill in ~/.claude/plugins/repos/bmad-method/src/bmm-skills/4-implementation/bmad-*/; do
-    ln -sf "$skill" ~/.claude/skills/bmad-method/$(basename "$skill")
+# 2. 코어 + 라이프사이클 스킬 일괄 flat 심링크
+BMAD=~/.claude/plugins/repos/bmad-method/src
+for skill in \
+  "$BMAD"/core-skills/bmad-*/ \
+  "$BMAD"/bmm-skills/1-analysis/bmad-*/ \
+  "$BMAD"/bmm-skills/1-analysis/research/bmad-*/ \
+  "$BMAD"/bmm-skills/2-plan-workflows/bmad-*/ \
+  "$BMAD"/bmm-skills/3-solutioning/bmad-*/ \
+  "$BMAD"/bmm-skills/4-implementation/bmad-*/ ; do
+    [ -d "$skill" ] || continue
+    ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
 done
 ```
 
-설치 후 어떤 프로젝트에서든 `/bmad-method:bmad-help` 등으로 호출 가능.
+설치 후 어떤 프로젝트에서든 `/bmad-help`, `/bmad-prd` 등으로 호출 가능.
 
-검증된 결과: 위 패턴으로 총 **44개 스킬** 자동 등록됨 (코어 11개 + 라이프사이클 33개).
+검증된 결과 (2026-05): 위 패턴으로 총 **44개 스킬** 자동 등록됨 (코어 12개 + 라이프사이클 32개).
+`web-bundles/` 아래에 코치 스킬 6개(prd-coach, ux-coach, brainstorming-coach 등)가 더 있으나 `bmad-` 접두어가 아니라 위 루프에는 포함되지 않는다 (필요 시 별도 심링크).
 
 업데이트: `cd ~/.claude/plugins/repos/bmad-method && git pull`
 

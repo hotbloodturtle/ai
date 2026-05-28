@@ -23,8 +23,8 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 |------|------|-----------|------|------|
 | Superpowers | 플러그인 | 14개 개발 워크플로 스킬 (TDD, 디버깅, 코드 리뷰 등) | 필수 | [superpowers.md](superpowers.md) |
 | Document-Skills | 플러그인 | 문서 작성 17개 스킬 (pdf, xlsx, pptx, docx 등) | 추천 | [document-skills.md](document-skills.md) |
-| Marketing Skills | 스킬 | 40개 마케팅 전문 스킬 (SEO, CRO, 카피라이팅) | 선택 | [marketing-skills.md](marketing-skills.md) |
-| Claude SEO | 스킬 | 13개 SEO 서브스킬 + 7개 서브에이전트 | 선택 | [claude-seo.md](claude-seo.md) |
+| Marketing Skills | 스킬 | 33개 마케팅 전문 스킬 (SEO, CRO, 카피라이팅) | 선택 | [marketing-skills.md](marketing-skills.md) |
+| Claude SEO | 스킬 | 16개 SEO 서브스킬 + 10개 서브에이전트 | 선택 | [claude-seo.md](claude-seo.md) |
 | Context7 | MCP | 최신 라이브러리 문서를 컨텍스트에 주입 | 추천 | [context7.md](context7.md) |
 | Task Master | MCP | PRD → 구조화된 태스크 분해 | 선택 | [task-master.md](task-master.md) |
 | Playwright CLI | 스킬 | 토큰 효율적 브라우저 자동화 | 선택 | [playwright-cli.md](playwright-cli.md) |
@@ -35,7 +35,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | claude-squad | 병렬 도구 | 터미널 멀티 에이전트 오케스트레이션 | 선택 | [claude-squad.md](claude-squad.md) |
 | RTK | 토큰 절감 | Bash 출력 압축으로 60~90% 토큰 절감 | 필수 | [rtk.md](rtk.md) |
 | planning-with-files | 스킬 | Manus 스타일 영속적 플래닝 | 선택 | [planning-with-files.md](planning-with-files.md) |
-| Awesome Design MD | 디자인 레퍼런스 | 71개 사이트 DESIGN.md 컬렉션 (전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
+| Awesome Design MD | 디자인 레퍼런스 | 58개 사이트 DESIGN.md 컬렉션 (로컬 클론 기준, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
 | Serena | 플러그인 + MCP | LSP 기반 시맨틱 코드 탐색/편집 | 추천 | [serena.md](serena.md) |
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
 | BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
@@ -78,15 +78,24 @@ brew install rtk claude-squad
 npm install -g @playwright/cli@latest @anthropic-ai/claude-agent-sdk
 ```
 
-### 3. 스킬 (git clone + 심링크)
-각 스킬 docs의 "설치" 섹션에 검증된 명령 있음. Superpowers/Document/Marketing/Planning/BMAD/gstack/Awesome Design 모두 동일 패턴.
+### 3. 스킬 (설치 경로 2가지)
+- **플러그인 마켓플레이스** (이 기기의 실제 방식): Superpowers, Document-Skills/example-skills, Serena, frontend-design는 `/plugin install <이름>@<마켓플레이스>`로 설치됨. `~/.claude/plugins/cache/`에 들어가고 `~/.claude/plugins/repos/`는 **비어 있음**.
+- **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고. ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
 ```bash
+# context7: HTTP 권장이나 이 기기는 stdio(npx)로 등록됨
 claude mcp add --transport http --scope user context7 https://mcp.context7.com/mcp
 claude mcp add --scope user task-master-ai -- npx -y task-master-ai
+# serena: 이 기기는 /plugin install serena 로 설치 → plugin:serena:serena 로 등록 (아래 add는 수동 대안)
 claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
+```
+
+### 4-b. claude-mem (세션 간 메모리)
+```bash
+npx claude-mem install   # 플러그인+훅 등록
+npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://localhost:37701/health 로 확인
 ```
 
 ### 5. 글로벌 설정
@@ -110,3 +119,19 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 | `~/.claude/agents/`에 외부 .md 심링크 | Self-Modification (에이전트 등록) | AskUserQuestion으로 명시 승인 필요 |
 
 각 도구 docs의 "검증된 함정" 섹션에도 명시.
+
+---
+
+## 실제 설치 상태 메모 (2026-05-28 검증)
+
+문서와 기기 상태를 대조하여 갱신함.
+
+### 문서에 없으나 기기에 설치된 항목 (참고)
+- **andrej-karpathy-skills** (`karpathy-skills` 마켓플레이스) — Karpathy 가이드라인 스킬
+- **swift-lsp** (`claude-plugins-official`) — Swift LSP 플러그인
+- **notebooklm**, **obsidian** — 개별 스킬 (`~/.claude/skills/`)
+- 개인 한국어 스킬: explain, test, translate, my-style, start-project, review, refactor, fix, commit-msg, daily-report
+
+### 알려진 불일치 (사용자 결정 필요)
+- **android-qa-agent 경로**: 문서는 `~/Documents/projects/android-qa-agent`로 정정됐으나, 실제 심링크(`~/.local/bin/android-qa` 등)는 여전히 `~/Documents/projects/angie-projects/android-qa-agent`를 가리킨다. 둘 중 하나로 통일 필요 — ① 레포를 angie-projects 밖으로 이동 후 심링크 재지정, 또는 ② 문서를 angie-projects 경로로 되돌리기.
+- **awesome-design-md 사이트 수**: 로컬 클론 58개 / 이 문서 표기 58개 / 글로벌 `~/.claude/CLAUDE.md` 표기 54개. 글로벌 CLAUDE.md는 사용자 직접 수정 필요(자동 분류기 차단). `git pull`로 upstream 최신본(더 많을 수 있음) 동기화 권장.

@@ -21,6 +21,15 @@ Anthropic이 공식 제공하는 범용 스킬 모음이다. PDF, XLSX, PPTX, DO
 
 ## 설치 (Claude Code 기준)
 
+### 방법 A: 플러그인 마켓플레이스 (이 기기의 실제 설치 방식)
+```bash
+/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills
+# example-skills도 동일 세트 (이 기기엔 둘 다 설치되어 있음)
+```
+스킬이 `document-skills:<스킬명>` 네임스페이스로 등록된다. `~/.claude/plugins/repos/`는 사용하지 않는다.
+
+### 방법 B: git clone + 심링크 (수동)
 ```bash
 mkdir -p ~/.claude/plugins/repos ~/.claude/skills
 git clone --depth 1 https://github.com/anthropics/skills.git ~/.claude/plugins/repos/document-skills

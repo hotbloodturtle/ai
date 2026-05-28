@@ -46,11 +46,12 @@ git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git ~/.claude/plu
 bash ~/.claude/plugins/repos/claude-seo/install.sh
 ```
 
-설치 결과:
-- `~/.claude/skills/seo/` (SKILL.md + .venv + Playwright Chrome)
-- `~/.claude/agents/seo-*.md` 18개 서브에이전트
+설치 결과 (이 기기 기준):
+- `~/.claude/skills/seo/` (SKILL.md + `.venv` + Playwright Chrome). `.venv`는 **Python 3.12** (install.sh가 3.10+ 인터프리터로 생성). brew `python@3.11`이 없어도 3.10+만 잡히면 동작함.
+- `~/.claude/skills/seo-*/` 서브스킬 16개 (seo-audit, seo-page, seo-technical, seo-schema, seo-content, seo-geo, seo-local, seo-maps, seo-images, seo-sitemap, seo-hreflang, seo-programmatic, seo-competitor-pages, seo-dataforseo, seo-plan, seo-image-gen)
+- `~/.claude/agents/seo-*.md` **서브에이전트 10개**: seo-content, seo-dataforseo, seo-geo, seo-image-gen, seo-local, seo-performance, seo-schema, seo-sitemap, seo-technical, seo-visual
 - DataForSEO MCP (옵션)
 
 ### 검증된 함정
-- 시스템 Python 3.9에서 `install.sh` 실행 시 `Python 3.10+ is required`로 즉시 실패. 위 PATH 설정 필수.
+- 시스템 Python 3.9에서 `install.sh` 실행 시 `Python 3.10+ is required`로 즉시 실패. Python 3.10+ 확보 필수(brew `python@3.11` 또는 uv/pyenv 등).
 - Claude Code 자동 분류기가 외부 install.sh 실행을 차단할 수 있음 → 사용자 직접 실행 권장.

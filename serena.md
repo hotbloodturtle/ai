@@ -36,11 +36,12 @@ brew install uv   # Python 패키지 매니저
 claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server
 ```
 
-### 방법 B: 플러그인 마켓플레이스
+### 방법 B: 플러그인 마켓플레이스 (이 기기의 실제 설치 방식)
 ```bash
 # claude-plugins-official 마켓플레이스에서 설치
-/plugin install serena
+/plugin install serena@claude-plugins-official
 ```
+설치 시 MCP가 `plugin:serena:serena` 네임스페이스로 등록된다 (`claude mcp list`에서 확인). 방법 A처럼 별도 `claude mcp add`가 필요 없다.
 
 ### 방법 C: 수동 MCP 등록
 `~/.claude/.mcp.json` 또는 프로젝트별 설정:

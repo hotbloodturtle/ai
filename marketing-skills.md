@@ -39,19 +39,27 @@
 
 ## 설치 (Claude Code 기준)
 
-```bash
-mkdir -p ~/.claude/plugins/repos ~/.claude/skills
-git clone --depth 1 https://github.com/coreyhaines31/marketingskills.git ~/.claude/plugins/repos/marketing-skills
+레포는 `~/.claude/skills/marketing/`에 통째로 클론되어 있고, 스킬 33개는 `marketing/skills/` **하위**에 중첩되어 있다. Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` **한 단계만** 스캔하므로, 중첩된 채로는 인식되지 않는다 → 각 스킬을 최상위로 **flat 심링크**해야 활성화된다.
 
-# 40개 스킬 일괄 심링크
-for skill in ~/.claude/plugins/repos/marketing-skills/skills/*/; do
-  ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
+```bash
+git clone --depth 1 https://github.com/coreyhaines31/marketingskills.git ~/.claude/skills/marketing
+
+# 스킬 일괄 flat 심링크 (seo-audit은 claude-seo와 이름 충돌 → 제외)
+for skill in ~/.claude/skills/marketing/skills/*/; do
+  name=$(basename "$skill")
+  [ "$name" = "seo-audit" ] && continue   # claude-seo의 seo-audit 보존
+  ln -sfn "$skill" ~/.claude/skills/"$name"
 done
 ```
 
-설치 결과: ab-testing, ad-creative, ads, ai-seo, analytics, aso, churn-prevention, co-marketing, cold-email, community-marketing, competitor-profiling, competitors, content-strategy, copy-editing, copywriting, cro, customer-research, directory-submissions, emails, free-tools, image, launch, lead-magnets, marketing-ideas, marketing-psychology, onboarding, paywalls, popups, pricing, product-marketing, programmatic-seo, referrals, revops, sales-enablement, schema, seo-audit, signup, site-architecture, social, video (총 40개. doc 인덱스의 33개에서 증가).
+설치 결과 (실제 33개 스킬 디렉터리, seo-audit 제외 시 32개 활성화):
+ab-test-setup, ad-creative, ai-seo, analytics-tracking, churn-prevention, cold-email, competitor-alternatives, content-strategy, copy-editing, copywriting, email-sequence, form-cro, free-tool-strategy, launch-strategy, lead-magnets, marketing-ideas, marketing-psychology, onboarding-cro, page-cro, paid-ads, paywall-upgrade-cro, popup-cro, pricing-strategy, product-marketing-context, programmatic-seo, referral-program, revops, sales-enablement, schema-markup, ~~seo-audit~~, signup-flow-cro, site-architecture, social-content.
+
+### 검증된 함정
+- 레포만 클론하고 flat 심링크를 안 하면 33개 스킬이 **디스크에만 있고 비활성** 상태가 된다 (스킬 목록에 안 뜸).
+- `seo-audit`는 claude-seo 스킬과 이름이 겹친다. 둘 다 두면 충돌하므로 claude-seo 쪽을 보존하고 마케팅 seo-audit은 심링크에서 제외한다.
 
 ### 업데이트
 ```bash
-cd ~/.claude/plugins/repos/marketing-skills && git pull
+cd ~/.claude/skills/marketing && git pull
 ```
