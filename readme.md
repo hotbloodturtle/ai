@@ -132,6 +132,6 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 - **notebooklm**, **obsidian** — 개별 스킬 (`~/.claude/skills/`)
 - 개인 한국어 스킬: explain, test, translate, my-style, start-project, review, refactor, fix, commit-msg, daily-report
 
-### 알려진 불일치 (사용자 결정 필요)
-- **android-qa-agent 경로**: 문서는 `~/Documents/projects/android-qa-agent`로 정정됐으나, 실제 심링크(`~/.local/bin/android-qa` 등)는 여전히 `~/Documents/projects/angie-projects/android-qa-agent`를 가리킨다. 둘 중 하나로 통일 필요 — ① 레포를 angie-projects 밖으로 이동 후 심링크 재지정, 또는 ② 문서를 angie-projects 경로로 되돌리기.
-- **awesome-design-md 사이트 수**: 로컬 클론 58개 / 이 문서 표기 58개 / 글로벌 `~/.claude/CLAUDE.md` 표기 54개. 글로벌 CLAUDE.md는 사용자 직접 수정 필요(자동 분류기 차단). `git pull`로 upstream 최신본(더 많을 수 있음) 동기화 권장.
+### 해결된 결정 사항
+- **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 확정. 모든 문서가 이 경로로 일관되며, android-qa 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리키도록 재지정한다(`angie-projects` 경로는 사용하지 않음).
+- **awesome-design-md 사이트 수**: 로컬 클론·이 repo 문서 모두 **58개**로 통일됨. 글로벌 `~/.claude/CLAUDE.md`에 다른 수(예: 54개)가 남아 있다면 58개로 맞춘다(자동 분류기 차단 시 사용자가 직접 수정). upstream은 계속 증가하므로 `git pull` 후 실제 디렉토리 수를 따른다.
