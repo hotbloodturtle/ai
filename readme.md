@@ -35,7 +35,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | claude-squad | 병렬 도구 | 터미널 멀티 에이전트 오케스트레이션 | 선택 | [claude-squad.md](claude-squad.md) |
 | RTK | 토큰 절감 | Bash 출력 압축으로 60~90% 토큰 절감 | 필수 | [rtk.md](rtk.md) |
 | planning-with-files | 스킬 | Manus 스타일 영속적 플래닝 | 선택 | [planning-with-files.md](planning-with-files.md) |
-| Awesome Design MD | 디자인 레퍼런스 | 58개 사이트 DESIGN.md 컬렉션 (로컬 클론 기준, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
+| Awesome Design MD | 디자인 레퍼런스 | 71개 사이트 DESIGN.md 컬렉션 (로컬 클론 기준, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
 | Serena | 플러그인 + MCP | LSP 기반 시맨틱 코드 탐색/편집 | 추천 | [serena.md](serena.md) |
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
 | BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
@@ -134,4 +134,4 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 
 ### 해결된 결정 사항
 - **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 확정. 모든 문서가 이 경로로 일관되며, android-qa 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리키도록 재지정한다(`angie-projects` 경로는 사용하지 않음).
-- **awesome-design-md 사이트 수**: 로컬 클론·이 repo 문서 모두 **58개**로 통일됨. 글로벌 `~/.claude/CLAUDE.md`에 다른 수(예: 54개)가 남아 있다면 58개로 맞춘다(자동 분류기 차단 시 사용자가 직접 수정). upstream은 계속 증가하므로 `git pull` 후 실제 디렉토리 수를 따른다.
+- **awesome-design-md 사이트 수**: 로컬 클론(이 기기 2026-05-29 재클론 기준) **71개**, 문서도 71개로 통일됨. 글로벌 `~/.claude/CLAUDE.md`에는 실제 디렉토리 수(현재 71개)를 적는다(자동 분류기 차단 시 사용자가 직접 수정). upstream은 계속 증가하므로 `git pull` 후 실제 디렉토리 수를 따른다.
