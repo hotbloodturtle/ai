@@ -35,7 +35,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | claude-squad | 병렬 도구 | 터미널 멀티 에이전트 오케스트레이션 | 선택 | [claude-squad.md](claude-squad.md) |
 | RTK | 토큰 절감 | Bash 출력 압축으로 60~90% 토큰 절감 | 필수 | [rtk.md](rtk.md) |
 | planning-with-files | 스킬 | Manus 스타일 영속적 플래닝 | 선택 | [planning-with-files.md](planning-with-files.md) |
-| Awesome Design MD | 디자인 레퍼런스 | 71개 사이트 DESIGN.md 컬렉션 (로컬 클론 기준, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
+| Awesome Design MD | 디자인 레퍼런스 | 74개 사이트 DESIGN.md 컬렉션 (로컬 클론 기준, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
 | Serena | 플러그인 + MCP | LSP 기반 시맨틱 코드 탐색/편집 | 추천 | [serena.md](serena.md) |
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
 | BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
@@ -66,8 +66,10 @@ Android QA 자동화 → [android-qa-agent-setup.md](android-qa-agent-setup.md)
 
 ### 1. 프리렉(prerequisite)
 ```bash
-brew install node uv gh tmux           # Node/uv/gh/tmux
-brew install python@3.11               # claude-seo용 (시스템 3.9 회피)
+brew install node uv gh tmux           # Node/uv/gh/tmux (이 기기는 node를 nvm으로 관리 중)
+# claude-seo는 Python 3.10+ 필요. install.sh가 자체 .venv를 생성하므로 3.10+ 인터프리터만 잡히면 됨.
+# (이 기기는 brew python@3.11 없이도 .venv가 3.12로 생성되어 정상 동작) — 3.10+가 없을 때만 아래로 확보:
+brew install python@3.11
 echo 'export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"' >> ~/.zshrc
 curl -fsSL https://bun.sh/install | bash   # gstack용
 ```
@@ -75,7 +77,8 @@ curl -fsSL https://bun.sh/install | bash   # gstack용
 ### 2. CLI 도구
 ```bash
 brew install rtk claude-squad
-npm install -g @playwright/cli@latest @anthropic-ai/claude-agent-sdk
+npm install -g @playwright/cli@latest
+# Claude Agent SDK는 전역 CLI가 아니라 프로젝트별 라이브러리다 → 쓰는 프로젝트에서 `npm install @anthropic-ai/claude-agent-sdk` ([agent-sdk.md](agent-sdk.md))
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
@@ -100,7 +103,7 @@ npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://l
 
 ### 5. 글로벌 설정
 - `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고)
-- `~/.claude/settings.json` — Android QA permissions + RTK env
+- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY`. (RTK 텔레메트리 끄기 `RTK_TELEMETRY_DISABLED=1`은 권장이나 이 기기엔 미적용)
 
 ---
 
@@ -122,7 +125,7 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 
 ---
 
-## 실제 설치 상태 메모 (2026-05-28 검증)
+## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13 재검증)
 
 문서와 기기 상태를 대조하여 갱신함.
 
@@ -133,5 +136,5 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 - 개인 한국어 스킬: explain, test, translate, my-style, start-project, review, refactor, fix, commit-msg, daily-report
 
 ### 해결된 결정 사항
-- **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 확정. 모든 문서가 이 경로로 일관되며, android-qa 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리키도록 재지정한다(`angie-projects` 경로는 사용하지 않음).
-- **awesome-design-md 사이트 수**: 로컬 클론(이 기기 2026-05-29 재클론 기준) **71개**, 문서도 71개로 통일됨. 글로벌 `~/.claude/CLAUDE.md`에는 실제 디렉토리 수(현재 71개)를 적는다(자동 분류기 차단 시 사용자가 직접 수정). upstream은 계속 증가하므로 `git pull` 후 실제 디렉토리 수를 따른다.
+- **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 확정. 모든 문서가 이 경로로 일관되며, android-qa 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리키도록 재지정한다(`angie-projects` 경로는 사용하지 않음). **(2026-06-13 실행 완료**: 레포를 angie-projects → projects로 이동, 심링크 4개 재지정, 설치된 `~/.claude/skills/android-qa-agent/SKILL.md`의 `QA_AGENT_DIR`까지 갱신, 빈 angie-projects 디렉토리 제거**)**
+- **awesome-design-md 사이트 수**: `git pull` 후(2026-06-13) 로컬 클론 **74개**. 문서(readme/awesome-design-md.md)도 74개로 통일. 글로벌 `~/.claude/CLAUDE.md`에도 실제 디렉토리 수(현재 74개)를 적는다(자동 분류기 차단 시 사용자가 직접 수정). upstream은 계속 증가하므로 `git pull` 후 실제 디렉토리 수를 따른다.

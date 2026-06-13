@@ -39,6 +39,11 @@ for skill in ~/.claude/plugins/repos/planning-with-files/skills/planning-with-fi
 done
 ```
 
+### 검증된 설치 상태 (이 기기, 2026-06-13)
+- 위 권장 방식(repos 클론 + skills 하위만 flat 심링크)과 **다르게** 설치돼 있다: 레포 **전체**가 `~/.claude/skills/planning-with-files/`에 그대로 클론됨(CHANGELOG, README, commands, docs, skills 등 포함). 이 디렉토리 **최상위에 SKILL.md가 없어** Claude Code의 1단계 스캔으로는 flat 스킬로 인식되지 않는다(사실상 비활성 클론).
+- 실제 활성화는 **플러그인 네임스페이스** `planning-with-files:*`(`planning-with-files:plan`, `planning-with-files:status`, `planning-with-files:planning-with-files` 등)로 되어 있다.
+- 정리 옵션: ① 플러그인만 남기고 비활성 클론(`~/.claude/skills/planning-with-files/`)을 제거, 또는 ② 위 권장 방식대로 레포를 `~/.claude/plugins/repos/`로 옮기고 `skills/` 하위만 최상위로 flat 심링크.
+
 ### 업데이트
 ```bash
 cd ~/.claude/plugins/repos/planning-with-files && git pull

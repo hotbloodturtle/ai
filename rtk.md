@@ -32,3 +32,5 @@ brew install rtk
 # 텔레메트리 비활성화 권장
 export RTK_TELEMETRY_DISABLED=1
 ```
+
+> 이 기기에는 `RTK_TELEMETRY_DISABLED`가 **설정돼 있지 않다**(권장값 미적용). 영구 적용하려면 `~/.zshrc` 또는 `~/.claude/settings.json`의 `env`에 추가한다. (binary는 `/opt/homebrew/bin/rtk`로 설치 확인됨)

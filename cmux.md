@@ -24,12 +24,13 @@ Git과 bash/zsh 환경이 있으면 플랫폼에 관계없이 사용할 수 있�
 Git과 bash 또는 zsh가 필요하다. cmux는 순수 Bash 스크립트(`cmux.sh`)다 — 컴파일된 바이너리가 아니다.
 **Homebrew 포뮬러(formula)는 존재하지 않는다.** 공식 인스톨러 또는 직접 git clone 방식 중 선택.
 
-### 방법 A: 공식 인스톨러 (curl)
+### 방법 A: 공식 인스톨러 (curl) — 이 기기의 실제 설치 방식
 ```bash
 curl -fsSL https://github.com/craigsc/cmux/releases/latest/download/install.sh | sh
 ```
+> 공식 인스톨러는 `cmux`를 `~/.zshrc`에 **zsh 함수**로 등록한다(`type cmux`로 확인). 따라서 이 기기에는 `~/.claude/plugins/repos/cmux`나 `~/.local/bin/cmux` 심링크가 **없다** — 함수가 곧 진입점이다.
 
-### 방법 B: git clone + 심링크 (이 프로젝트가 사용한 방식)
+### 방법 B: git clone + 심링크 (대안)
 ```bash
 git clone --depth 1 https://github.com/craigsc/cmux.git ~/.claude/plugins/repos/cmux
 chmod +x ~/.claude/plugins/repos/cmux/cmux.sh
