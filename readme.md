@@ -40,6 +40,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
 | BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
 | Best Practices | 실천 가이드 | Claude Code 활용 69개 팁 핵심 선별 | 추천 | [best-practices.md](best-practices.md) |
+| Ponytail | 플러그인 | 과잉 설계 억제 → 코드량·비용·시간 절감 (RTK와 상호보완) | 추천 | [ponytail.md](ponytail.md) |
 
 ---
 
@@ -82,7 +83,7 @@ npm install -g @playwright/cli@latest
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스** (이 기기의 실제 방식): Superpowers, Document-Skills/example-skills, Serena, frontend-design는 `/plugin install <이름>@<마켓플레이스>`로 설치됨. `~/.claude/plugins/cache/`에 들어가고 `~/.claude/plugins/repos/`는 **비어 있음**.
+- **플러그인 마켓플레이스** (이 기기의 실제 방식): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail은 `/plugin install <이름>@<마켓플레이스>`로 설치됨. `~/.claude/plugins/cache/`에 들어가고 `~/.claude/plugins/repos/`는 **비어 있음**.
 - **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고. ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
@@ -125,9 +126,12 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 
 ---
 
-## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13 재검증)
+## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13·2026-06-22 재검증)
 
 문서와 기기 상태를 대조하여 갱신함.
+
+### 신규 문서화 (2026-06-22)
+- **Ponytail** v4.7.0 — 사용자 직접 설치(`/plugin install ponytail@ponytail`). 캐시 `~/.claude/plugins/cache/ponytail/ponytail/4.7.0`, 명령어 6 + 스킬 6 + 훅 5 구성. 과잉 설계 억제 플러그인 → [ponytail.md](ponytail.md)
 
 ### 문서에 없으나 기기에 설치된 항목 (참고)
 - **andrej-karpathy-skills** (`karpathy-skills` 마켓플레이스) — Karpathy 가이드라인 스킬
