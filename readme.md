@@ -41,6 +41,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
 | Best Practices | 실천 가이드 | Claude Code 활용 69개 팁 핵심 선별 | 추천 | [best-practices.md](best-practices.md) |
 | Ponytail | 플러그인 | 과잉 설계 억제 → 코드량·비용·시간 절감 (RTK와 상호보완) | 추천 | [ponytail.md](ponytail.md) |
+| Claude HUD | 플러그인 | statusline에 컨텍스트/도구/에이전트/할일 실시간 표시 | 추천 | [claude-hud.md](claude-hud.md) |
 
 ---
 
@@ -129,6 +130,9 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 ## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13·2026-06-22 재검증)
 
 문서와 기기 상태를 대조하여 갱신함.
+
+### 신규 문서화 (2026-07-06)
+- **Claude HUD** v0.3.0 — `claude plugin install claude-hud@claude-hud`로 설치. Bun 런타임 + 래퍼 스크립트(`~/.claude/claude-hud-statusline.sh`)로 statusLine 설정 (setup.md의 인라인 원라이너는 따옴표 깨짐 이슈로 회피). ponytail statusline 배지와 상호 배타적 → claude-hud 채택 → [claude-hud.md](claude-hud.md)
 
 ### 신규 문서화 (2026-06-22)
 - **Ponytail** v4.7.0 — 사용자 직접 설치(`/plugin install ponytail@ponytail`). 캐시 `~/.claude/plugins/cache/ponytail/ponytail/4.7.0`, 명령어 6 + 스킬 6 + 훅 5 구성. 과잉 설계 억제 플러그인 → [ponytail.md](ponytail.md)
