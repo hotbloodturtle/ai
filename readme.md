@@ -42,6 +42,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | Best Practices | 실천 가이드 | Claude Code 활용 69개 팁 핵심 선별 | 추천 | [best-practices.md](best-practices.md) |
 | Ponytail | 플러그인 | 과잉 설계 억제 → 코드량·비용·시간 절감 (RTK와 상호보완) | 추천 | [ponytail.md](ponytail.md) |
 | Claude HUD | 플러그인 | statusline에 컨텍스트/도구/에이전트/할일 실시간 표시 | 추천 | [claude-hud.md](claude-hud.md) |
+| explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
 
 ---
 
@@ -130,6 +131,9 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 ## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13·2026-06-22 재검증)
 
 문서와 기기 상태를 대조하여 갱신함.
+
+### 신규 문서화 (2026-07-16)
+- **explain-diff** — Geoffrey Litt의 gist 프롬프트를 `~/.claude/commands/explain-diff.md`로 등록 (글로벌 슬래시 커맨드). 퀴즈 정답 편향 패치 포함 → [explain-diff.md](explain-diff.md)
 
 ### 신규 문서화 (2026-07-06)
 - **Claude HUD** v0.3.0 — `claude plugin install claude-hud@claude-hud`로 설치. Bun 런타임 + 래퍼 스크립트(`~/.claude/claude-hud-statusline.sh`)로 statusLine 설정 (setup.md의 인라인 원라이너는 따옴표 깨짐 이슈로 회피). ponytail statusline 배지와 상호 배타적 → claude-hud 채택 → [claude-hud.md](claude-hud.md)
