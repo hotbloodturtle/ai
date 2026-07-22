@@ -88,7 +88,9 @@ Claude Code/Codex에선 **가벼운 Node.js 라이프사이클 훅(lifecycle hoo
 
 데스크톱 앱은 `/plugin` 명령이 없으므로 UI에서 설치: Customize → 개인 플러그인 옆 `+` → Create plugin and add marketplace → Add from repository → 레포 URL 입력.
 
-## 검증된 설치 상태 (이 기기, 2026-06-22)
+## 검증된 설치 상태 (이 기기, 2026-06-22 / 2026-07-22 재설치)
+
+> 2026-07-22: 마켓플레이스·플러그인이 기기에서 유실된 것을 발견하고 재설치함 → 현재 **v4.8.4** (`~/.claude/plugins/cache/ponytail/ponytail/4.8.4`). 아래는 v4.7.0 당시 검증 기록.
 
 - 마켓플레이스 `ponytail` 등록됨, 플러그인 `ponytail@ponytail` **v4.7.0** 설치 (사용자 직접 설치).
 - 활성 설치 경로: `~/.claude/plugins/cache/ponytail/ponytail/4.7.0` (`installed_plugins.json` 등록 확인, gitCommitSha `6da37bf`).

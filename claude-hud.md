@@ -41,7 +41,9 @@ claude plugin install claude-hud@claude-hud
 - `/claude-hud:configure` — 가이드 설정. 프리셋: **Full**(전부) / **Essential**(활동+git) / **Minimal**(모델+컨텍스트 바만)
 - 수동: `~/.claude/plugins/claude-hud/config.json` 편집 (색상, 임계값, 표시 항목)
 
-## 이 머신의 실제 설치 상태 (2026-07-06 검증)
+## 이 머신의 실제 설치 상태 (2026-07-06 검증, 2026-07-22 재설치)
+
+> 2026-07-22: 플러그인·마켓플레이스·래퍼 스크립트·statusLine 설정이 유실된 것을 발견하고 재설치함 → 현재 **v0.6.0**. 0.6.0부터 컴파일된 `dist/index.js`가 동봉되어, 재작성한 래퍼는 bun+`src/index.ts` 우선 / node+`dist/index.js` 폴백으로 동작. 스모크 테스트 통과. 아래는 v0.3.0 당시 기록.
 
 - v0.3.0 설치 완료 (`~/.claude/plugins/cache/claude-hud/claude-hud/0.3.0/`)
 - 런타임: Bun (`src/index.ts` 직접 실행 — node보다 빠름)

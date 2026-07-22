@@ -85,7 +85,7 @@ npm install -g @playwright/cli@latest
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스** (이 기기의 실제 방식): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail은 `/plugin install <이름>@<마켓플레이스>`로 설치됨. `~/.claude/plugins/cache/`에 들어가고 `~/.claude/plugins/repos/`는 **비어 있음**.
+- **플러그인 마켓플레이스** (이 기기의 실제 방식): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail은 `/plugin install <이름>@<마켓플레이스>`로 설치됨. `~/.claude/plugins/cache/`에 들어가고, `~/.claude/plugins/repos/`에는 git clone 방식 스킬의 원본 레포(bmad-method, claude-seo, planning-with-files, cmux)가 들어 있다.
 - **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고. ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
@@ -106,7 +106,7 @@ npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://l
 
 ### 5. 글로벌 설정
 - `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고)
-- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY`. (RTK 텔레메트리 끄기 `RTK_TELEMETRY_DISABLED=1`은 권장이나 이 기기엔 미적용)
+- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1`(적용됨) + `statusLine`(claude-hud 래퍼)
 
 ---
 
@@ -128,9 +128,21 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 
 ---
 
-## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13·2026-06-22 재검증)
+## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13·2026-06-22·2026-07-22 재검증)
 
 문서와 기기 상태를 대조하여 갱신함.
+
+### 재검증 및 복구 (2026-07-22)
+
+7/16 이후 `~/.claude` 일부가 유실된 상태를 발견(플러그인 마켓플레이스·`commands/`·개인 스킬·`~/.zshrc`의 cmux 함수 소실 — 원인 미상, 설정 초기화/재설치 추정). 문서 기준으로 복구:
+
+- **ponytail** 재설치 → **v4.8.4** (마켓플레이스 재등록 + `/plugin install`)
+- **claude-hud** 재설치 → **v0.6.0**. 래퍼 스크립트(`~/.claude/claude-hud-statusline.sh`) 재작성: bun+`src/index.ts` 우선, 없으면 node+`dist/index.js` 폴백(0.6.0부터 dist 동봉). `settings.json`의 `statusLine` 재등록, 스모크 테스트 통과
+- **explain-diff** 재등록 → 원본 gist(`explain-diff-html.md`)에서 재생성 + 퀴즈 편향 패치·자동 오픈 지시 재적용
+- **cmux** 재설치 → 방법 A(zsh 함수)가 유실되어 **방법 B 변형**으로 전환: `~/.claude/plugins/repos/cmux` 클론 + `~/.local/bin/cmux` **bash 래퍼**(cmux.sh는 shebang이 없어 심링크만으로는 sh로 실행되어 깨짐)
+- **awesome-design-md** `git pull` → 74개 확인, 글로벌 CLAUDE.md 71→74 갱신
+- playwright CLI는 유실 아님 — 바이너리명이 `playwright-cli`라 점검 오류였음 (v0.1.13 정상)
+- ⚠️ **미복구(내용 유실)**: andrej-karpathy-skills, notebooklm, obsidian, 개인 한국어 스킬 10종(explain, test, translate, my-style, start-project, review, refactor, fix, commit-msg, daily-report) — 기기에서 사라졌고 내용 사본이 없어 재생성 불가. 백업(Time Machine 등)에서 `~/.claude/skills/`, `~/.claude/commands/` 복원 필요
 
 ### 신규 문서화 (2026-07-16)
 - **explain-diff** — Geoffrey Litt의 gist 프롬프트를 `~/.claude/commands/explain-diff.md`로 등록 (글로벌 슬래시 커맨드). 퀴즈 정답 편향 패치 포함 → [explain-diff.md](explain-diff.md)
@@ -142,6 +154,8 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 - **Ponytail** v4.7.0 — 사용자 직접 설치(`/plugin install ponytail@ponytail`). 캐시 `~/.claude/plugins/cache/ponytail/ponytail/4.7.0`, 명령어 6 + 스킬 6 + 훅 5 구성. 과잉 설계 억제 플러그인 → [ponytail.md](ponytail.md)
 
 ### 문서에 없으나 기기에 설치된 항목 (참고)
+
+⚠️ 아래 항목은 2026-07-22 재검증에서 **모두 기기에서 사라진 것으로 확인** (위 "재검증 및 복구" 참조).
 - **andrej-karpathy-skills** (`karpathy-skills` 마켓플레이스) — Karpathy 가이드라인 스킬
 - **swift-lsp** (`claude-plugins-official`) — Swift LSP 플러그인
 - **notebooklm**, **obsidian** — 개별 스킬 (`~/.claude/skills/`)
