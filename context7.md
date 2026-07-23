@@ -35,10 +35,9 @@ claude mcp list
 # context7: ... - ✓ Connected
 ```
 
-> 이 기기의 실제 등록은 **stdio(npx)** 방식이다: `context7: npx -y @upstash/context7-mcp@latest`.
-> HTTP 트랜스포트(권장)와 stdio 둘 다 동작하며 차이는 첫 호출 속도뿐이다.
+> stdio(npx) 방식(`npx -y @upstash/context7-mcp@latest`)도 동작하며, HTTP 트랜스포트(권장)와의 차이는 첫 호출 속도뿐이다.
 
 ## 참고
 
 - 별도 API 키 불필요.
-- HTTP 트랜스포트는 npx 다운로드가 없어 첫 호출이 빠름. (이 기기는 stdio로 등록되어 있어 첫 호출 시 npx 다운로드가 한 번 일어남.)
+- HTTP 트랜스포트는 npx 다운로드가 없어 첫 호출이 빠름 (stdio는 첫 호출 시 npx 다운로드가 한 번 일어남).

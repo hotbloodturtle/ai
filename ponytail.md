@@ -88,15 +88,13 @@ Claude Code/Codex에선 **가벼운 Node.js 라이프사이클 훅(lifecycle hoo
 
 데스크톱 앱은 `/plugin` 명령이 없으므로 UI에서 설치: Customize → 개인 플러그인 옆 `+` → Create plugin and add marketplace → Add from repository → 레포 URL 입력.
 
-## 검증된 설치 상태 (이 기기, 2026-06-22 / 2026-07-22 재설치)
+## 설치 확인
 
-> 2026-07-22: 마켓플레이스·플러그인이 기기에서 유실된 것을 발견하고 재설치함 → 현재 **v4.8.4** (`~/.claude/plugins/cache/ponytail/ponytail/4.8.4`). 아래는 v4.7.0 당시 검증 기록.
-
-- 마켓플레이스 `ponytail` 등록됨, 플러그인 `ponytail@ponytail` **v4.7.0** 설치 (사용자 직접 설치).
-- 활성 설치 경로: `~/.claude/plugins/cache/ponytail/ponytail/4.7.0` (`installed_plugins.json` 등록 확인, gitCommitSha `6da37bf`).
+- 설치 경로: `~/.claude/plugins/cache/ponytail/ponytail/<버전>` (`installed_plugins.json`에서 활성 버전 확인).
 - 구성: **명령어 6개**(`commands/*.toml`) + **스킬 6개**(`skills/*/SKILL.md`: ponytail, -audit, -debt, -gain, -help, -review) + **라이프사이클 훅 5개**(`hooks/ponytail-*.js`, `plugin.json` → `hooks/claude-codex-hooks.json` 참조). MCP 서버(`ponytail-mcp/`)도 동봉되나 Claude Code 플러그인은 훅 기반으로 동작.
-- 마켓플레이스 클론 디렉토리(`~/.claude/plugins/marketplaces/ponytail`)의 `package.json`은 `0.1.0`이지만, **실제 활성 버전은 캐시의 4.7.0**이다(혼동 주의).
+- 세션 시작 시 SessionStart 훅이 "PONYTAIL MODE ACTIVE" 컨텍스트를 주입하면 정상.
 
 ## 검증된 함정
 
-- **nvm node와 비대화형 셸 PATH**: 훅이 Node.js로 도는데, README가 "Nix/nvm 사용자는 *비대화형 셸 PATH*에 node가 있어야 한다"고 경고한다. 이 기기는 node를 nvm(v24.14.1)으로 관리한다. 현재 세션에선 비대화형 `zsh -c`에서도 node가 잡혀(`/Users/.../v24.14.1/bin/node`) 훅이 정상 동작하지만 — node가 PATH에 없는 환경(예: GUI 직접 실행, cron)에서 Claude Code를 띄우면 always-on 활성화 훅이 조용히 비활성화된다(스킬 자체는 동작). 그런 환경을 쓰면 `~/.claude/settings.json`의 `env`나 nvm 초기화로 node PATH를 보장할 것. nvm 로드는 `~/.zshrc` 110~112줄.
+- **마켓플레이스 클론의 버전 표기**: `~/.claude/plugins/marketplaces/ponytail`의 `package.json` 버전은 실제 활성 버전과 다를 수 있다 — **캐시 디렉터리(`plugins/cache/.../<버전>`)가 기준**이다(혼동 주의).
+- **nvm node와 비대화형 셸 PATH**: 훅이 Node.js로 도는데, README가 "Nix/nvm 사용자는 *비대화형 셸 PATH*에 node가 있어야 한다"고 경고한다. node를 nvm 등으로 관리하는 기기는 `zsh -c 'command -v node'`로 비대화형 셸에서도 node가 잡히는지 확인할 것. node가 PATH에 없는 환경(예: GUI 직접 실행, cron)에서 Claude Code를 띄우면 always-on 활성화 훅이 조용히 비활성화된다(스킬 자체는 동작). 그런 환경에선 `~/.claude/settings.json`의 `env`나 셸 초기화로 node PATH를 보장할 것.

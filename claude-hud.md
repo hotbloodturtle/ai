@@ -41,17 +41,42 @@ claude plugin install claude-hud@claude-hud
 - `/claude-hud:configure` — 가이드 설정. 프리셋: **Full**(전부) / **Essential**(활동+git) / **Minimal**(모델+컨텍스트 바만)
 - 수동: `~/.claude/plugins/claude-hud/config.json` 편집 (색상, 임계값, 표시 항목)
 
-## 이 머신의 실제 설치 상태 (2026-07-06 검증, 2026-07-22 재설치)
+## 권장 설정: 래퍼 스크립트 방식 (모든 기기 공통)
 
-> 2026-07-22: 플러그인·마켓플레이스·래퍼 스크립트·statusLine 설정이 유실된 것을 발견하고 재설치함 → 현재 **v0.6.0**. 0.6.0부터 컴파일된 `dist/index.js`가 동봉되어, 재작성한 래퍼는 bun+`src/index.ts` 우선 / node+`dist/index.js` 폴백으로 동작. 스모크 테스트 통과. 아래는 v0.3.0 당시 기록.
+`/claude-hud:setup`이 만드는 인라인 bash 원라이너는 중첩 따옴표(`'"'"'`)가 JSON 저장을 거치며 깨지기 쉽다.
+대신 래퍼 스크립트를 두고 `statusLine`이 이를 호출하게 한다. 플러그인 업데이트 시 버전 디렉터리를 자동 탐색하므로 재설정이 불필요하다.
 
-- v0.3.0 설치 완료 (`~/.claude/plugins/cache/claude-hud/claude-hud/0.3.0/`)
-- 런타임: Bun (`src/index.ts` 직접 실행 — node보다 빠름)
-- `/claude-hud:setup`의 인라인 bash 원라이너는 중첩 따옴표(`'"'"'`)가 JSON 저장을 거치며 깨지기 쉬워,
-  래퍼 스크립트 방식으로 설정함:
-  - `~/.claude/claude-hud-statusline.sh` — 터미널 폭 감지 + 최신 플러그인 버전 자동 탐색 + bun 실행
-  - `~/.claude/settings.json`의 `statusLine.command` → 위 스크립트 호출
-- 스모크 테스트 통과 (모델명 + 컨텍스트 바 정상 렌더링)
+`~/.claude/claude-hud-statusline.sh` (작성 후 `chmod +x`):
+
+```bash
+#!/usr/bin/env bash
+# claude-hud statusline 래퍼: 최신 버전 디렉터리 자동 탐색 + bun 우선 / node 폴백
+set -euo pipefail
+
+HUD_BASE="$HOME/.claude/plugins/cache/claude-hud/claude-hud"
+HUD_DIR="$(ls -d "$HUD_BASE"/*/ 2>/dev/null | sort -V | tail -1)"
+[ -n "$HUD_DIR" ] || exit 0
+
+INPUT="$(cat)"
+
+if command -v bun >/dev/null 2>&1 && [ -f "$HUD_DIR/src/index.ts" ]; then
+  printf '%s' "$INPUT" | bun "$HUD_DIR/src/index.ts"
+elif command -v node >/dev/null 2>&1 && [ -f "$HUD_DIR/dist/index.js" ]; then
+  printf '%s' "$INPUT" | node "$HUD_DIR/dist/index.js"
+fi
+```
+
+`~/.claude/settings.json`:
+
+```json
+"statusLine": {
+  "type": "command",
+  "command": "bash \"$HOME/.claude/claude-hud-statusline.sh\""
+}
+```
+
+- 런타임: bun이 있으면 `src/index.ts` 직접 실행(더 빠름), 없으면 node + `dist/index.js` 폴백 (v0.6.0부터 dist 동봉 — node만 있는 기기도 동작)
+- 스모크 테스트: `echo '{"model":{"display_name":"test"}}' | bash ~/.claude/claude-hud-statusline.sh` → 모델명 + 컨텍스트 바가 렌더링되면 정상
 - 참고: ponytail 플러그인의 statusline 배지와 상호 배타적 (statusLine은 하나만 가능) → claude-hud 채택
 
 ## 팁

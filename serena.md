@@ -36,7 +36,7 @@ brew install uv   # Python 패키지 매니저
 claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server
 ```
 
-### 방법 B: 플러그인 마켓플레이스 (이 기기의 실제 설치 방식)
+### 방법 B: 플러그인 마켓플레이스 (권장 — MCP 자동 구성)
 ```bash
 # claude-plugins-official 마켓플레이스에서 설치
 /plugin install serena@claude-plugins-official

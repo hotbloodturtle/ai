@@ -33,7 +33,7 @@ claude mcp list
 # taskmaster-ai: npx -y task-master-ai - ✓ Connected
 ```
 
-> 이 기기의 실제 등록명은 **`taskmaster-ai`**(하이픈 없음)다. 위 `claude mcp add` 명령은 등록명을 인자로 받으므로, 이 기기는 `taskmaster-ai`라는 이름으로 추가되어 있다. `claude mcp list`에 `taskmaster-ai`로 표시된다.
+> `claude mcp add`의 첫 인자가 곧 등록명이 되어 `claude mcp list`에 그 이름으로 표시된다. 기기마다 등록명이 다를 수 있으니(예: `task-master-ai` vs `taskmaster-ai`) 검증 시 이름이 아니라 `task-master-ai` 패키지 연결 여부로 확인한다.
 
 첫 호출 시 npx가 패키지를 다운로드하므로 잠시 시간이 걸릴 수 있음.
 

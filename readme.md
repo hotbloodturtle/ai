@@ -35,7 +35,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | claude-squad | 병렬 도구 | 터미널 멀티 에이전트 오케스트레이션 | 선택 | [claude-squad.md](claude-squad.md) |
 | RTK | 토큰 절감 | Bash 출력 압축으로 60~90% 토큰 절감 | 필수 | [rtk.md](rtk.md) |
 | planning-with-files | 스킬 | Manus 스타일 영속적 플래닝 | 선택 | [planning-with-files.md](planning-with-files.md) |
-| Awesome Design MD | 디자인 레퍼런스 | 74개 사이트 DESIGN.md 컬렉션 (로컬 클론 기준, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
+| Awesome Design MD | 디자인 레퍼런스 | 유명 사이트 DESIGN.md 컬렉션 (upstream 증가 중, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
 | Serena | 플러그인 + MCP | LSP 기반 시맨틱 코드 탐색/편집 | 추천 | [serena.md](serena.md) |
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
 | BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
@@ -69,9 +69,9 @@ Android QA 자동화 → [android-qa-agent-setup.md](android-qa-agent-setup.md)
 
 ### 1. 프리렉(prerequisite)
 ```bash
-brew install node uv gh tmux           # Node/uv/gh/tmux (이 기기는 node를 nvm으로 관리 중)
+brew install node uv gh tmux           # node는 nvm 등 버전 매니저로 관리해도 무방
 # claude-seo는 Python 3.10+ 필요. install.sh가 자체 .venv를 생성하므로 3.10+ 인터프리터만 잡히면 됨.
-# (이 기기는 brew python@3.11 없이도 .venv가 3.12로 생성되어 정상 동작) — 3.10+가 없을 때만 아래로 확보:
+# 3.10+가 없을 때만 아래로 확보:
 brew install python@3.11
 echo 'export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"' >> ~/.zshrc
 curl -fsSL https://bun.sh/install | bash   # gstack용
@@ -85,15 +85,15 @@ npm install -g @playwright/cli@latest
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스** (이 기기의 실제 방식): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail은 `/plugin install <이름>@<마켓플레이스>`로 설치됨. `~/.claude/plugins/cache/`에 들어가고, `~/.claude/plugins/repos/`에는 git clone 방식 스킬의 원본 레포(bmad-method, claude-seo, planning-with-files, cmux)가 들어 있다.
+- **플러그인 마켓플레이스** (권장): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. git clone 방식 스킬의 원본 레포(bmad-method, claude-seo 등)는 `~/.claude/plugins/repos/`에 두는 것을 권장.
 - **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고. ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
 ```bash
-# context7: HTTP 권장이나 이 기기는 stdio(npx)로 등록됨
+# context7: HTTP 트랜스포트 권장 (stdio(npx) 방식도 동작, 차이는 첫 호출 속도뿐)
 claude mcp add --transport http --scope user context7 https://mcp.context7.com/mcp
 claude mcp add --scope user task-master-ai -- npx -y task-master-ai
-# serena: 이 기기는 /plugin install serena 로 설치 → plugin:serena:serena 로 등록 (아래 add는 수동 대안)
+# serena: /plugin install serena 로 설치하면 plugin:serena:serena 로 자동 등록 (아래 add는 수동 대안)
 claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
 ```
@@ -106,7 +106,7 @@ npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://l
 
 ### 5. 글로벌 설정
 - `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고)
-- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1`(적용됨) + `statusLine`(claude-hud 래퍼)
+- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1` + `statusLine`(claude-hud 래퍼, [claude-hud.md](claude-hud.md) 참고)
 
 ---
 
@@ -128,39 +128,27 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 
 ---
 
-## 실제 설치 상태 메모 (2026-05-28 검증, 2026-06-13·2026-06-22·2026-07-22 재검증)
+## 기기별 설치 검증 체크리스트
 
-문서와 기기 상태를 대조하여 갱신함.
+> 이 문서는 **여러 기기에서 공용**으로 쓴다. 특정 기기의 설치 이력·상태는 문서에 기록하지 않는다.
+> 새 기기 세팅 후 또는 주기 점검 시 아래로 문서 ↔ 기기 상태를 대조한다.
 
-### 재검증 및 복구 (2026-07-22)
+| 대상 | 확인 방법 |
+|------|-----------|
+| CLI 도구 | `command -v rtk claude-squad playwright-cli bun node uv gh tmux` |
+| 플러그인 | `~/.claude/plugins/installed_plugins.json` — superpowers, serena, document-skills/example-skills, frontend-design, claude-mem, ponytail, claude-hud 등 |
+| MCP 서버 | `claude mcp list` — context7, task-master, codebase-memory (serena는 플러그인 설치 시 `plugin:serena:serena`) |
+| claude-mem 워커 | `curl -s http://localhost:37701/health` |
+| 스킬 | `ls ~/.claude/skills/` — flat 심링크(marketing 등)와 개인 스킬 확인 |
+| 슬래시 커맨드 | `ls ~/.claude/commands/` — explain-diff 등 |
+| statusLine | `~/.claude/settings.json`의 `statusLine` + `~/.claude/claude-hud-statusline.sh` 존재 |
+| 디자인 레퍼런스 | `ls ~/.claude/design-systems/awesome-design-md/design-md \| wc -l` (upstream 증가 중 — 실제 수를 따른다) |
+| cmux | `type cmux` (zsh 함수) 또는 `command -v cmux` |
 
-7/16 이후 `~/.claude` 일부가 유실된 상태를 발견(플러그인 마켓플레이스·`commands/`·개인 스킬·`~/.zshrc`의 cmux 함수 소실 — 원인 미상, 설정 초기화/재설치 추정). 문서 기준으로 복구:
+⚠️ `~/.claude`가 백업 복원·재설치 등으로 과거 시점으로 되돌아가면 최근 설치분이 조용히 사라질 수 있다. 점검 시 위 체크리스트 전체를 돌릴 것. 개인 스킬(`~/.claude/skills/`)과 커맨드(`~/.claude/commands/`)는 레포 밖 유일 사본이 되기 쉬우니 **백업(Time Machine 등)을 유지**한다.
 
-- **ponytail** 재설치 → **v4.8.4** (마켓플레이스 재등록 + `/plugin install`)
-- **claude-hud** 재설치 → **v0.6.0**. 래퍼 스크립트(`~/.claude/claude-hud-statusline.sh`) 재작성: bun+`src/index.ts` 우선, 없으면 node+`dist/index.js` 폴백(0.6.0부터 dist 동봉). `settings.json`의 `statusLine` 재등록, 스모크 테스트 통과
-- **explain-diff** 재등록 → 원본 gist(`explain-diff-html.md`)에서 재생성 + 퀴즈 편향 패치·자동 오픈 지시 재적용
-- **cmux** 재설치 → 방법 A(zsh 함수)가 유실되어 **방법 B 변형**으로 전환: `~/.claude/plugins/repos/cmux` 클론 + `~/.local/bin/cmux` **bash 래퍼**(cmux.sh는 shebang이 없어 심링크만으로는 sh로 실행되어 깨짐)
-- **awesome-design-md** `git pull` → 74개 확인, 글로벌 CLAUDE.md 71→74 갱신
-- playwright CLI는 유실 아님 — 바이너리명이 `playwright-cli`라 점검 오류였음 (v0.1.13 정상)
-- ⚠️ **미복구(내용 유실)**: andrej-karpathy-skills, notebooklm, obsidian, 개인 한국어 스킬 10종(explain, test, translate, my-style, start-project, review, refactor, fix, commit-msg, daily-report) — 기기에서 사라졌고 내용 사본이 없어 재생성 불가. 백업(Time Machine 등)에서 `~/.claude/skills/`, `~/.claude/commands/` 복원 필요
+## 규약 (모든 기기 공통)
 
-### 신규 문서화 (2026-07-16)
-- **explain-diff** — Geoffrey Litt의 gist 프롬프트를 `~/.claude/commands/explain-diff.md`로 등록 (글로벌 슬래시 커맨드). 퀴즈 정답 편향 패치 포함 → [explain-diff.md](explain-diff.md)
-
-### 신규 문서화 (2026-07-06)
-- **Claude HUD** v0.3.0 — `claude plugin install claude-hud@claude-hud`로 설치. Bun 런타임 + 래퍼 스크립트(`~/.claude/claude-hud-statusline.sh`)로 statusLine 설정 (setup.md의 인라인 원라이너는 따옴표 깨짐 이슈로 회피). ponytail statusline 배지와 상호 배타적 → claude-hud 채택 → [claude-hud.md](claude-hud.md)
-
-### 신규 문서화 (2026-06-22)
-- **Ponytail** v4.7.0 — 사용자 직접 설치(`/plugin install ponytail@ponytail`). 캐시 `~/.claude/plugins/cache/ponytail/ponytail/4.7.0`, 명령어 6 + 스킬 6 + 훅 5 구성. 과잉 설계 억제 플러그인 → [ponytail.md](ponytail.md)
-
-### 문서에 없으나 기기에 설치된 항목 (참고)
-
-⚠️ 아래 항목은 2026-07-22 재검증에서 **모두 기기에서 사라진 것으로 확인** (위 "재검증 및 복구" 참조).
-- **andrej-karpathy-skills** (`karpathy-skills` 마켓플레이스) — Karpathy 가이드라인 스킬
-- **swift-lsp** (`claude-plugins-official`) — Swift LSP 플러그인
-- **notebooklm**, **obsidian** — 개별 스킬 (`~/.claude/skills/`)
-- 개인 한국어 스킬: explain, test, translate, my-style, start-project, review, refactor, fix, commit-msg, daily-report
-
-### 해결된 결정 사항
-- **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 확정. 모든 문서가 이 경로로 일관되며, android-qa 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리키도록 재지정한다(`angie-projects` 경로는 사용하지 않음). **(2026-06-13 실행 완료**: 레포를 angie-projects → projects로 이동, 심링크 4개 재지정, 설치된 `~/.claude/skills/android-qa-agent/SKILL.md`의 `QA_AGENT_DIR`까지 갱신, 빈 angie-projects 디렉토리 제거**)**
-- **awesome-design-md 사이트 수**: `git pull` 후(2026-06-13) 로컬 클론 **74개**. 문서(readme/awesome-design-md.md)도 74개로 통일. 글로벌 `~/.claude/CLAUDE.md`에도 실제 디렉토리 수(현재 74개)를 적는다(자동 분류기 차단 시 사용자가 직접 수정). upstream은 계속 증가하므로 `git pull` 후 실제 디렉토리 수를 따른다.
+- **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 통일. 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리킨다.
+- **awesome-design-md 사이트 수**: upstream이 계속 증가하므로 문서·글로벌 `~/.claude/CLAUDE.md`에 특정 개수를 고정하지 않고, `git pull` 후 실제 디렉토리 수를 따른다.
+- **statusLine**: ponytail의 statusline 배지와 claude-hud는 상호 배타적(statusLine은 하나만 가능) → claude-hud를 채택한다.

@@ -1,6 +1,6 @@
 # Awesome Design MD
 
-AI 에이전트를 위한 마크다운 디자인 시스템 컬렉션. 유명 사이트의 디자인 토큰을 DESIGN.md 형식으로 제공 (upstream 정기 추가됨). **이 기기 로컬 클론 기준 74개** — 아래 사이트 목록은 upstream 전체(증가 중)이며 `git pull`로 동기화한다.
+AI 에이전트를 위한 마크다운 디자인 시스템 컬렉션. 유명 사이트의 디자인 토큰을 DESIGN.md 형식으로 제공 (upstream 정기 추가됨). 아래 사이트 목록은 upstream 전체(증가 중)이며 `git pull`로 동기화한다. 로컬 클론의 실제 개수는 `ls ~/.claude/design-systems/awesome-design-md/design-md | wc -l`로 확인.
 
 - 공식: https://github.com/VoltAgent/awesome-design-md
 - 포맷: Google Stitch DESIGN.md 표준
@@ -44,7 +44,7 @@ git clone https://github.com/VoltAgent/awesome-design-md.git ~/.claude/design-sy
 
 ### 레퍼런스
 - 디자인 레퍼런스 위치: ~/.claude/design-systems/awesome-design-md/design-md/
-- 74개 사이트의 DESIGN.md 보유 (Claude, Vercel, Linear, Notion, Stripe 등 / upstream 정기 추가)
+- 다수 사이트의 DESIGN.md 보유 (Claude, Vercel, Linear, Notion, Stripe 등 / upstream 정기 추가, git pull 후 실제 디렉토리 수를 따른다)
 
 ### Awesome Design 요청 처리 흐름
 1. 특정 스타일 지정 시 → 해당 DESIGN.md 읽고 바로 적용
@@ -130,7 +130,7 @@ open ~/.claude/design-systems/awesome-design-md/design-md/claude/preview-dark.ht
 
 ---
 
-## 포함된 사이트 (upstream 전체 목록, 로컬 클론은 74개)
+## 포함된 사이트 (upstream 전체 목록)
 
 ### AI & ML
 claude, cohere, elevenlabs, minimax, mistral.ai, ollama, opencode.ai, replicate, runwayml, together.ai, x.ai

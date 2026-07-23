@@ -22,12 +22,12 @@
 
 ## 설치 (Claude Code 기준)
 
-### 방법 A: 플러그인 마켓플레이스 (이 기기의 실제 설치 방식)
+### 방법 A: 플러그인 마켓플레이스 (권장)
 ```bash
 /plugin marketplace add anthropics/claude-plugins-official
 /plugin install superpowers@claude-plugins-official
 ```
-설치 위치: `~/.claude/plugins/cache/claude-plugins-official/superpowers/<버전>` (현재 v5.1.0).
+설치 위치: `~/.claude/plugins/cache/claude-plugins-official/superpowers/<버전>`.
 14개 스킬이 `superpowers:<스킬명>` 네임스페이스로 자동 등록되며 `~/.claude/plugins/repos/`는 사용하지 않는다.
 
 ### 방법 B: git clone + 심링크 (수동)
