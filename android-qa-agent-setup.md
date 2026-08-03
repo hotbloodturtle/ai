@@ -1,4 +1,6 @@
-# Android QA Agent 세팅 가이드
+# Android QA Agent 세팅 가이드 (DEPRECATED)
+
+> ⚠️ **Deprecated (2026-08)**: [agent-device](agent-device.md)로 대체됨. 새 기기 세팅 시 이 문서는 건너뛰고 agent-device를 설치할 것. 아래 내용은 기존 환경 참고용 보관.
 
 에뮬레이터에서 앱을 자동으로 테스트하기 위한 환경 세팅 가이드.
 Claude Code가 ADB를 통해 Android 에뮬레이터를 직접 제어하고, 스크린샷을 캡처하여 테스트합니다.

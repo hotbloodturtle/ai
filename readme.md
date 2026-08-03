@@ -43,6 +43,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | Ponytail | 플러그인 | 과잉 설계 억제 → 코드량·비용·시간 절감 (RTK와 상호보완) | 추천 | [ponytail.md](ponytail.md) |
 | Claude HUD | 플러그인 | statusline에 컨텍스트/도구/에이전트/할일 실시간 표시 | 추천 | [claude-hud.md](claude-hud.md) |
 | explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
+| agent-device | CLI + 스킬 | iOS/Android 등 기기 자동화 — 접근성 ref 기반 앱 검증 (Callstack) | 추천 | [agent-device.md](agent-device.md) |
 
 ---
 
@@ -59,7 +60,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 
 각 도구의 상세 소개와 공식 링크는 개별 파일 참조.
 
-Android QA 자동화 → [android-qa-agent-setup.md](android-qa-agent-setup.md)
+Android QA 자동화 → ~~[android-qa-agent-setup.md](android-qa-agent-setup.md)~~ (deprecated, [agent-device](agent-device.md)로 대체)
 
 ---
 
@@ -81,6 +82,7 @@ curl -fsSL https://bun.sh/install | bash   # gstack용
 ```bash
 brew install rtk claude-squad
 npm install -g @playwright/cli@latest
+npm install -g agent-device@latest   # 기기 자동화 (Node 22.12+), 설치 후 agent-device doctor
 # Claude Agent SDK는 전역 CLI가 아니라 프로젝트별 라이브러리다 → 쓰는 프로젝트에서 `npm install @anthropic-ai/claude-agent-sdk` ([agent-sdk.md](agent-sdk.md))
 ```
 
@@ -149,6 +151,6 @@ Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행
 
 ## 규약 (모든 기기 공통)
 
-- **android-qa-agent 경로**: `~/Documents/projects/android-qa-agent`로 통일. 심링크(`~/.local/bin/android-qa` 등)도 이 경로를 가리킨다.
+- ~~**android-qa-agent 경로**~~: deprecated — [agent-device](agent-device.md)로 대체. 기존 설치분(`~/Documents/projects/android-qa-agent`, `~/.local/bin/android-qa*` 심링크)은 보관 상태이며 새 기기에는 설치하지 않는다.
 - **awesome-design-md 사이트 수**: upstream이 계속 증가하므로 문서·글로벌 `~/.claude/CLAUDE.md`에 특정 개수를 고정하지 않고, `git pull` 후 실제 디렉토리 수를 따른다.
 - **statusLine**: ponytail의 statusline 배지와 claude-hud는 상호 배타적(statusLine은 하나만 가능) → claude-hud를 채택한다.
