@@ -44,6 +44,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | Claude HUD | 플러그인 | statusline에 컨텍스트/도구/에이전트/할일 실시간 표시 | 추천 | [claude-hud.md](claude-hud.md) |
 | explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
 | agent-device | CLI + 스킬 | iOS/Android 등 기기 자동화 — 접근성 ref 기반 앱 검증 (Callstack) | 추천 | [agent-device.md](agent-device.md) |
+| Hallmark | 스킬 | 안티 AI-slop 디자인 — 구조 다양성 강제 + 57개 품질 게이트 (Awesome Design MD와 보완) | 추천 | [hallmark.md](hallmark.md) |
 
 ---
 
@@ -88,7 +89,8 @@ npm install -g agent-device@latest   # 기기 자동화 (Node 22.12+), 설치 �
 
 ### 3. 스킬 (설치 경로 2가지)
 - **플러그인 마켓플레이스** (권장): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. git clone 방식 스킬의 원본 레포(bmad-method, claude-seo 등)는 `~/.claude/plugins/repos/`에 두는 것을 권장.
-- **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고. ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
+- **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
+- **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code` ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
 ```bash
