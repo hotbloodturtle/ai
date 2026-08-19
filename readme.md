@@ -45,6 +45,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
 | agent-device | CLI + 스킬 | iOS/Android 등 기기 자동화 — 접근성 ref 기반 앱 검증 (Callstack) | 추천 | [agent-device.md](agent-device.md) |
 | Hallmark | 스킬 | 안티 AI-slop 디자인 — 구조 다양성 강제 + 57개 품질 게이트 (Awesome Design MD와 보완) | 추천 | [hallmark.md](hallmark.md) |
+| Spec Kit | CLI + 스킬 | GitHub 공식 스펙 주도 개발 — constitution→spec→plan→tasks→implement 슬래시 커맨드 (프로젝트별 설치) | 선택 | [spec-kit.md](spec-kit.md) |
 
 ---
 
@@ -84,6 +85,7 @@ curl -fsSL https://bun.sh/install | bash   # gstack용
 brew install rtk claude-squad
 npm install -g @playwright/cli@latest
 npm install -g agent-device@latest   # 기기 자동화 (Node 22.12+), 설치 후 agent-device doctor
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.16.4   # Spec Kit CLI, 스킬은 프로젝트에서 `specify init . --integration claude` ([spec-kit.md](spec-kit.md))
 # Claude Agent SDK는 전역 CLI가 아니라 프로젝트별 라이브러리다 → 쓰는 프로젝트에서 `npm install @anthropic-ai/claude-agent-sdk` ([agent-sdk.md](agent-sdk.md))
 ```
 
