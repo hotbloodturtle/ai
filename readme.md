@@ -38,7 +38,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | Awesome Design MD | 디자인 레퍼런스 | 유명 사이트 DESIGN.md 컬렉션 (upstream 증가 중, 전역 설치) | 추천 | [awesome-design-md.md](awesome-design-md.md) |
 | Serena | 플러그인 + MCP | LSP 기반 시맨틱 코드 탐색/편집 | 추천 | [serena.md](serena.md) |
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
-| BMAD-METHOD | 워크플로 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 | 선택 | [bmad-method.md](bmad-method.md) |
+| BMAD-METHOD | 워크플로 + 전역 래퍼 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 (v6: 프로젝트별 설치) | 선택 | [bmad-method.md](bmad-method.md) |
 | Best Practices | 실천 가이드 | Claude Code 활용 69개 팁 핵심 선별 | 추천 | [best-practices.md](best-practices.md) |
 | Ponytail | 플러그인 | 과잉 설계 억제 → 코드량·비용·시간 절감 (RTK와 상호보완) | 추천 | [ponytail.md](ponytail.md) |
 | Claude HUD | 플러그인 | statusline에 컨텍스트/도구/에이전트/할일 실시간 표시 | 추천 | [claude-hud.md](claude-hud.md) |
@@ -90,9 +90,9 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스** (권장): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. git clone 방식 스킬의 원본 레포(bmad-method, claude-seo 등)는 `~/.claude/plugins/repos/`에 두는 것을 권장.
-- **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
-- **얇은 전역 래퍼**: agent-device, Spec Kit은 CLI만 전역 설치하고 `~/.claude/skills/<이름>/SKILL.md`를 각 문서의 부록 A로 직접 작성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md)).
+- **플러그인 마켓플레이스** (권장): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. git clone 방식 스킬의 원본 레포(claude-seo 등)는 `~/.claude/plugins/repos/`에 두는 것을 권장.
+- **git clone + flat 심링크**: Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
+- **얇은 전역 래퍼 (프로젝트 설치형 도구)**: agent-device, Spec Kit, BMAD(v6~)는 전역에 `~/.claude/skills/<이름>/SKILL.md` 래퍼만 두고(각 문서 부록 A) 실제 스킬은 프로젝트에서 생성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md), [bmad-method.md](bmad-method.md)).
 - **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code` ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
