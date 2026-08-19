@@ -45,7 +45,7 @@ AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
 | explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
 | agent-device | CLI + 스킬 | iOS/Android 등 기기 자동화 — 접근성 ref 기반 앱 검증 (Callstack) | 추천 | [agent-device.md](agent-device.md) |
 | Hallmark | 스킬 | 안티 AI-slop 디자인 — 구조 다양성 강제 + 57개 품질 게이트 (Awesome Design MD와 보완) | 추천 | [hallmark.md](hallmark.md) |
-| Spec Kit | CLI + 스킬 | GitHub 공식 스펙 주도 개발 — constitution→spec→plan→tasks→implement 슬래시 커맨드 (프로젝트별 설치) | 선택 | [spec-kit.md](spec-kit.md) |
+| Spec Kit | CLI + 스킬 + 전역 래퍼 | GitHub 공식 스펙 주도 개발 — constitution→spec→plan→tasks→implement 슬래시 커맨드 (프로젝트별 설치) | 선택 | [spec-kit.md](spec-kit.md) |
 
 ---
 
@@ -92,6 +92,7 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0
 ### 3. 스킬 (설치 경로 2가지)
 - **플러그인 마켓플레이스** (권장): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. git clone 방식 스킬의 원본 레포(bmad-method, claude-seo 등)는 `~/.claude/plugins/repos/`에 두는 것을 권장.
 - **git clone + flat 심링크**: Marketing, planning-with-files, BMAD, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
+- **얇은 전역 래퍼**: agent-device, Spec Kit은 CLI만 전역 설치하고 `~/.claude/skills/<이름>/SKILL.md`를 각 문서의 부록 A로 직접 작성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md)).
 - **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code` ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
