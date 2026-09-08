@@ -152,15 +152,18 @@ Codebase Memory의 바이너리는 먼저 [설치](codebase-memory.md)해야 한
 
 새 Codex 턴에서 스킬을 확인한다. 플러그인·MCP 변경이 보이지 않으면 앱/CLI를 재시작한다. `/hooks`에서 새 훅의 소스·명령을 읽고 신뢰한다. **설치했다고 훅이 자동 실행 검증된 것은 아니다.** 신뢰를 우회하는 플래그를 일괄 설치 절차에 넣지 않는다.
 
+파일 목록뿐 아니라 Codex `/skills`의 실제 로딩 결과에서도 오류·중복을 확인한다. Codex SEO는 [중첩 확장 복사본 비활성화](claude-seo.md#중첩-확장-스킬-중복-노출)가 필요했던 버전이 있다. 다량의 스킬을 설치하면 초기 설명이 축약될 수 있으므로 원하는 스킬을 이름으로 지정할 수 있다.
+
 ```bash
 codex plugin list
 codex mcp list
+codex doctor --summary
 rtk --version
 agent-device doctor
 specify --version
 ```
 
-MCP 설정·목록 출력에는 인자에 넣은 키가 표시될 수 있으므로 그대로 커밋하거나 공유하지 않는다. [점검 스크립트](scripts/check-setup.py)는 키/인자를 출력하지 않는 파일·등록 상태 요약용이다. 연결 검증을 대신하지 않는다.
+MCP 설정·목록 출력에는 인자에 넣은 키가 표시될 수 있으므로 그대로 커밋하거나 공유하지 않는다. [점검 스크립트](scripts/check-setup.py)는 키/인자를 출력하지 않는 최상위 파일·등록 상태 요약용이다. 중첩 스킬이나 활성 로딩 결과, 연결 검증을 대신하지 않는다.
 
 ```bash
 mkdir -p .local

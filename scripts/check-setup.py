@@ -43,12 +43,15 @@ def main():
         "broken_symlinks": broken,
         "global_rules": (codex / "AGENTS.md").is_file(),
         "standalone_hooks_file": (codex / "hooks.json").is_file(),
+        "disabled_skill_paths": [entry.get("path")
+                                 for entry in data.get("skills", {}).get("config", [])
+                                 if entry.get("enabled") is False],
         "document_runtime": {
             "python": any((home / ".local/share/ai-tools/document-runtime/.venv" / path).exists()
                           for path in ["bin/python", "Scripts/python.exe"]),
             "node_modules": (home / ".local/share/ai-tools/document-runtime/node_modules").is_dir(),
         },
-        "limits": "Registration/files only. Remote plugins, declared skill-name collisions, hook trust, authentication and runtime health require separate verification.",
+        "limits": "Registration and top-level files only; standalone_skills includes disabled files. Nested skills, declared-name collisions, remote plugins, hook trust, authentication and runtime health require Codex runtime verification.",
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 1 if broken else 0

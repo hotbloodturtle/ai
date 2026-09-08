@@ -82,3 +82,25 @@ PATH="$(brew --prefix python@3.11)/libexec/bin:$PATH" bash install.sh
 2026-09 검증에서 시스템 Python 3.9로는 실패했다. Pango가 없으면 WeasyPrint 경고가 JSON 앞에 섞여 bootstrap의 `verification`이 null이 되고 `AttributeError`가 날 수 있었다. `brew install pango` 후 설치기를 다시 실행하고 verifier의 `full_ready`를 확인한다. 라이브러리 탐색이 계속 실패하면 [WeasyPrint 공식 문제 해결](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#missing-library)을 따른다.
 
 Google API 패키지 설치는 계정 인증 완료와 다르다. Google OAuth, DataForSEO, Firecrawl, Gemini 등은 해당 기능을 사용할 때 별도로 연결한다. 마케팅 스킬의 seo-audit와 중복 설치하지 않는다.
+
+### 중첩 확장 스킬 중복 노출
+
+v1.9.6-codex.5는 최상위 스킬 외에 `seo/extensions/*/skills/`에도 같은 이름의 SKILL.md를 포함한다. 실제 Codex 로딩에서 `seo-dataforseo`, `seo-firecrawl`, `seo-image-gen`이 두 번 나타났다. 최상위 파일만 검사하면 놓치는 문제다.
+
+원본을 지우지 않고 `~/.codex/config.toml`의 `[[skills.config]]`로 **중첩 복사본만** 비활성화한다. 아래 경로는 실제 기기의 절대 경로로 바꾸고 같은 entry가 있으면 중복 추가하지 않는다.
+
+```toml
+[[skills.config]]
+path = "/실제/CODEX_HOME/skills/seo/extensions/dataforseo/skills/seo-dataforseo/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/실제/CODEX_HOME/skills/seo/extensions/firecrawl/skills/seo-firecrawl/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/실제/CODEX_HOME/skills/seo/extensions/banana/skills/seo-image-gen/SKILL.md"
+enabled = false
+```
+
+각각의 최상위 `skills/seo-*/SKILL.md`는 활성 상태로 유지한다. 설정 백업 후 병합하고 Codex를 재시작해 `/skills`에서 확인한다. CLI 0.153.4의 app-server `skills/list`에서도 최상위 활성·중첩 비활성·활성 이름 중복 0개를 확인했다. [공식 스킬 비활성화 문서](https://learn.chatgpt.com/docs/build-skills#enable-or-disable-local-codex-skills)

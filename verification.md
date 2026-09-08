@@ -11,7 +11,8 @@
 | BMAD 플러그인 6.13.0-next | 설치·파일 검사 후 제거 | prerelease 선택지로만 문서화 |
 | Spec Kit 0.16.4 | 임시 프로젝트에 Codex 스킬 10개와 `.specify/` 생성 | 실제 사용자 프로젝트는 초기화하지 않음 |
 | 공통 복원 스킬 7개 | skill-creator의 quick_validate 통과 | 작업별 행동 검증을 대신하지 않음 |
-| 독립 스킬 및 설치한 개발 플러그인 | YAML 파싱·필수 description·선언 name 중복 검사 통과 | 기존 원격 앱 플러그인 전체를 검사한 것은 아님 |
+| 독립 스킬 및 설치한 개발 플러그인 | 최상위 YAML 파싱·description 검사 통과, 실제 `skills/list` 활성 이름 중복·로딩 오류 0개 | 실제 로딩에서 발견한 SEO 중첩 복사본 3개 비활성화 후 재검증. 파일 수와 활성 로딩 수는 다름 |
+| Codex doctor | 19 ok / 1 idle / 0 warn / 0 fail | 로컬 설치·설정·인증 구성·연결 진단이며 개별 도구 작업 검증은 별도 |
 | gstack | `./setup --host codex` 성공, setup의 Chromium 실행 점검 통과 | 외부 계정·Claude 호출 등이 필요한 워크플로는 별도 |
 | Codex SEO v1.9.6-codex.5 | 설치 완료, verifier `full_ready=true` | Google 등 API 인증/실제 요청 완료를 의미하지 않음 |
 | Document Skills 런타임 | 기본 PDF/DOCX/PPTX/XLSX 생성·읽기 통과 | 복잡한 레이아웃/폰트/매크로는 산출물별 확인 |
@@ -32,5 +33,6 @@
 - Codebase Memory: 기존 Claude 스킬의 인용되지 않은 `description` 콜론으로 YAML 파싱 실패. 저장소의 독립 복원 스킬로 교체.
 - RTK: `@파일` 한 줄을 Codex에서 읽을 파일을 명시하는 문장으로 보완.
 - 문서 스킬: upstream의 preinstalled 가정과 실제 기기의 차이를 독립 문서 런타임으로 해소.
+- 실제 로딩 검사: 최상위 파일 검사에서 놓친 Codex SEO 확장 스킬 3개의 중복 노출 발견. 원본을 보존하고 `[[skills.config]]`에서 중첩 복사본만 비활성화한 뒤 app-server `skills/list`로 재검증.
 
 설치 이후의 사용자 확인은 [활성화와 사용 확인](setup-guide.md#활성화와-사용-확인)을 따른다. Linux·Windows에서 직접 실행한 결과는 아직 없다.
