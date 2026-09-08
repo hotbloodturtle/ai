@@ -62,3 +62,20 @@ cd ~/.claude/skills/gstack && ./setup
 ## 참고
 
 - 업데이트: `/gstack-upgrade` 슬래시 커맨드
+
+---
+
+## Codex
+
+현재 [upstream](https://github.com/garrytan/gstack)은 Codex 전용 host를 지원한다. Claude 설치와 독립 체크아웃을 사용한다.
+
+```bash
+mkdir -p "$HOME/.local/share/ai-tools"
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git "$HOME/.local/share/ai-tools/gstack"
+cd "$HOME/.local/share/ai-tools/gstack"
+./setup --host codex
+```
+
+Bun이 필요하다. setup은 의존성·브라우저 바이너리와 Codex용 `gstack-*` 스킬을 `${CODEX_HOME:-~/.codex}/skills/`에 구성한다. 현재 config.toml의 모델을 읽어 지침을 생성하므로 모델 변경 후 같은 setup을 다시 실행한다. Claude용 기본 setup 또는 `--host auto`를 Codex 전용 설치에 사용하지 않는다.
+
+setup 성공과 브라우저 런타임 확인을 검증했다. 일부 워크플로는 별도의 외부 계정/도구 또는 Claude 호출 기능을 포함할 수 있으므로, 모든 gstack 기능이 OpenAI만으로 실행된다고 가정하지 않는다. 사용하려는 스킬의 요구사항을 확인한다. setup은 공유 브라우저 캐시도 갱신할 수 있다.

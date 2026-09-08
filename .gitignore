@@ -2,3 +2,5 @@
 .claude/
 .worktrees/
 .playwright/
+.local/
+__pycache__/

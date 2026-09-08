@@ -47,3 +47,17 @@ done
 ```bash
 cd ~/.claude/plugins/repos/superpowers && git pull
 ```
+
+---
+
+## Codex
+
+공식 Codex 마켓플레이스에서 설치한다. Claude 플러그인 캐시와 독립적이다.
+
+```bash
+codex plugin add superpowers@openai-curated-remote
+```
+
+위 selector가 보이지 않는 환경은 `codex plugin list` 또는 앱 Plugins에서 Superpowers를 검색한다. 마켓플레이스 이름을 임의로 가정하지 않는다. 2026-09-08 CLI 0.153.4에서 위 명령과 플러그인 6.3.0 설치를 확인했다. 다음 턴에서 스킬을 확인하고, 보이지 않으면 재시작한다.
+
+[upstream Codex 설치 안내](https://github.com/obra/superpowers#codex-app)

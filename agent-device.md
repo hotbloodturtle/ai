@@ -146,3 +146,11 @@ agent-device help debugging       # 로그·네트워크·성능·트레이스
 agent-device help physical-device # 실기기 연결·iOS 서명
 ```
 `````
+
+---
+
+## Codex / 공용 래퍼
+
+[upstream](https://github.com/callstack/agent-device)은 Codex를 지원한다. 기존 `agent-device` CLI, Android SDK, Xcode는 재사용하고 [공통 스킬 원본](skills/agent-device/SKILL.md)을 `~/.agents/skills/agent-device/`에 설치한다.
+
+[설치 가이드](setup-guide.md#3-이-저장소의-공통-래퍼)에 복사 절차가 있다. `agent-device doctor`에서 장치 인식·러너 캐시를 확인한 뒤 실제 QA 대상을 정한다. 현재 점검에서 TV용 Vega CLI 누락은 경고이며 일반 Android/iOS QA의 hard blocker가 아니었다. 실제 기기 조작 검증과 doctor 통과는 구분한다.

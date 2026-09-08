@@ -50,3 +50,11 @@ chmod +x ~/.local/bin/cmux
 # 프로젝트 루트에서
 echo ".worktrees/" >> .gitignore
 ```
+
+---
+
+## Codex
+
+이 문서의 cmux는 **craigsc/cmux Bash 스크립트**다. 동명의 다른 터미널 앱과 구분한다. [현재 소스](https://github.com/craigsc/cmux/blob/main/cmux.sh)는 Claude 실행을 전제로 하므로 “Git worktree 도구이므로 Codex도 바로 지원”이라고 판단하지 않는다.
+
+Codex용으로 별도 설치하지 않는다. Codex 병렬 터미널 작업은 [claude-squad](claude-squad.md)의 `-p codex` 또는 일반 Git worktree를 사용한다. 향후 upstream에 host 선택 기능이 추가되면 실제 실행 검증 후 이 문서를 갱신한다.

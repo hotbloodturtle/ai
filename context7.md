@@ -41,3 +41,15 @@ claude mcp list
 
 - 별도 API 키 불필요.
 - HTTP 트랜스포트는 npx 다운로드가 없어 첫 호출이 빠름 (stdio는 첫 호출 시 npx 다운로드가 한 번 일어남).
+
+---
+
+## Codex
+
+```bash
+codex mcp add context7 -- npx -y @upstash/context7-mcp
+# 또는 HTTP 방식 (둘 중 하나만 등록)
+# codex mcp add context7 --url https://mcp.context7.com/mcp
+```
+
+이미 다른 이름으로 같은 서버가 등록되어 있으면 재사용한다. 라이브러리 문서 조회를 요청해 실제 응답을 확인한다. [Codex 공식 Context7 예제](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)

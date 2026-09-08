@@ -69,3 +69,17 @@ claude mcp list
 - 프로젝트 최초 사용 시 `onboarding` 단계를 거쳐야 심볼 인덱스가 생성됨
 - Codebase Memory MCP와 역할이 유사하지만, Serena는 LSP 기반 실시간 분석에, Codebase Memory는 지식 그래프 저장에 강점이 있음
 - Claude Code 자동 분류기가 git+ URL을 untrusted로 분류할 수 있어 첫 등록 시 확인 프롬프트가 뜰 수 있음
+
+---
+
+## Codex 및 현행 설치 권장
+
+2026-09 upstream은 오래된 마켓플레이스 설정 대신 직접 MCP 등록을 권장한다. 위 Claude 플러그인 방식은 기존 설치 이력이며, 새 설치에서는 [공식 클라이언트 안내](https://oraios.github.io/serena/02-usage/030_clients.html)를 우선한다.
+
+```bash
+codex mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context codex --open-web-dashboard false
+```
+
+GUI에서 의도치 않은 폴더가 활성화되지 않도록 전역 설정에는 특정 프로젝트를 고정하지 않았다. 사용할 때 대상 프로젝트를 activate한다. 터미널 CWD에 맞춰 자동 활성화하려면 설치 버전이 지원하는 `--project-from-cwd`를 추가할 수 있다.
+
+초기 uv 다운로드 때문에 실패하면 해당 MCP 설정에 `startup_timeout_sec = 60`을 추가한다. 현재 검증은 MCP 초기화와 tools/list(24개)까지다. 특정 언어의 LSP 분석은 해당 프로젝트에서 검증한다.

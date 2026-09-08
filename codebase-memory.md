@@ -52,3 +52,20 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/DeusData/codebase-memor
 - 제로 디펜던시(Zero Dependency) 단일 바이너리.
 - 자동 분류기는 `curl ... | bash` 패턴을 차단할 수 있으므로 사용자가 직접 실행해야 함.
 - PreToolUse 훅이 Read/Grep을 가로채 codebase-memory-mcp 도구로 유도하므로, 단순 텍스트 검색 시에도 게이트 메시지가 출력될 수 있음.
+
+---
+
+## Codex
+
+기존 공용 바이너리가 있다면 Claude 설정을 건드리는 일괄 인스톨러를 다시 돌리지 않고 Codex MCP만 추가할 수 있다.
+
+```bash
+command -v codebase-memory-mcp
+codex mcp add codebase-memory -- codebase-memory-mcp
+```
+
+Codex 앱에서 PATH를 못 찾으면 위에서 확인한 현재 기기의 절대 경로를 등록한다. [공통 스킬 원본](skills/codebase-memory/SKILL.md)을 `~/.agents/skills/codebase-memory`에 설치한다. 기존 Claude 스킬을 그대로 복사했을 때 description의 인용되지 않은 콜론 때문에 YAML 파싱이 실패한 사례가 있어, 이 저장소에는 문법 검증된 독립 원본을 둔다.
+
+새 기기의 바이너리 설치는 [upstream](https://github.com/DeusData/codebase-memory-mcp)을 따른다. 최신 installer는 여러 에이전트를 자동 감지해 설정·훅·규칙까지 변경하므로 기존 환경에서는 `--dry-run`과 설치 버전의 옵션을 먼저 확인한다.
+
+이번 Codex 구성은 MCP+스킬이며 자동 게이트 훅을 추가하지 않았다. 14개 도구의 MCP 초기화/목록을 확인했다. 실제 코드 프로젝트를 index한 뒤 구조 검색을 사용한다. CLI 버전 문자열과 MCP serverInfo 버전이 다르게 나올 수 있으므로 둘을 구분해 기록한다.

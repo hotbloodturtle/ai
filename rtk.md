@@ -19,7 +19,7 @@ Claude Code와 함께 사용하면 명령이 자동으로 rtk를 경유하여 �
 
 ## 공식 링크
 
-- GitHub: https://github.com/contextprotocol/rtk
+- GitHub: https://github.com/rtk-ai/rtk
 
 ## 설치
 
@@ -34,3 +34,18 @@ export RTK_TELEMETRY_DISABLED=1
 ```
 
 > `RTK_TELEMETRY_DISABLED=1`은 `~/.zshrc` 또는 `~/.claude/settings.json`의 `env`에 넣어야 영구 적용된다 (export만으로는 해당 셸에서만 유효).
+
+---
+
+## Codex
+
+현재 upstream은 [rtk-ai/rtk](https://github.com/rtk-ai/rtk)다. 기존 contextprotocol 링크가 동작하지 않으면 현행 저장소를 사용한다.
+
+```bash
+rtk --version
+rtk init -g --codex
+```
+
+0.40.0에서 검증. `~/.codex/RTK.md`와 `~/.codex/AGENTS.md` 지침을 구성하며 Claude 설정을 패치하지 않는다. Codex에서는 지침에 따라 `rtk ...`를 호출하는 방식으로, Claude의 자동 Bash 재작성 훅과 다르다.
+
+생성된 AGENTS.md가 `@/절대경로/RTK.md` 한 줄뿐이면 Codex용으로 “셸 출력 압축이 필요하면 ~/.codex/RTK.md를 읽고 지원되는 명령에 RTK를 사용한다”는 명시적 문장으로 바꾼다. 다른 개인 규칙은 유지한다. 텔레메트리 설정은 현재 CLI 설명을 확인해 셸 또는 Codex 실행 환경에 적용한다.

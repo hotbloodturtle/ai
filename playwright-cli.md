@@ -45,3 +45,17 @@ playwright-cli install --skills
 
 - 패키지명은 `@playwright/cli` (Microsoft 공식). 과거 `@anthropics/playwright-cli`로 알려진 이름은 npm에 존재하지 않음.
 - Microsoft가 코딩 에이전트 용도로 MCP보다 CLI 사용을 권장한다.
+
+---
+
+## Codex
+
+기존 CLI를 재사용하며 [공통 playwright-cli 스킬](skills/playwright-cli/SKILL.md)을 `~/.agents/skills/`에 설치한다. CLI가 없다면 Microsoft의 `npm install -g @playwright/cli`를 사용한다.
+
+```bash
+playwright-cli --version
+playwright-cli -s=setup-check open about:blank
+playwright-cli -s=setup-check close
+```
+
+스모크 테스트는 임시 폴더에서 실행해 스냅샷 파일이 문서 저장소에 남지 않게 한다. 현재 CLI 0.1.13에서 브라우저 열기/닫기를 검증했다. 다른 사용자 세션까지 종료하는 `close-all`은 설치 점검에 사용하지 않는다. [upstream](https://github.com/microsoft/playwright-cli)

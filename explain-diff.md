@@ -43,3 +43,11 @@
 
 - 이 저장소처럼 문서 몇 줄짜리 diff에는 효용이 낮다. 큰 PR, 온보딩, 남의 브랜치 리뷰에 쓸 때 가치가 있다
 - 대상을 명시하지 않으면 현재 워킹 트리/브랜치 기준으로 동작하므로, PR 번호나 커밋 범위를 함께 주는 게 정확하다
+
+---
+
+## Codex / 복원용 원본
+
+[공통 explain-diff 스킬](skills/explain-diff/SKILL.md)을 `~/.agents/skills/explain-diff/`에 설치한다. [공통 래퍼 설치 방법](setup-guide.md#3-이-저장소의-공통-래퍼)을 따른다. `explain-diff로 최근 커밋을 설명해줘`처럼 요청한다.
+
+이 원본은 위 gist의 아이디어를 바탕으로 작성한 간결한 재사용 지침이며 gist 전문의 복사본은 아니다. Claude도 스킬로 사용할 수 있지만 기존 `~/.claude/commands/explain-diff.md`와 중복 등록하지 않는다.

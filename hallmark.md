@@ -69,3 +69,15 @@ npx -y skills update -g
 **권장 조합**: Hallmark로 구조·품질 확보 → 특정 브랜드 룩이 필요하면 awesome-design-md의 DESIGN.md로 토큰 지정. Hallmark `study`가 뽑은 design.md를 프로젝트 루트에 두면 awesome-design-md 워크플로우와 동일하게 참조된다.
 
 frontend-design 스킬(Anthropic)과도 겹치지만, Hallmark가 그 스킬의 규칙을 이미 흡수·확장했다고 명시하고 있다.
+
+---
+
+## Codex
+
+[upstream](https://github.com/Nutlope/hallmark)은 Codex를 지원한다. Claude 설치 옵션 대신 Codex를 명시한다.
+
+```bash
+npx -y skills add nutlope/hallmark -g -y -a codex
+```
+
+이미 `~/.agents/skills/hallmark/SKILL.md`가 있으면 중복 설치하지 않는다. 설치 CLI/버전에 따라 공통 `.agents/skills` 경로 또는 호환 경로를 사용할 수 있으므로 실제 설치 출력과 Codex 스킬 목록으로 확인한다. 이번 기기에서는 기존 공통 설치를 재사용했다.

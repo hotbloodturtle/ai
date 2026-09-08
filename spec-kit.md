@@ -124,3 +124,17 @@ init 직후에는 새 스킬이 현재 세션에 로드되지 않을 수 있다 
 - 스펙 산출물은 `specs/NNN-feature/` 아래. 임의 위치에 spec.md 만들지 않는다.
 - `.specify/scripts/bash/*.sh`는 스킬이 호출하므로 임의 수정 금지.
 ````
+
+---
+
+## Codex
+
+기존 `specify` CLI를 재사용한다. [공통 spec-kit 래퍼](skills/spec-kit/SKILL.md)를 전역 설치한 뒤 실제 작업 프로젝트에서 초기화한다.
+
+```bash
+specify init . --integration codex --integration-options="--skills" --script sh
+```
+
+0.16.4에서 임시 디렉토리로 위 명령을 검증했고 `.agents/skills/speckit-*/SKILL.md` 10개와 `.specify/` 생성이 확인됐다. Codex에서는 `$speckit-constitution` → `$speckit-specify` → `$speckit-plan` → `$speckit-tasks` → `$speckit-implement` 순으로 사용한다.
+
+`.specify/`가 이미 있으면 재초기화하기 전에 `specify integration --help`로 기존 프로젝트에 integration을 추가하는 방법을 확인한다. `--force`를 습관적으로 붙여 기존 스펙/설정을 덮어쓰지 않는다. Windows 네이티브는 `--script ps`를 선택한다. [upstream](https://github.com/github/spec-kit)

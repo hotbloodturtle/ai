@@ -176,3 +176,16 @@ cd ~/.claude/design-systems/awesome-design-md && git pull
 | 사용 시점 | 프로젝트 시작 시 디자인 방향 수립 | 구현 시 구체적 토큰 참조 |
 
 **권장 워크플로우**: design-consultation으로 방향 잡기 → awesome-design-md 레퍼런스로 상세 값 보강
+
+---
+
+## Codex / 공용 레퍼런스
+
+Claude 전용 경로 대신 독립 원본을 둘 수 있다.
+
+```bash
+mkdir -p "$HOME/.local/share/ai-tools"
+git clone --depth 1 https://github.com/VoltAgent/awesome-design-md.git "$HOME/.local/share/ai-tools/awesome-design-md"
+```
+
+[공통 awesome-design 스킬](skills/awesome-design/SKILL.md)을 [설치 가이드](setup-guide.md#3-이-저장소의-공통-래퍼)에 따라 설치한다. 기존 Claude 레퍼런스는 그대로 둬도 된다. 새 기기는 같은 독립 원본을 두 에이전트에서 참조할 수 있다. `CLAUDE.md`의 규칙은 Codex에 자동 적용되지 않는다.

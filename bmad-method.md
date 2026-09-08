@@ -125,3 +125,31 @@ init 직후에는 새 스킬이 현재 세션에 로드되지 않을 수 있다 
 - 산출물은 `_bmad-output/` 아래. `_bmad/`는 설치 산출물이므로 직접 수정하지 않고 `_bmad/custom/*.toml`로 오버라이드.
 - 업데이트: 같은 install 명령 재실행 (Quick Update).
 ````
+
+---
+
+## Codex
+
+### 안정 버전 프로젝트 설치 (기본)
+
+[공통 bmad-method 래퍼](skills/bmad-method/SKILL.md)를 `~/.agents/skills/bmad-method/`에 설치한다. 실제 작업 프로젝트에서:
+
+```bash
+npx -y bmad-method@6.11.0 install --directory . --modules bmm --tools codex --yes
+# 두 에이전트를 사용하는 프로젝트라면 --tools claude-code,codex
+```
+
+임시 프로젝트에서 `.agents/skills/`의 스킬 49개, `_bmad/`와 설정 생성을 검증했다. 전역 래퍼만 설치한 상태와 프로젝트 초기화 완료 상태는 구분한다. 설치 옵션 목록은 `npx -y bmad-method@6.11.0 install --list-tools`로 확인한다.
+
+### 선택적 Codex 플러그인
+
+2026-09 [upstream](https://github.com/bmad-code-org/BMAD-METHOD)은 Codex 플러그인도 제공한다. 위 v6.11의 “항상 프로젝트 설치 필요” 설명은 그 버전의 설치 방식이며 모든 후속 버전에 일반화하지 않는다.
+
+```bash
+codex plugin marketplace add bmad-code-org/bmad-plugins
+codex plugin add bmad-method@bmad
+```
+
+2026-09-08 이 경로에서 제공된 버전은 **6.13.0-next(prerelease)**이며 스킬 21개를 포함한다. 설치·파일 확인 후 기본 구성을 안정 버전 래퍼로 정했으며 플러그인은 제거했다. 전체 SDLC 실행을 검증한 것은 아니다. prerelease를 선택할 때만 이 경로를 사용하고 프로젝트 스킬과 중복 설치하지 않는다.
+
+플러그인 사용은 새 턴에서 BMAD를 명시적으로 요청한다. 실제 프로젝트 산출물은 해당 플러그인 버전의 스킬 지침에 따라 생성한다. 기존 Claude 프로젝트의 `_bmad/`를 전역 설치 작업으로 수정하지 않는다.

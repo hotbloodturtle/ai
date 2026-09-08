@@ -1,6 +1,14 @@
 # AI 도구 레퍼런스
 
-AI 코딩 에이전트 생태계의 주요 도구/스킬/MCP 소개 모음
+새 기기에서 **Claude Code 또는 Codex, 혹은 둘 다** 사용할 수 있도록 AI 도구·스킬·MCP의 설치와 사용 방법을 정리한 레퍼런스다.
+
+- 새 기기 설정: [Claude / Codex 설치 가이드](setup-guide.md)
+- 도구별 지원 여부와 차이: [호환성 표](compatibility.md)
+- 버전별 검증 근거와 남은 범위: [검증 기록](verification.md)
+- 복원용 공통 스킬 원본: [skills/](skills/)
+- 키를 출력하지 않는 로컬 상태 점검: [scripts/check-setup.py](scripts/check-setup.py) (Python 3.11+)
+
+아래 기존 일괄 설치 명령은 **Claude Code용**이다. Codex는 설치 가이드와 각 문서의 Codex 섹션을 따른다. 공용 문서에는 재현 절차를, 기기별 설치 결과는 Git 제외 `.local/`에 기록한다.
 
 ---
 
@@ -66,9 +74,9 @@ Android QA 자동화 → ~~[android-qa-agent-setup.md](android-qa-agent-setup.md
 
 ---
 
-## 일괄 설치 가이드
+## Claude Code 설치 가이드
 
-처음 환경 구축 시 권장 순서. 이 프로젝트에서 검증된 시퀀스(2026-05).
+기존 Claude 설치 순서를 보존한 안내다(2026-05~08 검증 기반). 2026-09 변경점과 Codex 구성은 [공통 설치 가이드](setup-guide.md)를 우선한다. 기존 설치가 있으면 같은 도구를 다시 등록하지 않는다.
 
 ### 1. 프리렉(prerequisite)
 ```bash
@@ -76,7 +84,7 @@ brew install node uv gh tmux           # node는 nvm 등 버전 매니저로 관
 # claude-seo는 Python 3.10+ 필요. install.sh가 자체 .venv를 생성하므로 3.10+ 인터프리터만 잡히면 됨.
 # 3.10+가 없을 때만 아래로 확보:
 brew install python@3.11
-echo 'export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"' >> ~/.zshrc
+# 설치 명령 실행 시 PATH="$(brew --prefix python@3.11)/libexec/bin:$PATH"를 지정할 수 있다.
 curl -fsSL https://bun.sh/install | bash   # gstack용
 ```
 
@@ -90,22 +98,25 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스** (권장): Superpowers, Document-Skills/example-skills, Serena, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. git clone 방식 스킬의 원본 레포(claude-seo 등)는 `~/.claude/plugins/repos/`에 두는 것을 권장.
+- **플러그인 마켓플레이스**: Superpowers, Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#codex-및-현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 두 에이전트에서 재사용하기 쉽다.
 - **git clone + flat 심링크**: Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
 - **얇은 전역 래퍼 (프로젝트 설치형 도구)**: agent-device, Spec Kit, BMAD(v6~)는 전역에 `~/.claude/skills/<이름>/SKILL.md` 래퍼만 두고(각 문서 부록 A) 실제 스킬은 프로젝트에서 생성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md), [bmad-method.md](bmad-method.md)).
 - **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code` ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
 ```bash
-# context7: HTTP 트랜스포트 권장 (stdio(npx) 방식도 동작, 차이는 첫 호출 속도뿐)
+# context7: HTTP 또는 stdio 중 하나 선택
 claude mcp add --transport http --scope user context7 https://mcp.context7.com/mcp
 claude mcp add --scope user task-master-ai -- npx -y task-master-ai
-# serena: /plugin install serena 로 설치하면 plugin:serena:serena 로 자동 등록 (아래 add는 수동 대안)
+# 기존 Serena 플러그인이 연결돼 있으면 중복 등록하지 않는다.
 claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
 ```
 
 ### 4-b. claude-mem (세션 간 메모리)
+
+아래는 기존 설치 방식 기록이다. 새 기기는 [현재 upstream 변경 사항](claude-mem.md#codex--새-설치-시-확인)과 버전을 확인한 뒤 선택한다.
+
 ```bash
 npx claude-mem install   # 플러그인+훅 등록
 npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://localhost:37701/health 로 확인
@@ -117,27 +128,17 @@ npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://l
 
 ---
 
-## 자동 분류기(auto mode) 차단 패턴
+## 설치 권한과 환경별 차이
 
-Claude Code `defaultMode: "auto"` 환경에서 다음은 사용자 직접 실행이 필요할 수 있음:
+과거 Claude auto mode에서는 설정 편집·외부 설치기·셸 환경 변경이 차단된 사례가 있었다. 이는 당시 환경의 관찰이며 모든 기기에서 사용자 수동 실행을 요구하는 규칙이 아니다. 현재 세션의 승인 범위와 실제 도구 오류를 기준으로 처리한다.
 
-| 차단 사례 | 사유 | 우회 |
-|----------|------|------|
-| `~/.claude/settings.json` 편집 | Self-Modification | 사용자가 수동 편집 또는 미리 만든 JSON `cp` |
-| `~/.claude/CLAUDE.md` 편집 | Self-Modification | Bash heredoc은 한 번 통과한 사례 있음 |
-| `~/.zshrc` 편집 (Android SDK 환경변수 등) | Unauthorized Persistence | 사용자가 vi/nano로 직접 편집 |
-| `curl ... \| bash` (codebase-memory, cmux 인스톨러) | Untrusted remote code | 사용자가 터미널에서 직접 실행 |
-| 외부 레포 `install.sh` 직접 실행 (claude-seo) | Untrusted external script | 사용자가 직접 실행 |
-| `npx claude-mem status/start` 등 후속 명령 | Untrusted third-party code (npx) | 사용자가 직접 실행. 단 `npx claude-mem install`은 통과한 사례 있음 |
-| `~/.claude/agents/`에 외부 .md 심링크 | Self-Modification (에이전트 등록) | AskUserQuestion으로 명시 승인 필요 |
-
-각 도구 docs의 "검증된 함정" 섹션에도 명시.
+이미 허용된 설치·설정은 진행하되 기존 설정을 병합하고 검증한다. 실제 승인 거절이 발생하면 동작과 사유를 설명하고 허용되는 방식으로 해결한다. 같은 차단을 우회하려고 cp/heredoc 등 명령 형태만 바꾸지 않는다. Codex 훅 신뢰 확인은 별도의 `/hooks` 절차다.
 
 ---
 
 ## 기기별 설치 검증 체크리스트
 
-> 이 문서는 **여러 기기에서 공용**으로 쓴다. 특정 기기의 설치 이력·상태는 문서에 기록하지 않는다.
+> 이 문서는 **여러 기기에서 공용**으로 쓴다. 검증한 버전·명령은 공용 문서에 기록하되, 특정 기기의 사용자 경로·설치 목록·상태는 Git 제외 `.local/`에 기록한다.
 > 새 기기 세팅 후 또는 주기 점검 시 아래로 문서 ↔ 기기 상태를 대조한다.
 
 | 대상 | 확인 방법 |

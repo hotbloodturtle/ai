@@ -78,3 +78,11 @@ curl http://localhost:37701/health   # {"status":"ok",...}
 - 자동 분류기(auto mode)는 `npx claude-mem` 같은 외부 코드 실행을 차단할 수 있음. 설치/시작 명령은 사용자가 직접 실행하거나, 명시적 승인이 필요할 수 있음.
 - README에는 워커 포트가 `37777`로 적혀 있으나 v13.3.0 기준 실제 포트는 **`37701`**.
 - `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` 환경변수는 Claude Code 내장 auto-memory를 끄는 옵션으로, Claude-Mem과는 별개 시스템이며 동작에 영향 없음.
+
+---
+
+## Codex / 새 설치 시 확인
+
+2026-09-08 조회한 upstream README에는 “Claude-Mem is now Grok Mem” 변경이 표시되어 있어, 위 Claude 설치 기록을 최신 설치 절차로 간주하지 않는다. 기존 Claude 메모리 설치는 유지하며 [현재 upstream](https://github.com/thedotmack/claude-mem)과 사용 버전을 먼저 확인한다.
+
+Codex에서 자동 관찰·요약·다음 세션 주입까지 이어지는 검증된 설치 경로는 이번 조사/설치에서 확보하지 못했다. MCP 검색만 연결하는 것과 자동 메모리를 동일하게 표시하지 않는다. Codex 설치 대상에서는 보류하고, 현재는 planning-with-files의 명시적 파일 기반 계획/기록을 활용한다. 이는 Claude-Mem의 자동 의미 검색 메모리와 동등한 대체가 아니다.

@@ -93,3 +93,11 @@ cp <이 프로젝트>/best-practices-rules.md ~/.claude/rules/ai-workflow.md
 
 - Claude Code **매일 업데이트**
 - 하루 시작을 **changelog 읽기**로
+
+---
+
+## Codex에 적용할 때
+
+행동 원칙(요구사항 확인, 작은 변경, 근거 있는 검증, 작업 범위 유지)은 재사용할 수 있다. 전역은 `~/.codex/AGENTS.md`, 프로젝트는 `AGENTS.md`에 필요한 규칙만 옮긴다.
+
+Claude의 `/command`, `settings.json` permissions, 훅 등록, `@rules/...` include를 문자열 치환으로 옮기지 않는다. Codex 스킬·MCP·훅에 각각 맞춘다. 여러 계획 프레임워크를 설치해도 매 작업에 모두 강제하지 말고 하나를 중심으로 선택한다. [공통 설치 가이드](setup-guide.md)

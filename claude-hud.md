@@ -83,3 +83,11 @@ fi
 
 - Linux에서 `/tmp`가 noexec 등으로 제한된 경우 설치 전 `TMPDIR` 지정 필요
 - 플러그인 업데이트 시 래퍼 스크립트가 버전 디렉터리를 자동 탐색하므로 재설정 불필요
+
+---
+
+## Codex
+
+Claude Code의 statusline 입력·세션 형식에 의존하는 플러그인이다. 위 설치 명령을 Codex에서 실행하거나 `statusLine` JSON을 config.toml에 옮기지 않는다.
+
+이번 Codex 설치 대상에서는 제외했다. Codex 자체 UI/CLI 상태 표시를 이용한다. Claude HUD와 동일한 세부 지표를 모두 제공한다는 뜻은 아니다. [upstream](https://github.com/jarrodwatts/claude-hud)에서 Codex 지원을 추가하면 다시 검증한다.

@@ -47,3 +47,20 @@ done
 ```bash
 cd ~/.claude/plugins/repos/planning-with-files && git pull
 ```
+
+---
+
+## Codex
+
+[공식 Codex 안내](https://github.com/OthmanAdi/planning-with-files/blob/master/docs/codex.md)의 personal installation을 따른다.
+
+```bash
+mkdir -p "$HOME/.local/share/ai-tools" "$HOME/.agents/skills" "$HOME/.codex/hooks"
+git clone --depth 1 https://github.com/OthmanAdi/planning-with-files.git "$HOME/.local/share/ai-tools/planning-with-files"
+# 기존 대상이 없을 때:
+cp -R "$HOME/.local/share/ai-tools/planning-with-files/.agents/skills/planning-with-files" "$HOME/.agents/skills/"
+```
+
+원본 `.codex/hooks/` 파일을 `~/.codex/hooks/`에 복사하고 원본 `.codex/hooks.json`의 이벤트를 기존 `~/.codex/hooks.json`에 **병합**한다. 기존 파일을 통째로 덮어쓰지 않는다. 같은 entry를 중복 추가하지 않는다. 2026-09 원본은 SessionStart, UserPromptSubmit, PreToolUse, PermissionRequest, PostToolUse, PreCompact, Stop의 7개 이벤트를 제공한다.
+
+플러그인 설치와 standalone 훅 설치는 대안이다. 둘 다 활성화하면 중복 실행된다. 이번 구성은 standalone이다. `/hooks`에서 신뢰 확인한 다음 사용한다. 단발 작업에서 계획 주입을 끄려면 해당 실행에 `PLANNING_DISABLED=1`을 지정한다. 자동 훅은 프로젝트 파일을 사용하며, 과거 세션 로그 catchup은 별도 명시적 모드다.

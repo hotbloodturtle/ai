@@ -63,3 +63,16 @@ ab-test-setup, ad-creative, ai-seo, analytics-tracking, churn-prevention, cold-e
 ```bash
 cd ~/.claude/skills/marketing && git pull
 ```
+
+---
+
+## Codex
+
+[upstream](https://github.com/coreyhaines31/marketingskills)은 Codex를 지원한다. `skill-installer`로 `skills/` 아래 개별 스킬을 `~/.agents/skills/`에 설치한다. 수동 방식은 [Document Skills의 복사 루프](document-skills.md#codex)를 같은 저장소 구조에 적용하되, SEO suite를 함께 쓰면 `seo-audit`를 제외한다.
+
+```bash
+mkdir -p "$HOME/.local/share/ai-tools"
+git clone --depth 1 https://github.com/coreyhaines31/marketingskills.git "$HOME/.local/share/ai-tools/marketingskills"
+```
+
+스킬 수·이름은 버전에 따라 달라진다. 2026-09-08에는 seo-audit 제외 49개를 설치했으며, 과거 본문의 33개는 당시 버전 기준이다. 이미 같은 이름이 있으면 덮어쓰기 전에 출처를 확인한다.

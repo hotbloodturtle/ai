@@ -55,3 +55,30 @@ bash ~/.claude/plugins/repos/claude-seo/install.sh
 ### 검증된 함정
 - 시스템 Python 3.9에서 `install.sh` 실행 시 `Python 3.10+ is required`로 즉시 실패. Python 3.10+ 확보 필수(brew `python@3.11` 또는 uv/pyenv 등).
 - Claude Code 자동 분류기가 외부 install.sh 실행을 차단할 수 있음 → 사용자 직접 실행 권장.
+
+---
+
+## Codex
+
+같은 제작자의 [codex-seo](https://github.com/AgriciDaniel/codex-seo)를 사용한다. Claude SEO의 `.claude/agents`를 그대로 복사하지 않는다.
+
+macOS에서 Python 3.11과 PDF 시스템 라이브러리를 먼저 준비한다:
+
+```bash
+brew install python@3.11 pango
+mkdir -p "$HOME/.local/share/ai-tools"
+git clone --depth 1 --branch v1.9.6-codex.5 https://github.com/AgriciDaniel/codex-seo.git "$HOME/.local/share/ai-tools/codex-seo"
+cd "$HOME/.local/share/ai-tools/codex-seo"
+# install.sh 내용을 확인한 뒤 실행
+PATH="$(brew --prefix python@3.11)/libexec/bin:$PATH" bash install.sh
+```
+
+설치기는 `~/.codex/skills/seo*`와 `~/.codex/agents/seo-*.toml`을 교체한다. 기존 SEO 설치가 있다면 먼저 백업한다. 기본 ref는 v1.9.6-codex.5이며 `CODEX_SEO_REF`로 선택할 수 있다. 일반 Linux는 Python 3.10+와 Pango 등 배포판 의존성을 준비한 후 `bash install.sh`; Windows는 upstream의 `install.ps1`을 따른다.
+
+```bash
+"${CODEX_HOME:-$HOME/.codex}/skills/seo/.venv/bin/python"   "${CODEX_HOME:-$HOME/.codex}/skills/seo/scripts/verify_environment.py" --json
+```
+
+2026-09 검증에서 시스템 Python 3.9로는 실패했다. Pango가 없으면 WeasyPrint 경고가 JSON 앞에 섞여 bootstrap의 `verification`이 null이 되고 `AttributeError`가 날 수 있었다. `brew install pango` 후 설치기를 다시 실행하고 verifier의 `full_ready`를 확인한다. 라이브러리 탐색이 계속 실패하면 [WeasyPrint 공식 문제 해결](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#missing-library)을 따른다.
+
+Google API 패키지 설치는 계정 인증 완료와 다르다. Google OAuth, DataForSEO, Firecrawl, Gemini 등은 해당 기능을 사용할 때 별도로 연결한다. 마케팅 스킬의 seo-audit와 중복 설치하지 않는다.
