@@ -48,6 +48,7 @@
 | Claude Agent SDK | SDK | Claude Code 능력을 API로 노출, 자율 에이전트 구축 | 추천 | [agent-sdk.md](agent-sdk.md) |
 | BMAD-METHOD | 워크플로 + 전역 래퍼 | 12+ 에이전트, 34+ 워크플로, 전체 SDLC 프레임워크 (v6: 프로젝트별 설치) | 선택 | [bmad-method.md](bmad-method.md) |
 | Best Practices | 실천 가이드 | Claude Code 활용 69개 팁 핵심 선별 | 추천 | [best-practices.md](best-practices.md) |
+| Senior Thinking Skills | 선별 참고자료 | 결정 이유 기록·실패 사전 점검·수치 재현성 원칙 (기본 설치 제외) | 선택 | [senior-thinking-skills.md](senior-thinking-skills.md) |
 | Ponytail | 플러그인 | 과잉 설계 억제 → 코드량·비용·시간 절감 (RTK와 상호보완) | 추천 | [ponytail.md](ponytail.md) |
 | Claude HUD | 플러그인 | statusline에 컨텍스트/도구/에이전트/할일 실시간 표시 | 추천 | [claude-hud.md](claude-hud.md) |
 | explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
