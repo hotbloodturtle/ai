@@ -37,7 +37,6 @@
 | Task Master | MCP | PRD → 구조화된 태스크 분해 | 선택 | [task-master.md](task-master.md) |
 | Playwright CLI | 스킬 | 토큰 효율적 브라우저 자동화 | 선택 | [playwright-cli.md](playwright-cli.md) |
 | Codebase Memory | MCP | 코드 지식 그래프 + 게이트 훅 | 추천 | [codebase-memory.md](codebase-memory.md) |
-| Claude-Mem | 플러그인 + MCP | 세션 간 영속 메모리 (자동 압축/주입) | 추천 | [claude-mem.md](claude-mem.md) |
 | gstack | 스킬 | 29개 역할 가상 엔지니어링 팀 | 선택 | [gstack.md](gstack.md) |
 | cmux | 병렬 도구 | Git worktree 기반 병렬 실행 | 선택 | [cmux.md](cmux.md) |
 | claude-squad | 병렬 도구 | 터미널 멀티 에이전트 오케스트레이션 | 선택 | [claude-squad.md](claude-squad.md) |
@@ -114,15 +113,6 @@ claude mcp add --scope user serena -- uvx --from git+https://github.com/oraios/s
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
 ```
 
-### 4-b. claude-mem (세션 간 메모리)
-
-아래는 기존 설치 방식 기록이다. 새 기기는 [현재 upstream 변경 사항](claude-mem.md#codex--새-설치-시-확인)과 버전을 확인한 뒤 선택한다.
-
-```bash
-npx claude-mem install   # 플러그인+훅 등록
-npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://localhost:37701/health 로 확인
-```
-
 ### 5. 글로벌 설정
 - `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고)
 - `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1` + `statusLine`(claude-hud 래퍼, [claude-hud.md](claude-hud.md) 참고)
@@ -145,9 +135,8 @@ npx claude-mem start     # 워커 기동 (autostart 안 되면 수동), http://l
 | 대상 | 확인 방법 |
 |------|-----------|
 | CLI 도구 | `command -v rtk claude-squad playwright-cli bun node uv gh tmux` |
-| 플러그인 | `~/.claude/plugins/installed_plugins.json` — superpowers, serena, document-skills/example-skills, frontend-design, claude-mem, ponytail, claude-hud 등 |
+| 플러그인 | `~/.claude/plugins/installed_plugins.json` — superpowers, serena, document-skills/example-skills, frontend-design, ponytail, claude-hud 등 |
 | MCP 서버 | `claude mcp list` — context7, task-master, codebase-memory (serena는 플러그인 설치 시 `plugin:serena:serena`) |
-| claude-mem 워커 | `curl -s http://localhost:37701/health` |
 | 스킬 | `ls ~/.claude/skills/` — flat 심링크(marketing 등)와 개인 스킬 확인 |
 | 슬래시 커맨드 | `ls ~/.claude/commands/` — explain-diff 등 |
 | statusLine | `~/.claude/settings.json`의 `statusLine` + `~/.claude/claude-hud-statusline.sh` 존재 |

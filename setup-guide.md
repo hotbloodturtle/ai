@@ -4,6 +4,8 @@
 
 명령 검증 기준: 2026-09-08, macOS Apple Silicon, Codex CLI 0.153.4. Linux/Windows는 아래 플랫폼 안내와 각 upstream 설치 문서를 함께 따른다. 해당 OS에서 직접 실행 검증했다는 의미는 아니다.
 
+> **claude-mem 금지:** 설치하지 않는다. 이미 있는 기기는 [handoff.md](handoff.md) 절차로 제거한다.
+
 ## 진행 순서
 
 1. 아래 공통 런타임과 사용할 에이전트를 설치하고 로그인한다.
@@ -138,7 +140,7 @@ Codebase Memory의 바이너리는 먼저 [설치](codebase-memory.md)해야 한
 - [agent-device](agent-device.md): 기존 CLI와 기기 SDK를 재사용하고 공통 래퍼를 설치한다.
 - [claude-squad](claude-squad.md): `claude-squad -p "codex"` 또는 배포본의 `cs -p "codex"`.
 - [Codex SEO](claude-seo.md#codex): Claude SEO 대신 Codex 전용 suite를 설치한다. macOS는 Python 3.11과 Pango를 먼저 준비한다.
-- Claude HUD, Claude Agent SDK, craigsc/cmux, Claude-Mem의 처리 방식은 [호환성 표](compatibility.md)를 따른다.
+- Claude HUD, Claude Agent SDK, craigsc/cmux의 처리 방식은 [호환성 표](compatibility.md)를 따른다.
 
 ## 활성화와 사용 확인
 

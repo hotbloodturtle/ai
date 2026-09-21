@@ -12,7 +12,6 @@
 | [Task Master](task-master.md) | MCP | MCP | 내부 모델 인증은 클라이언트 연결과 별개 |
 | [Playwright CLI](playwright-cli.md) | CLI/스킬 | CLI/스킬 | 바이너리 공유 가능 |
 | [Codebase Memory](codebase-memory.md) | MCP/스킬/훅 | MCP/스킬, 버전별 훅 | 현재 구성은 기존 바이너리+MCP+스킬, Codex 훅 미설치 |
-| [Claude-Mem](claude-mem.md) | 기존 플러그인 | 자동 메모리 전체 경로 미확인 | MCP 검색만으로 자동 수집·주입까지 지원한다고 보지 않음 |
 | [gstack](gstack.md) | 기본 setup | `--host codex` | Codex용 gstack-* 스킬 생성 |
 | [cmux](cmux.md) | craigsc/cmux | 직접 호환 미확인 | Claude 실행 전제. Codex는 claude-squad/worktree 사용 |
 | [claude-squad](claude-squad.md) | `-p claude` | `-p codex` | 실행 파일 이름은 배포본별 확인 |
