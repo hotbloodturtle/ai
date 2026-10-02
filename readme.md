@@ -53,6 +53,7 @@
 | explain-diff | 커맨드(프롬프트) | diff/PR을 배경·직관·코드·퀴즈 인터랙티브 HTML로 설명 | 선택 | [explain-diff.md](explain-diff.md) |
 | agent-device | CLI + 스킬 | iOS/Android 등 기기 자동화 — 접근성 ref 기반 앱 검증 (Callstack) | 추천 | [agent-device.md](agent-device.md) |
 | Hallmark | 스킬 | 안티 AI-slop 디자인 — 구조 다양성 강제 + 57개 품질 게이트 (Awesome Design MD와 보완) | 추천 | [hallmark.md](hallmark.md) |
+| Archify | 스킬 | 설명·Mermaid·코드 → 검증된 인터랙티브 다이어그램 HTML (호출당 ~12–15k 토큰) | 추천 | [archify.md](archify.md) |
 | Spec Kit | CLI + 스킬 + 전역 래퍼 | GitHub 공식 스펙 주도 개발 — constitution→spec→plan→tasks→implement 슬래시 커맨드 (프로젝트별 설치) | 선택 | [spec-kit.md](spec-kit.md) |
 
 ---
@@ -101,7 +102,7 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0
 - **플러그인 마켓플레이스**: Superpowers, Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#codex-및-현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 두 에이전트에서 재사용하기 쉽다.
 - **git clone + flat 심링크**: Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
 - **얇은 전역 래퍼 (프로젝트 설치형 도구)**: agent-device, Spec Kit, BMAD(v6~)는 전역에 `~/.claude/skills/<이름>/SKILL.md` 래퍼만 두고(각 문서 부록 A) 실제 스킬은 프로젝트에서 생성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md), [bmad-method.md](bmad-method.md)).
-- **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code` ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
+- **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code`, Archify는 `npx -y skills add tt-a1i/archify -g -y -a claude-code` 후 `archify-review` 제거 ([archify.md](archify.md)) ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
 ```bash
@@ -115,7 +116,7 @@ curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/i
 
 ### 5. 글로벌 설정
 - `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고)
-- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1` + `statusLine`(claude-hud 래퍼, [claude-hud.md](claude-hud.md) 참고)
+- `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1` + `env.ARCHIFY_UPDATE_CHECK_DISABLED=1` + `statusLine`(claude-hud 래퍼, [claude-hud.md](claude-hud.md) 참고)
 
 ---
 

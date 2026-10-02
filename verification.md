@@ -26,6 +26,12 @@
 | planning-with-files | 스킬·훅 파일 설치 및 no-plan 셸 entry 스모크 | fail-open 종료코드 0은 계획 주입 성공을 증명하지 않음. `/hooks` 후 실제 프로젝트에서 확인 |
 | claude-squad 1.0.17 | 실행 파일 및 `-p codex` 옵션 확인 | 실제 TUI 에이전트 세션은 미생성 |
 
+## 2026-10-02 — macOS / Claude Code
+
+| 대상 | 검증 결과 | 검증 범위의 한계 |
+|---|---|---|
+| Archify 3.0.1 | skills CLI 전역 설치, `doctor` 전 항목 ok, `demo` HTML 생성, 동반 설치된 `archify-review` 제거 | 실제 레포 기반 다이어그램 생성·Codex 설치는 미실행 |
+
 ## 재현 과정에서 수정한 문제
 
 - Codex SEO: macOS 시스템 Python 3.9 대신 Homebrew Python 3.11 사용.
