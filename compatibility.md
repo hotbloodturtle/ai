@@ -28,6 +28,7 @@
 | [agent-device](agent-device.md) | CLI/스킬 | CLI/스킬 | SDK/기기 연결은 OS별 준비 |
 | [Hallmark](hallmark.md) | 스킬 | 스킬 | 현재 Codex에서 기존 설치 재사용 |
 | [Archify](archify.md) | 스킬 | 스킬 | Node 18+. Codex 설치는 미검증 |
+| [Matt Pocock Skills](mattpocock-skills.md) | 스킬 (선별 3개) | 스킬 | Codex 설치는 미검증 |
 | [Spec Kit](spec-kit.md) | `--integration claude` | `--integration codex --integration-options="--skills"` | 실제 작업 프로젝트에 생성 |
 | [Android QA 구 가이드](android-qa-agent-setup.md) | deprecated | 새 설치 제외 | agent-device 사용 |
 

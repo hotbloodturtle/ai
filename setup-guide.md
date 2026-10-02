@@ -85,7 +85,7 @@ Codex의 기본 홈을 바꿨다면 `~/.codex`를 실제 `CODEX_HOME`으로 읽�
 
 ### 2. 문서·마케팅·디자인
 
-[Document Skills](document-skills.md), [Marketing Skills](marketing-skills.md), [Hallmark](hallmark.md), [Archify](archify.md), [Awesome Design](awesome-design-md.md), [explain-diff](explain-diff.md)를 설치한다.
+[Document Skills](document-skills.md), [Marketing Skills](marketing-skills.md), [Hallmark](hallmark.md), [Archify](archify.md), [Matt Pocock Skills](mattpocock-skills.md), [Awesome Design](awesome-design-md.md), [explain-diff](explain-diff.md)를 설치한다.
 
 Codex에서는 `skill-installer`에 아래처럼 요청할 수 있다. 설치 목적에 맞는 `skills/<name>` 폴더만 설치하며, 최상위에 SKILL.md가 없는 전체 저장소를 스킬 경로에 넣지 않는다.
 

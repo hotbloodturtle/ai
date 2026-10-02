@@ -5,6 +5,7 @@
 - 새 기기 설정: [Claude / Codex 설치 가이드](setup-guide.md)
 - 도구별 지원 여부와 차이: [호환성 표](compatibility.md)
 - 버전별 검증 근거와 남은 범위: [검증 기록](verification.md)
+- 평가 후 보류·제외한 도구: [후보 목록](candidates.md)
 - 복원용 공통 스킬 원본: [skills/](skills/)
 - 키를 출력하지 않는 로컬 상태 점검: [scripts/check-setup.py](scripts/check-setup.py) (Python 3.11+)
 
@@ -54,6 +55,7 @@
 | agent-device | CLI + 스킬 | iOS/Android 등 기기 자동화 — 접근성 ref 기반 앱 검증 (Callstack) | 추천 | [agent-device.md](agent-device.md) |
 | Hallmark | 스킬 | 안티 AI-slop 디자인 — 구조 다양성 강제 + 57개 품질 게이트 (Awesome Design MD와 보완) | 추천 | [hallmark.md](hallmark.md) |
 | Archify | 스킬 | 설명·Mermaid·코드 → 검증된 인터랙티브 다이어그램 HTML (호출당 ~12–15k 토큰) | 추천 | [archify.md](archify.md) |
+| Matt Pocock Skills (선별) | 스킬 | `grilling`·`grill-me`(계획 검증 질문 라운드), `writing-for-agents`(스킬·CLAUDE.md 작성 가이드) | 추천 | [mattpocock-skills.md](mattpocock-skills.md) |
 | Spec Kit | CLI + 스킬 + 전역 래퍼 | GitHub 공식 스펙 주도 개발 — constitution→spec→plan→tasks→implement 슬래시 커맨드 (프로젝트별 설치) | 선택 | [spec-kit.md](spec-kit.md) |
 
 ---
@@ -102,7 +104,7 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0
 - **플러그인 마켓플레이스**: Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#codex-및-현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 두 에이전트에서 재사용하기 쉽다.
 - **git clone + flat 심링크**: Superpowers(세션 훅 주입 회피, [superpowers.md](superpowers.md)), Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
 - **얇은 전역 래퍼 (프로젝트 설치형 도구)**: agent-device, Spec Kit, BMAD(v6~)는 전역에 `~/.claude/skills/<이름>/SKILL.md` 래퍼만 두고(각 문서 부록 A) 실제 스킬은 프로젝트에서 생성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md), [bmad-method.md](bmad-method.md)).
-- **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code`, Archify는 `npx -y skills add tt-a1i/archify -g -y -a claude-code` 후 `archify-review` 제거 ([archify.md](archify.md)) ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
+- **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code`, Archify는 `npx -y skills add tt-a1i/archify -g -y -a claude-code` 후 `archify-review` 제거 ([archify.md](archify.md)), Matt Pocock은 `--skill`로 3개만 ([mattpocock-skills.md](mattpocock-skills.md)) ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
 ### 4. MCP 서버
 ```bash
