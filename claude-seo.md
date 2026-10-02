@@ -42,13 +42,19 @@ echo 'export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"' >> ~/.zshrc
 
 ### 공식 인스톨러
 ```bash
-git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git ~/.claude/plugins/repos/claude-seo
-bash ~/.claude/plugins/repos/claude-seo/install.sh
+git clone https://github.com/AgriciDaniel/claude-seo.git ~/.claude/plugins/repos/claude-seo
+PATH="$(brew --prefix python@3.11)/libexec/bin:$PATH" bash ~/.claude/plugins/repos/claude-seo/install.sh
 ```
 
-설치 결과:
+`install.sh`는 로컬 clone이 아니라 **GitHub의 고정 태그(2026-10-02: v2.4.1)를 임시로 받아** `~/.claude/skills/seo*`와 `~/.claude/agents/`에 복사한다. 설정 파일·훅 등록은 하지 않는다(훅은 스킬 폴더에 복사만, plugin 설치 시에만 강제).
+
+**`~/.claude/skills/seo`와 `seo-*`는 반드시 실제 폴더여야 한다.** 심링크로 두면 인스톨러가 링크를 따라가 원본 레포를 덮어쓴다(→ [Marketing Skills 함정](marketing-skills.md#검증된-함정)).
+
+업데이트: `git -C ~/.claude/plugins/repos/claude-seo pull --ff-only` 후 위 인스톨러 재실행(태그는 `install.sh`에 고정, `CLAUDE_SEO_TAG`로 변경 가능).
+
+설치 결과 (v2.4.1):
 - `~/.claude/skills/seo/` (SKILL.md + `.venv` + Playwright Chrome). `.venv`는 install.sh가 감지한 3.10+ 인터프리터로 생성된다 — brew `python@3.11`이 없어도 3.10+만 잡히면 동작.
-- `~/.claude/skills/seo-*/` 서브스킬 16개 (seo-audit, seo-page, seo-technical, seo-schema, seo-content, seo-geo, seo-local, seo-maps, seo-images, seo-sitemap, seo-hreflang, seo-programmatic, seo-competitor-pages, seo-dataforseo, seo-plan, seo-image-gen)
+- `~/.claude/skills/seo-*/` 서브스킬 + 확장 스킬(v2.4.1: seo-agentic, seo-ahrefs, seo-bing, seo-matomo, seo-profound, seo-seranking, seo-unlighthouse 추가). 기본 서브스킬 (seo-audit, seo-page, seo-technical, seo-schema, seo-content, seo-geo, seo-local, seo-maps, seo-images, seo-sitemap, seo-hreflang, seo-programmatic, seo-competitor-pages, seo-dataforseo, seo-plan, seo-image-gen)
 - `~/.claude/agents/seo-*.md` **서브에이전트 10개**: seo-content, seo-dataforseo, seo-geo, seo-image-gen, seo-local, seo-performance, seo-schema, seo-sitemap, seo-technical, seo-visual
 - DataForSEO MCP (옵션)
 

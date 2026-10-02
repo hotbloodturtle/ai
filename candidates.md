@@ -19,10 +19,6 @@
 | [agent-skills](https://github.com/addyosmani/agent-skills) (전체) | 2026-10-02 | 제외 | 25개 중 대부분 Superpowers·Spec Kit·gstack·내장 명령과 중복. `test-driven-development` 이름 충돌, `/review`·`/ship` 명령 충돌. 스킬당 ~13.5KB |
 | [mattpocock/skills](https://github.com/mattpocock/skills) (나머지) | 2026-10-02 | 제외 | `tdd`·`diagnosing-bugs`·`code-review`·`retro`·`handoff` 등 기존과 중복, `to-spec`·`triage` 등은 레포별 이슈 트래커 셋업 필요. 선별 3개는 [mattpocock-skills.md](mattpocock-skills.md) |
 | Superpowers `diagnosing-superpowers` | 2026-10-02 | 제외 | 메인테이너용 버그 리포트 스킬, description 오발동 위험 ([superpowers.md](superpowers.md)) |
+| Document Skills `academy-guide`, `discernment-nudge` | 2026-10-02 | 제외 | 거의 모든 답변 직전에 호출되도록 트리거 → 답변당 수천 토큰 ([document-skills.md](document-skills.md)) |
 | Archify `archify-review` | 2026-10-02 | 제외 | archify 레포 관리용 리뷰 스킬, description 오발동 위험 ([archify.md](archify.md)) |
 
-## 업데이트 보류
-
-| 대상 | 상태 | 할 일 |
-|------|------|-------|
-| [Marketing Skills](marketing-skills.md) | 로컬 2026-05-13, upstream 대비 479커밋·신규 스킬 10개 뒤처짐. 문서의 스킬 수·이름·경로도 실제와 불일치 | `git pull` + 신규 심링크 + 문서 갱신 |

@@ -21,30 +21,42 @@ Anthropic이 공식 제공하는 범용 스킬 모음이다. PDF, XLSX, PPTX, DO
 
 ## 설치 (Claude Code 기준)
 
-### 방법 A: 플러그인 마켓플레이스 (권장)
-```bash
-/plugin marketplace add anthropics/skills
-/plugin install document-skills@anthropic-agent-skills
-# example-skills도 동일 세트 — 하나만 설치하면 된다
-```
-스킬이 `document-skills:<스킬명>` 네임스페이스로 등록된다. `~/.claude/plugins/repos/`는 사용하지 않는다.
+이 환경은 **방법 A(clone + 심링크)**를 쓴다(Codex와 원본 공유, 스킬 단위 제외 가능).
 
-### 방법 B: git clone + 심링크 (수동)
+### 방법 A: git clone + 심링크 (채택)
 ```bash
 mkdir -p ~/.claude/plugins/repos ~/.claude/skills
-git clone --depth 1 https://github.com/anthropics/skills.git ~/.claude/plugins/repos/document-skills
+git clone https://github.com/anthropics/skills.git ~/.claude/plugins/repos/document-skills
 
-# 17개 스킬 일괄 심링크
+# academy-guide, discernment-nudge 제외
 for skill in ~/.claude/plugins/repos/document-skills/skills/*/; do
-  ln -sfn "$skill" ~/.claude/skills/$(basename "$skill")
+  name=$(basename "$skill")
+  case "$name" in academy-guide|discernment-nudge) continue;; esac
+  ln -sfn "$skill" ~/.claude/skills/"$name"
 done
 ```
 
-설치 결과: algorithmic-art, brand-guidelines, canvas-design, claude-api, doc-coauthoring, docx, frontend-design, internal-comms, mcp-builder, pdf, pptx, skill-creator, slack-gif-creator, theme-factory, web-artifacts-builder, webapp-testing, xlsx (총 17개).
+설치 결과(17개): algorithmic-art, brand-guidelines, canvas-design, claude-api, doc-coauthoring, docx, frontend-design, internal-comms, mcp-builder, pdf, pptx, skill-creator, slack-gif-creator, theme-factory, web-artifacts-builder, webapp-testing, xlsx.
+
+제외(2026-10-02, 토큰 비용):
+- `academy-guide` (7.7KB): Claude 사용법 질문마다 "답변 마무리 전 확인"하도록 트리거.
+- `discernment-nudge` (10.6KB): 실질적인 답변·초안마다 "최종 답변 전 호출"하도록 트리거 → 답변당 ~2.7k 토큰.
+
+참고:
+- claude.ai 계정 로그인 시 `anthropic-skills:docx/pdf/pptx/xlsx/skill-creator`가 별도로 노출되어 목록에 두 번 보인다. 목록 예산만 조금 더 쓰고 동작 문제는 없다. API 키 로그인·Codex에서는 계정 스킬이 없으므로 로컬 심링크를 유지한다.
+- `claude-api`는 description 트리거가 넓다(Claude·Anthropic 언급 시). Claude API 개발을 안 하는 기기는 심링크를 빼도 된다.
+
+### 방법 B: 플러그인 마켓플레이스
+```bash
+/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills
+```
+`document-skills:<스킬명>` 네임스페이스. 전체 설치라 위 제외가 안 된다. 방법 A와 동시에 쓰지 않는다.
 
 ### 업데이트
 ```bash
-cd ~/.claude/plugins/repos/document-skills && git pull
+cd ~/.claude/plugins/repos/document-skills && git pull --ff-only
+ls skills   # 새 스킬이 있으면 비용·트리거 확인 후 심링크
 ```
 
 ---

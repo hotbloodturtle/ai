@@ -61,7 +61,13 @@ cd ~/.claude/skills/gstack && ./setup
 
 ## 참고
 
-- 업데이트: `/gstack-upgrade` 슬래시 커맨드
+- 업데이트: `/gstack-upgrade` 슬래시 커맨드, 또는 직접:
+  ```bash
+  cd ~/.claude/plugins/repos/gstack && git pull --ff-only
+  ./setup --host claude --no-prefix --no-team --no-plan-tune-hooks --no-timeline-stop-hook </dev/null
+  ```
+  플래그 없이 실행하면 질문이 뜨거나 전역 `settings.json`에 훅(plan-tune, timeline Stop, team 자동 업데이트)이 등록될 수 있다. 훅은 매 호출 비용이 생기므로 끈다. `--no-prefix`는 기존 이름(`review`, `ship` 등) 유지.
+- **토큰 비용 주의**: 주요 스킬 SKILL.md가 크다(2026-10-02 v1.91.12: `office-hours` 86KB, `plan-ceo-review` 81KB, `ship` 79KB, `review` 75KB, `qa` 52KB → 호출당 ~12–21k 토큰). `autoplan`은 여러 리뷰 스킬을 연쇄로 읽는다. 필요할 때만 명시 호출한다.
 
 ---
 

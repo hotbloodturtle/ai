@@ -5,8 +5,8 @@ description: Bootstrap GitHub Spec Kit when the user asks for Spec Kit, speckit,
 
 # Spec Kit
 
-Check `specify --version` and `specify init --help`. The verified baseline is 0.16.4.
-If missing, install with `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.16.4`.
+Check `specify --version` and `specify init --help`. The verified baseline is 1.0.13.
+If missing, install with `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.0.13`.
 
 Initialize the user's intended project, not this reference repository:
 

@@ -32,7 +32,7 @@
 |------|------|-----------|------|------|
 | Superpowers | 스킬 (clone + 심링크) | 14개 개발 워크플로 스킬 (TDD, 디버깅, 코드 리뷰 등) | 필수 | [superpowers.md](superpowers.md) |
 | Document-Skills | 플러그인 | 문서 작성 17개 스킬 (pdf, xlsx, pptx, docx 등) | 추천 | [document-skills.md](document-skills.md) |
-| Marketing Skills | 스킬 | 33개 마케팅 전문 스킬 (SEO, CRO, 카피라이팅) | 선택 | [marketing-skills.md](marketing-skills.md) |
+| Marketing Skills | 스킬 | 50개 마케팅 전문 스킬 (SEO, CRO, 카피라이팅) | 선택 | [marketing-skills.md](marketing-skills.md) |
 | Claude SEO | 스킬 | 16개 SEO 서브스킬 + 10개 서브에이전트 | 선택 | [claude-seo.md](claude-seo.md) |
 | Context7 | MCP | 최신 라이브러리 문서를 컨텍스트에 주입 | 추천 | [context7.md](context7.md) |
 | Task Master | MCP | PRD → 구조화된 태스크 분해 | 선택 | [task-master.md](task-master.md) |
@@ -96,7 +96,7 @@ curl -fsSL https://bun.sh/install | bash   # gstack용
 brew install rtk claude-squad
 npm install -g @playwright/cli@latest
 npm install -g agent-device@latest   # 기기 자동화 (Node 22.12+), 설치 후 agent-device doctor
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.16.4   # Spec Kit CLI, 스킬은 프로젝트에서 `specify init . --integration claude` ([spec-kit.md](spec-kit.md))
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.0.13   # Spec Kit CLI, 스킬은 프로젝트에서 `specify init . --integration claude` ([spec-kit.md](spec-kit.md))
 # Claude Agent SDK는 전역 CLI가 아니라 프로젝트별 라이브러리다 → 쓰는 프로젝트에서 `npm install @anthropic-ai/claude-agent-sdk` ([agent-sdk.md](agent-sdk.md))
 ```
 

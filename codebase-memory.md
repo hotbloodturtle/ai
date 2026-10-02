@@ -30,6 +30,8 @@ Codebase Memory는 코드베이스를 지식 그래프(Knowledge Graph)로 인�
 ### macOS / Linux
 ```bash
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
+# 이미 설정된 기기의 바이너리만 업데이트 (MCP·훅·스킬 설정 유지):
+# curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh -o /tmp/cbm-install.sh && bash /tmp/cbm-install.sh --skip-config
 source ~/.zshrc   # ~/.local/bin이 PATH에 없었다면 자동 추가됨
 ```
 
