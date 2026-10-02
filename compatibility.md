@@ -4,7 +4,7 @@
 
 | 도구 | Claude Code | Codex | 차이 / 사용 범위 |
 |---|---|---|---|
-| [Superpowers](superpowers.md) | 플러그인 | 공식 플러그인 | 각 에이전트에 별도 설치 |
+| [Superpowers](superpowers.md) | clone + 심링크 (플러그인 가능) | 공식 플러그인 | 각 에이전트에 별도 설치. Claude는 세션 훅 주입을 피하려 심링크 방식 |
 | [Document Skills](document-skills.md) | 플러그인/스킬 | 개별 스킬 | claude-api 제외 가능, 문서 런타임 별도 |
 | [Marketing Skills](marketing-skills.md) | 스킬 | 스킬 | SEO suite와 seo-audit 이름 충돌 조정 |
 | [Claude SEO](claude-seo.md) | claude-seo | codex-seo 별도 저장소 | Codex TOML agents·Python venv 포함 |

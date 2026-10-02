@@ -29,7 +29,7 @@
 
 | 이름 | 분류 | 핵심 가치 | 티어 | 파일 |
 |------|------|-----------|------|------|
-| Superpowers | 플러그인 | 14개 개발 워크플로 스킬 (TDD, 디버깅, 코드 리뷰 등) | 필수 | [superpowers.md](superpowers.md) |
+| Superpowers | 스킬 (clone + 심링크) | 14개 개발 워크플로 스킬 (TDD, 디버깅, 코드 리뷰 등) | 필수 | [superpowers.md](superpowers.md) |
 | Document-Skills | 플러그인 | 문서 작성 17개 스킬 (pdf, xlsx, pptx, docx 등) | 추천 | [document-skills.md](document-skills.md) |
 | Marketing Skills | 스킬 | 33개 마케팅 전문 스킬 (SEO, CRO, 카피라이팅) | 선택 | [marketing-skills.md](marketing-skills.md) |
 | Claude SEO | 스킬 | 16개 SEO 서브스킬 + 10개 서브에이전트 | 선택 | [claude-seo.md](claude-seo.md) |
@@ -99,8 +99,8 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스**: Superpowers, Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#codex-및-현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 두 에이전트에서 재사용하기 쉽다.
-- **git clone + flat 심링크**: Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
+- **플러그인 마켓플레이스**: Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#codex-및-현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 두 에이전트에서 재사용하기 쉽다.
+- **git clone + flat 심링크**: Superpowers(세션 훅 주입 회피, [superpowers.md](superpowers.md)), Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
 - **얇은 전역 래퍼 (프로젝트 설치형 도구)**: agent-device, Spec Kit, BMAD(v6~)는 전역에 `~/.claude/skills/<이름>/SKILL.md` 래퍼만 두고(각 문서 부록 A) 실제 스킬은 프로젝트에서 생성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md), [bmad-method.md](bmad-method.md)).
 - **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code`, Archify는 `npx -y skills add tt-a1i/archify -g -y -a claude-code` 후 `archify-review` 제거 ([archify.md](archify.md)) ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
 
@@ -136,9 +136,9 @@ curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/i
 | 대상 | 확인 방법 |
 |------|-----------|
 | CLI 도구 | `command -v rtk claude-squad playwright-cli bun node uv gh tmux` |
-| 플러그인 | `~/.claude/plugins/installed_plugins.json` — superpowers, serena, document-skills/example-skills, frontend-design, ponytail, claude-hud 등 |
+| 플러그인 | `~/.claude/plugins/installed_plugins.json` — serena, document-skills/example-skills, frontend-design, ponytail, claude-hud 등 |
 | MCP 서버 | `claude mcp list` — context7, task-master, codebase-memory (serena는 플러그인 설치 시 `plugin:serena:serena`) |
-| 스킬 | `ls ~/.claude/skills/` — flat 심링크(marketing 등)와 개인 스킬 확인 |
+| 스킬 | `ls ~/.claude/skills/` — flat 심링크(superpowers 14개, marketing 등)와 개인 스킬 확인 |
 | 슬래시 커맨드 | `ls ~/.claude/commands/` — explain-diff 등 |
 | statusLine | `~/.claude/settings.json`의 `statusLine` + `~/.claude/claude-hud-statusline.sh` 존재 |
 | 디자인 레퍼런스 | `ls ~/.claude/design-systems/awesome-design-md/design-md \| wc -l` (upstream 증가 중 — 실제 수를 따른다) |

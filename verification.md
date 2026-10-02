@@ -30,6 +30,7 @@
 
 | 대상 | 검증 결과 | 검증 범위의 한계 |
 |---|---|---|
+| Superpowers 6.4.2 | Claude: clone `git pull`(f2cbfbe→8ca22db), 심링크 14개 확인, `diagnosing-superpowers` 제외. Codex 플러그인 6.4.2 확인 | 워크플로 실행 검증 아님 |
 | Archify 3.0.1 | skills CLI 전역 설치, `doctor` 전 항목 ok, `demo` HTML 생성, 동반 설치된 `archify-review` 제거 | 실제 레포 기반 다이어그램 생성·Codex 설치는 미실행 |
 
 ## 재현 과정에서 수정한 문제
