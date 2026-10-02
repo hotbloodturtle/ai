@@ -18,6 +18,7 @@
 | [last30days](https://github.com/mvanhorn/last30days-skill) | 2026-10-02 | 제외 | `SKILL.md` 260KB → **호출당 ~65k 토큰**. X 무료 경로는 브라우저 쿠키 추출(계정 위험), 첫 실행 시 외부 CLI 자동 설치. 필요하면 스킬 대신 엔진 CLI(`python3 scripts/last30days.py "주제"`)만 사용 |
 | [agent-skills](https://github.com/addyosmani/agent-skills) (전체) | 2026-10-02 | 제외 | 25개 중 대부분 Superpowers·Spec Kit·gstack·내장 명령과 중복. `test-driven-development` 이름 충돌, `/review`·`/ship` 명령 충돌. 스킬당 ~13.5KB |
 | [mattpocock/skills](https://github.com/mattpocock/skills) (나머지) | 2026-10-02 | 제외 | `tdd`·`diagnosing-bugs`·`code-review`·`retro`·`handoff` 등 기존과 중복, `to-spec`·`triage` 등은 레포별 이슈 트래커 셋업 필요. 선별 3개는 [mattpocock-skills.md](mattpocock-skills.md) |
+| [taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-10-02 | 제외 | Hallmark(사용 중)와 같은 안티 AI-slop 디자인 목적. 메인 스킬 87KB(~22k 토큰)로 더 큼. `output-skill`은 "모든 작업"에 완전 출력 강제 → 토큰 증가 |
 | Superpowers `diagnosing-superpowers` | 2026-10-02 | 제외 | 메인테이너용 버그 리포트 스킬, description 오발동 위험 ([superpowers.md](superpowers.md)) |
 | Document Skills `academy-guide`, `discernment-nudge` | 2026-10-02 | 제외 | 거의 모든 답변 직전에 호출되도록 트리거 → 답변당 수천 토큰 ([document-skills.md](document-skills.md)) |
 | Archify `archify-review` | 2026-10-02 | 제외 | archify 레포 관리용 리뷰 스킬, description 오발동 위험 ([archify.md](archify.md)) |
