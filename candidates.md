@@ -20,6 +20,7 @@
 | [agent-skills](https://github.com/addyosmani/agent-skills) (전체) | 2026-10-02 | 제외 | 25개 중 대부분 Superpowers·Spec Kit·gstack·내장 명령과 중복. `test-driven-development` 이름 충돌, `/review`·`/ship` 명령 충돌. 스킬당 ~13.5KB |
 | [mattpocock/skills](https://github.com/mattpocock/skills) (나머지) | 2026-10-02 | 제외 | `tdd`·`diagnosing-bugs`·`code-review`·`retro`·`handoff` 등 기존과 중복, `to-spec`·`triage` 등은 레포별 이슈 트래커 셋업 필요. 선별 3개는 [mattpocock-skills.md](mattpocock-skills.md) |
 | [taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-10-02 | 제외 | Hallmark(사용 중)와 같은 안티 AI-slop 디자인 목적. 메인 스킬 87KB(~22k 토큰)로 더 큼. `output-skill`은 "모든 작업"에 완전 출력 강제 → 토큰 증가 |
+| [Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) | 2026-10-02 | 제외 | `/understand`가 서브에이전트로 레포 전체 파일을 LLM 분석(메인 스킬 59KB + 코드 전체 → 중간 레포 수십만 토큰). autoUpdate 시 SessionStart 훅이 "묻지 말고 갱신" 지시. codebase-memory(로컬 파싱, 0토큰)·Serena·archify와 중복 |
 | Superpowers `diagnosing-superpowers` | 2026-10-02 | 제외 | 메인테이너용 버그 리포트 스킬, description 오발동 위험 ([superpowers.md](superpowers.md)) |
 | Document Skills `academy-guide`, `discernment-nudge` | 2026-10-02 | 제외 | 거의 모든 답변 직전에 호출되도록 트리거 → 답변당 수천 토큰 ([document-skills.md](document-skills.md)) |
 | Archify `archify-review` | 2026-10-02 | 제외 | archify 레포 관리용 리뷰 스킬, description 오발동 위험 ([archify.md](archify.md)) |
