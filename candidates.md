@@ -7,6 +7,7 @@
 | 대상 | 설치할 때 | 설치 방법 | 비고 |
 |------|-----------|-----------|------|
 | mattpocock `improve-codebase-architecture` + `codebase-design` + `domain-modeling` | 큰 코드베이스 구조 정리 | `npx -y skills add mattpocock/skills --skill <이름> ... -g -y -a claude-code` | 묶음으로만 동작(`grilling`·`GLOSSARY.md` 의존) |
+| [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) `ui-ux-pro-max` 스킬만 | 앱 UI 품질 개선 시 **app-auto 레포에 프로젝트 단위로** | 스킬 폴더(`.claude/skills/ui-ux-pro-max`)만 복사 | 전역 제외 이유: description이 모든 UI 작업에 트리거(+5–6k 토큰), Hallmark·frontend-design과 중복, 키워드 검색 품질 보통. 플러그인은 기존 `design`과 이름 충돌하는 7개 스킬 동반 |
 | [pm-skills](https://github.com/phuryn/pm-skills) `pm-product-discovery`, `pm-product-strategy` | 새 제품 기획 | `claude plugin marketplace add phuryn/pm-skills` → `claude plugin install <플러그인>@pm-skills --scope project` | `--scope project` 동작 미검증 |
 | [agent-skills](https://github.com/addyosmani/agent-skills) `api-and-interface-design`, `observability-and-instrumentation` 등 | 해당 작업 본격 착수 | `npx -y skills add addyosmani/agent-skills --skill <이름> -g -y -a claude-code` | 하나씩만 |
 
