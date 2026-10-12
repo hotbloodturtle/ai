@@ -21,6 +21,7 @@
 | [mattpocock/skills](https://github.com/mattpocock/skills) (나머지) | 2026-10-02 | 제외 | `tdd`·`diagnosing-bugs`·`code-review`·`retro`·`handoff` 등 기존과 중복, `to-spec`·`triage` 등은 레포별 이슈 트래커 셋업 필요. 선별 3개는 [mattpocock-skills.md](mattpocock-skills.md) |
 | [taste-skill](https://github.com/Leonxlnx/taste-skill) | 2026-10-02 | 제외 | Hallmark(사용 중)와 같은 안티 AI-slop 디자인 목적. 메인 스킬 87KB(~22k 토큰)로 더 큼. `output-skill`은 "모든 작업"에 완전 출력 강제 → 토큰 증가 |
 | [Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) | 2026-10-02 | 제외 | `/understand`가 서브에이전트로 레포 전체 파일을 LLM 분석(메인 스킬 59KB + 코드 전체 → 중간 레포 수십만 토큰). autoUpdate 시 SessionStart 훅이 "묻지 말고 갱신" 지시. codebase-memory(로컬 파싱, 0토큰)·Serena·archify와 중복 |
+| [context-mode](https://github.com/mksglu/context-mode) | 2026-10-12 | 제외 | v1.0.169, ELv2. 플러그인이 훅 6종을 등록하는데, 그중 PreToolUse가 Bash·Read·Grep·WebFetch·Agent·`mcp__` 전체에 걸려 curl/wget과 빌드 명령을 sandbox로 강제 우회시키고, SessionStart에서 라우팅 블록(~8KB)을 상시 주입. RTK(Bash 압축)·codebase-memory 게이트 훅·Ponytail과 겹치고, 훅 체인이 3중으로 쌓여 모든 툴 호출에 node 프로세스가 추가로 뜬다. app-auto의 gradle/fastlane/adb 흐름을 깰 위험이 있다. 써야 한다면 훅 없이 MCP만 등록(`claude mcp add context-mode -- npx -y context-mode`)해서 프로젝트 단위로 시험 |
 | Superpowers `diagnosing-superpowers` | 2026-10-02 | 제외 | 메인테이너용 버그 리포트 스킬, description 오발동 위험 ([superpowers.md](superpowers.md)) |
 | Document Skills `academy-guide`, `discernment-nudge` | 2026-10-02 | 제외 | 거의 모든 답변 직전에 호출되도록 트리거 → 답변당 수천 토큰 ([document-skills.md](document-skills.md)) |
 | Archify `archify-review` | 2026-10-02 | 제외 | archify 레포 관리용 리뷰 스킬, description 오발동 위험 ([archify.md](archify.md)) |
