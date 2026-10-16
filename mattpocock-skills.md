@@ -27,7 +27,6 @@ Matt Pocock의 "작고 조합 가능한" 엔지니어링 스킬 모음 중 **3�
 npx -y skills add mattpocock/skills --skill grilling --skill grill-me --skill writing-for-agents -g -y -a claude-code
 ```
 
-- 각 폴더의 `agents/openai.yaml`은 Codex 표시용 메타데이터라 Claude에는 영향 없다.
 - 플러그인(`claude plugins install mattpocock-skills`)은 27개 전체가 설치되므로 쓰지 않는다. skills CLI와 동시 사용 시 중복된다.
 
 업데이트:
@@ -50,13 +49,3 @@ npx -y skills update -g
 ## 보류한 스킬
 
 [candidates.md](candidates.md) 참고 (`improve-codebase-architecture` 묶음 등).
-
----
-
-## Codex
-
-```bash
-npx -y skills add mattpocock/skills --skill grilling --skill grill-me --skill writing-for-agents -g -y -a codex
-```
-
-이번 기기에서는 Codex 설치를 검증하지 않았다.

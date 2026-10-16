@@ -71,8 +71,8 @@ tiangolo `full-stack-fastapi-template`(FastAPI + React) 실제 레포에서 12�
 
 ## 동작 방식
 
-Claude Code/Codex에선 **가벼운 Node.js 라이프사이클 훅(lifecycle hook)**으로 매 응답 전 결정 사다리를 주입한다.
-다른 에디터(Cursor/Windsurf/Cline 등)는 룰 파일 복사 방식. 멀티 플랫폼 지원(Claude Code, Codex, Copilot CLI, Gemini, OpenCode, Pi 등).
+Claude Code에선 **가벼운 Node.js 라이프사이클 훅(lifecycle hook)**으로 매 응답 전 결정 사다리를 주입한다.
+다른 에디터(Cursor/Windsurf/Cline 등)는 룰 파일 복사 방식. 멀티 플랫폼 지원(Claude Code, Copilot CLI, Gemini, OpenCode, Pi 등).
 
 ## 공식 링크
 
@@ -91,23 +91,10 @@ Claude Code/Codex에선 **가벼운 Node.js 라이프사이클 훅(lifecycle hoo
 ## 설치 확인
 
 - 설치 경로: `~/.claude/plugins/cache/ponytail/ponytail/<버전>` (`installed_plugins.json`에서 활성 버전 확인).
-- 구성: **명령어 6개**(`commands/*.toml`) + **스킬 6개**(`skills/*/SKILL.md`: ponytail, -audit, -debt, -gain, -help, -review) + **라이프사이클 훅 5개**(`hooks/ponytail-*.js`, `plugin.json` → `hooks/claude-codex-hooks.json` 참조). MCP 서버(`ponytail-mcp/`)도 동봉되나 Claude Code 플러그인은 훅 기반으로 동작.
+- 구성: **명령어 6개**(`commands/*.toml`) + **스킬 6개**(`skills/*/SKILL.md`: ponytail, -audit, -debt, -gain, -help, -review) + **라이프사이클 훅 5개**(`hooks/ponytail-*.js`, `plugin.json` → 훅 설정 참조). MCP 서버(`ponytail-mcp/`)도 동봉되나 Claude Code 플러그인은 훅 기반으로 동작.
 - 세션 시작 시 SessionStart 훅이 "PONYTAIL MODE ACTIVE" 컨텍스트를 주입하면 정상.
 
 ## 검증된 함정
 
 - **마켓플레이스 클론의 버전 표기**: `~/.claude/plugins/marketplaces/ponytail`의 `package.json` 버전은 실제 활성 버전과 다를 수 있다 — **캐시 디렉터리(`plugins/cache/.../<버전>`)가 기준**이다(혼동 주의).
 - **nvm node와 비대화형 셸 PATH**: 훅이 Node.js로 도는데, README가 "Nix/nvm 사용자는 *비대화형 셸 PATH*에 node가 있어야 한다"고 경고한다. node를 nvm 등으로 관리하는 기기는 `zsh -c 'command -v node'`로 비대화형 셸에서도 node가 잡히는지 확인할 것. node가 PATH에 없는 환경(예: GUI 직접 실행, cron)에서 Claude Code를 띄우면 always-on 활성화 훅이 조용히 비활성화된다(스킬 자체는 동작). 그런 환경에선 `~/.claude/settings.json`의 `env`나 셸 초기화로 node PATH를 보장할 것.
-
----
-
-## Codex
-
-```bash
-codex plugin marketplace add DietrichGebert/ponytail
-codex plugin add ponytail@ponytail
-```
-
-[upstream Codex 안내](https://github.com/DietrichGebert/ponytail#codex)에 따른다. 2026-09-08에는 4.9.0 설치를 확인했다. CLI 설치 후 Codex 앱도 재시작해 반영 여부를 확인한다. `/hooks`에서 라이프사이클 훅의 명령을 검토·신뢰하고 새 스레드에서 사용한다. node가 GUI/비대화형 셸 PATH에서도 보여야 한다.
-
-플러그인 설치 성공과 always-on 훅 실행 성공은 별도다. 위 본문의 훅·명령 개수는 당시 버전 기준이므로 현재 manifest를 확인한다.

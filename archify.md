@@ -60,15 +60,3 @@ npx -y skills update -g
 | `artifact-diagramming` (내장) | 아티팩트용 SVG 작성 요령. Archify는 검증 엔진·인터랙션·소스 링크까지 가진 전용 도구 |
 | [Codebase Memory](codebase-memory.md) `get_architecture` | 구조를 텍스트로 파악 → Archify로 시각화. 보완 |
 | [explain-diff](explain-diff.md) | diff 설명용. 겹치지 않음 |
-
----
-
-## Codex
-
-upstream이 Codex를 지원한다(`~/.agents/skills/`).
-
-```bash
-npx -y skills add tt-a1i/archify -g -y -a codex
-```
-
-이번 기기에서는 Codex 설치를 검증하지 않았다.

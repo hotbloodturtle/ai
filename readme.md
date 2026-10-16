@@ -1,15 +1,14 @@
 # AI 도구 레퍼런스
 
-새 기기에서 **Claude Code 또는 Codex, 혹은 둘 다** 사용할 수 있도록 AI 도구·스킬·MCP의 설치와 사용 방법을 정리한 레퍼런스다.
+새 기기에서 **Claude Code**를 사용할 수 있도록 AI 도구·스킬·MCP의 설치와 사용 방법을 정리한 레퍼런스다.
 
-- 새 기기 설정: [Claude / Codex 설치 가이드](setup-guide.md)
-- 도구별 지원 여부와 차이: [호환성 표](compatibility.md)
+- 새 기기 설정: [Claude Code 설치 가이드](setup-guide.md)
 - 버전별 검증 근거와 남은 범위: [검증 기록](verification.md)
 - 평가 후 보류·제외한 도구: [후보 목록](candidates.md)
 - 복원용 공통 스킬 원본: [skills/](skills/)
 - 키를 출력하지 않는 로컬 상태 점검: [scripts/check-setup.py](scripts/check-setup.py) (Python 3.11+)
 
-아래 기존 일괄 설치 명령은 **Claude Code용**이다. Codex는 설치 가이드와 각 문서의 Codex 섹션을 따른다. 공용 문서에는 재현 절차를, 기기별 설치 결과는 Git 제외 `.local/`에 기록한다.
+공용 문서에는 재현 절차를, 기기별 설치 결과는 Git 제외 `.local/`에 기록한다.
 
 ---
 
@@ -21,7 +20,7 @@
 | MCP (Model Context Protocol) | 에이전트에게 외부 세계 접근 권한 부여. DB, API, 브라우저 등 연결. |
 | Plugin | Skill + MCP를 패키징하여 마켓플레이스로 설치/관리. |
 | SDK | 에이전트 능력을 프로그래밍 API로 노출. 자율 에이전트 구축용. |
-| Rules | 에이전트의 행동 규칙 정의. CLAUDE.md, AGENTS.md 등. |
+| Rules | 에이전트의 행동 규칙 정의. CLAUDE.md 등. |
 | Templates | 반복 작업의 구조 템플릿. |
 
 ---
@@ -79,7 +78,7 @@ Android QA 자동화 → ~~[android-qa-agent-setup.md](android-qa-agent-setup.md
 
 ## Claude Code 설치 가이드
 
-기존 Claude 설치 순서를 보존한 안내다(2026-05~08 검증 기반). 2026-09 변경점과 Codex 구성은 [공통 설치 가이드](setup-guide.md)를 우선한다. 기존 설치가 있으면 같은 도구를 다시 등록하지 않는다.
+기존 Claude 설치 순서를 보존한 안내다(2026-05~08 검증 기반). 2026-09 변경점은 [공통 설치 가이드](setup-guide.md)를 우선한다. 기존 설치가 있으면 같은 도구를 다시 등록하지 않는다.
 
 ### 1. 프리렉(prerequisite)
 ```bash
@@ -101,7 +100,7 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1
 ```
 
 ### 3. 스킬 (설치 경로 2가지)
-- **플러그인 마켓플레이스**: Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#codex-및-현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 두 에이전트에서 재사용하기 쉽다.
+- **플러그인 마켓플레이스**: Document-Skills/example-skills, frontend-design, Ponytail, Claude HUD는 `/plugin install <이름>@<마켓플레이스>`로 설치. `~/.claude/plugins/cache/`에 들어간다. Serena 새 설치는 [현행 수동 MCP 안내](serena.md#현행-설치-권장)를 우선한다. 독립 clone 원본은 `~/.local/share/ai-tools/`에 두면 재사용하기 쉽다.
 - **git clone + flat 심링크**: Superpowers(세션 훅 주입 회피, [superpowers.md](superpowers.md)), Marketing, planning-with-files, gstack, Awesome Design. 각 스킬 docs의 "설치" 섹션 참고.
 - **얇은 전역 래퍼 (프로젝트 설치형 도구)**: agent-device, Spec Kit, BMAD(v6~)는 전역에 `~/.claude/skills/<이름>/SKILL.md` 래퍼만 두고(각 문서 부록 A) 실제 스킬은 프로젝트에서 생성 ([agent-device.md](agent-device.md), [spec-kit.md](spec-kit.md), [bmad-method.md](bmad-method.md)).
 - **skills CLI**: Hallmark는 `npx -y skills add nutlope/hallmark -g -y -a claude-code`, Archify는 `npx -y skills add tt-a1i/archify -g -y -a claude-code` 후 `archify-review` 제거 ([archify.md](archify.md)), Matt Pocock은 `--skill`로 3개만 ([mattpocock-skills.md](mattpocock-skills.md)) ([hallmark.md](hallmark.md) — `-g`/`-a` 플래그 함정 있음). ⚠️ Claude Code는 `~/.claude/skills/<스킬>/SKILL.md` 한 단계만 스캔하므로, 레포를 통째로 클론한 경우(예: Marketing) 각 스킬을 **최상위로 flat 심링크**해야 인식된다.
@@ -126,7 +125,7 @@ curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/i
 
 과거 Claude auto mode에서는 설정 편집·외부 설치기·셸 환경 변경이 차단된 사례가 있었다. 이는 당시 환경의 관찰이며 모든 기기에서 사용자 수동 실행을 요구하는 규칙이 아니다. 현재 세션의 승인 범위와 실제 도구 오류를 기준으로 처리한다.
 
-이미 허용된 설치·설정은 진행하되 기존 설정을 병합하고 검증한다. 실제 승인 거절이 발생하면 동작과 사유를 설명하고 허용되는 방식으로 해결한다. 같은 차단을 우회하려고 cp/heredoc 등 명령 형태만 바꾸지 않는다. Codex 훅 신뢰 확인은 별도의 `/hooks` 절차다.
+이미 허용된 설치·설정은 진행하되 기존 설정을 병합하고 검증한다. 실제 승인 거절이 발생하면 동작과 사유를 설명하고 허용되는 방식으로 해결한다. 같은 차단을 우회하려고 cp/heredoc 등 명령 형태만 바꾸지 않는다.
 
 ---
 

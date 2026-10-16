@@ -13,15 +13,13 @@ pkill -f claude-mem                      # worker·mcp-server·chroma-mcp
 rm -rf ~/.claude-mem \
   ~/.claude/plugins/cache/thedotmack \
   ~/.claude/plugins/marketplaces/thedotmack ~/.claude/plugins/marketplaces/thedotmack-claude-mem
-# Codex에 설치했었다면
-rm -rf ~/.codex/plugins/cache/thedotmack/claude-mem ~/.codex/plugins/cache/claude-mem-local
 ```
 
 ## 확인
 
 ```bash
 pgrep -fl claude-mem                      # 출력 없어야 함
-grep -rn "claude-mem\|thedotmack" ~/.claude/settings.json ~/.claude/plugins/*.json ~/.claude.json ~/.codex/config.toml  # 출력 없어야 함
+grep -rn "claude-mem\|thedotmack" ~/.claude/settings.json ~/.claude/plugins/*.json ~/.claude.json  # 출력 없어야 함
 ```
 
 `~/.claude.json`의 `skillUsage`/`pluginUsage` 카운터는 남아도 무해하다(재설치 트리거 아님).

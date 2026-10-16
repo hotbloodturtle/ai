@@ -19,7 +19,7 @@
 
 ### 사용 예시
 
-설치 없이 이 문서를 작업 요청에 지정하면 된다. Claude와 Codex 모두 문서를 읽고 관련 원칙을 적용하는 방식이다.
+설치 없이 이 문서를 작업 요청에 지정하면 된다. Claude가 문서를 읽고 관련 원칙을 적용하는 방식이다.
 
 ```text
 senior-thinking-skills.md의 record-the-why 기준으로 이번 도구 선택의
@@ -48,11 +48,11 @@ senior-thinking-skills.md의 premortem 기준으로 이번 저장 흐름의
 
 - **라우터:** 작은 변경도 설계를 제시하고 멈추라는 지침과, 방향이 명확하면 계속 진행하라는 지침이 함께 있다. 기존 계획 워크플로 위에 또 다른 중단 기준을 추가하지 않는다.
 - **interface-contracts:** 관찰 가능한 동작까지 호환성으로 점검하는 원칙은 유용하다. 다만 API·의존성 버전을 하나만 허용하는 절대 규칙은 채택하지 않는다. 외부 소비자의 단계적 이전이 필요한 경우를 따로 판단한다.
-- **delegate-to-subagents:** 실행 중 메시지 교환 설명과 중간 상태 채널이 없다는 설명이 함께 있어 환경별 해석이 필요하다. 제공 훅의 Claude 도구 이름·이벤트를 Codex에 그대로 복사하지 않는다.
+- **delegate-to-subagents:** 실행 중 메시지 교환 설명과 중간 상태 채널이 없다는 설명이 함께 있어 환경별 해석이 필요하다.
 - **조직 규모별 관점:** Principal·Distinguished·Executive 관점은 해당 영향 범위가 실제로 있는 작업에만 참고한다. 작은 수정에 조직·예산 검토를 의무화하지 않는다.
 
 위 판단의 원문: [라우터](https://github.com/songjiun10-collab/Senior-thinking-skills/blob/be98e588b4b5455b5ca95c11d2beacdfef4360be/senior-engineer-mindset/SKILL.md), [인터페이스 계약](https://github.com/songjiun10-collab/Senior-thinking-skills/blob/be98e588b4b5455b5ca95c11d2beacdfef4360be/interface-contracts/SKILL.md), [위임](https://github.com/songjiun10-collab/Senior-thinking-skills/blob/be98e588b4b5455b5ca95c11d2beacdfef4360be/delegate-to-subagents/SKILL.md).
 
 ## 재검토 조건
 
-선별 원칙을 반복해서 수동 지정하게 되거나, 기존 워크플로가 같은 실수를 반복할 때 해당 원칙만 독립 스킬로 도입할지 검토한다. 이때 실제 작업 사례로 효과와 불필요한 중단 여부를 확인하고 Claude/Codex 실행 검증을 별도로 기록한다.
+선별 원칙을 반복해서 수동 지정하게 되거나, 기존 워크플로가 같은 실수를 반복할 때 해당 원칙만 독립 스킬로 도입할지 검토한다. 이때 실제 작업 사례로 효과와 불필요한 중단 여부를 확인하고 Claude 실행 검증을 별도로 기록한다.
