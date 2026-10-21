@@ -117,7 +117,7 @@ curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/i
 ```
 
 ### 5. 글로벌 설정
-- `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고)
+- `~/.claude/CLAUDE.md` — Awesome Design 트리거 규칙 ([awesome-design-md.md](awesome-design-md.md) 참고) + **새 이슈는 논의·계획부터** 규칙(2026-10-21, 원문은 `../bale/CLAUDE.md` 의 같은 섹션 — 기기마다 복사)
 - `~/.claude/settings.json` — Android QA permissions(`Bash(adb *)`, `Bash(emulator *)` 등) + `env.CLAUDE_CODE_DISABLE_AUTO_MEMORY` + `env.RTK_TELEMETRY_DISABLED=1` + `env.ARCHIFY_UPDATE_CHECK_DISABLED=1` + `statusLine`(claude-hud 래퍼, [claude-hud.md](claude-hud.md) 참고)
 
 ---
