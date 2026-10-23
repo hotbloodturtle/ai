@@ -7,7 +7,7 @@
 | 대상 | 검증 결과 | 검증 범위의 한계 |
 |---|---|---|
 | CLI (brew) | rtk 0.50.0→**1.0.1**(`rtk hook claude` 재작성 응답 확인, BSL 1.1 구성요소 포함 — [rtk.md](rtk.md)), uv 0.13.5, gh 2.103.0, tmux 3.8, node 26.12.1. claude-squad 1.0.20·playwright-cli 0.1.22는 이미 최신 | |
-| agent-device 0.21.31 | npm 전역 업데이트 | `doctor` 실패 — 예전 0.21.19 데몬이 떠 있음([agent-device.md](agent-device.md#검증-이력)). 데몬 정리 후 재확인 필요 |
+| agent-device 0.21.31 | npm 전역 업데이트, 예전 0.21.19 데몬 종료·남은 잠금 파일 정리 후 `doctor` warn(hard blocker 없음, [agent-device.md](agent-device.md#검증-이력)) | 실제 기기 조작 미실행 |
 | Spec Kit 1.2.3 | `uv tool install ... --force`, 빈 폴더 init 스모크(`speckit-*` 10개 + `.specify/`) | 실제 프로젝트 워크플로 미실행 |
 | BMAD 6.12.4 | 빈 폴더 스모크 설치 → `bmad-*` 29개 + `_bmad/` | 워크플로 미실행 |
 | codebase-memory-mcp 0.12.1 | `install.sh --skip-config`(바이너리만), MCP initialize + tools/list(17개) 직접 확인, settings.json 변경 없음. 기기 스킬이 깨진 원본으로 돌아가 있어 저장소 복원본으로 교체 | 실행 중 세션의 MCP 는 재시작 후 재연결 |
@@ -16,7 +16,7 @@
 | gstack 1.91.182 | `git pull` + 훅 없는 setup, settings.json 무변경 확인, `proactive=false` 유지, 다시 생긴 `codex` 스킬 삭제 | |
 | skills CLI | `npx skills update -g`: hallmark·archify(3.2)·grilling 갱신, `archify-review` 재생성 없음 | 실제 생성 미실행 |
 | 플러그인 | ponytail 4.10.0→**5.3.2**(훅 3개, 상시 ~641토큰), claude-hud 0.10.0→0.12.1(래퍼가 최신 버전 자동 선택), slack 1.4.1 최신 | 재시작 후 반영 |
-| Codex 정리 | 기기의 `~/.claude/skills/codex`(gstack 래퍼)·`~/.local/share/ai-tools/codex-seo` 삭제. 문서에는 이미 없음 | |
+| Codex 정리 | 기기에서 Codex 전부 제거: `@openai/codex` CLI(`npm uninstall -g`), `~/.codex`, `~/.claude/skills/codex`(gstack 래퍼), `~/.local/share/ai-tools/codex-seo`. 문서에는 이미 없음 | |
 
 ## 2026-10-02 — macOS / Claude Code
 
