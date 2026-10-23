@@ -65,7 +65,8 @@ cd ~/.claude/skills/gstack && ./setup
   ```bash
   cd ~/.claude/plugins/repos/gstack && git pull --ff-only
   ./setup --host claude --no-prefix --no-team --no-plan-tune-hooks --no-timeline-stop-hook </dev/null
+  rm -rf ~/.claude/skills/codex   # OpenAI Codex CLI 래퍼 — Codex 안 씀. setup 이 매번 다시 만든다(제외 옵션 없음, 2026-10-23 확인)
   ```
   플래그 없이 실행하면 질문이 뜨거나 전역 `settings.json`에 훅(plan-tune, timeline Stop, team 자동 업데이트)이 등록될 수 있다. 훅은 매 호출 비용이 생기므로 끈다. `--no-prefix`는 기존 이름(`review`, `ship` 등) 유지.
-- **토큰 비용 주의**: 주요 스킬 SKILL.md가 크다(2026-10-02 v1.91.12: `office-hours` 86KB, `plan-ceo-review` 81KB, `ship` 79KB, `review` 75KB, `qa` 52KB → 호출당 ~12–21k 토큰). `autoplan`은 여러 리뷰 스킬을 연쇄로 읽는다. 필요할 때만 명시 호출한다.
+- **토큰 비용 주의**: 주요 스킬 SKILL.md가 크다(2026-10-23 v1.91.182: `office-hours` 92KB, `plan-ceo-review` 78KB, `ship` 79KB, `review` 78KB, `qa` 49KB → 호출당 ~12–23k 토큰). `autoplan`은 여러 리뷰 스킬을 연쇄로 읽는다. 필요할 때만 명시 호출한다.
 - **자동 실행 끄기**: `~/.claude/plugins/repos/gstack/bin/gstack-config set proactive false` — 기본값(true)이면 상황을 보고 스킬을 알아서 실행한다. false면 "/review 돌릴까요?"처럼 먼저 묻는다(2026-10-02 적용).

@@ -46,16 +46,17 @@ git clone https://github.com/AgriciDaniel/claude-seo.git ~/.claude/plugins/repos
 PATH="$(brew --prefix python@3.11)/libexec/bin:$PATH" bash ~/.claude/plugins/repos/claude-seo/install.sh
 ```
 
-`install.sh`는 로컬 clone이 아니라 **GitHub의 고정 태그(2026-10-02: v2.4.1)를 임시로 받아** `~/.claude/skills/seo*`와 `~/.claude/agents/`에 복사한다. 설정 파일·훅 등록은 하지 않는다(훅은 스킬 폴더에 복사만, plugin 설치 시에만 강제).
+`install.sh`는 로컬 clone이 아니라 **GitHub의 고정 태그(2026-10-23: v2.5.0)를 임시로 받아** `~/.claude/skills/seo*`와 `~/.claude/agents/`에 복사한다. 설정 파일·훅 등록은 하지 않는다(훅은 스킬 폴더에 복사만, plugin 설치 시에만 강제).
 
 **`~/.claude/skills/seo`와 `seo-*`는 반드시 실제 폴더여야 한다.** 심링크로 두면 인스톨러가 링크를 따라가 원본 레포를 덮어쓴다(→ [Marketing Skills 함정](marketing-skills.md#검증된-함정)).
 
 업데이트: `git -C ~/.claude/plugins/repos/claude-seo pull --ff-only` 후 위 인스톨러 재실행(태그는 `install.sh`에 고정, `CLAUDE_SEO_TAG`로 변경 가능).
 
-설치 결과 (v2.4.1):
+설치 결과 (v2.5.0, 2026-10-23):
 - `~/.claude/skills/seo/` (SKILL.md + `.venv` + Playwright Chrome). `.venv`는 install.sh가 감지한 3.10+ 인터프리터로 생성된다 — brew `python@3.11`이 없어도 3.10+만 잡히면 동작.
 - `~/.claude/skills/seo-*/` 서브스킬 + 확장 스킬(v2.4.1: seo-agentic, seo-ahrefs, seo-bing, seo-matomo, seo-profound, seo-seranking, seo-unlighthouse 추가). 기본 서브스킬 (seo-audit, seo-page, seo-technical, seo-schema, seo-content, seo-geo, seo-local, seo-maps, seo-images, seo-sitemap, seo-hreflang, seo-programmatic, seo-competitor-pages, seo-dataforseo, seo-plan, seo-image-gen)
-- `~/.claude/agents/seo-*.md` **서브에이전트 10개**: seo-content, seo-dataforseo, seo-geo, seo-image-gen, seo-local, seo-performance, seo-schema, seo-sitemap, seo-technical, seo-visual
+- `~/.claude/skills/seo*` 33개(허브 `seo` 포함). v2.5.0에서 seo-backlinks·seo-cluster·seo-content-brief·seo-drift·seo-ecommerce·seo-firecrawl·seo-flow·seo-google·seo-sxo 등이 함께 설치된다
+- `~/.claude/agents/seo-*.md` **서브에이전트 20개**: seo-agentic, seo-backlinks, seo-cluster, seo-content, seo-dataforseo, seo-drift, seo-ecommerce, seo-flow, seo-geo, seo-google, seo-image-gen, seo-local, seo-maps, seo-matomo, seo-performance, seo-schema, seo-sitemap, seo-sxo, seo-technical, seo-visual
 - DataForSEO MCP (옵션)
 
 ### 검증된 함정

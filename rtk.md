@@ -33,4 +33,9 @@ brew install rtk
 export RTK_TELEMETRY_DISABLED=1
 ```
 
+### 1.0 변경 사항 (2026-10-23 1.0.1 확인)
+- `rtk proxy <cmd>` → **`rtk bypass <cmd>`** (옛 이름은 별칭으로 계속 동작), `--ultra-compact` 제거, `rtk gain` 헤드라인 비율에서 너무 큰 출력 제외.
+- **라이선스**: CLI 본체는 Apache-2.0 그대로, 엔진·프록시 구성요소는 **BSL 1.1**. 실사용은 무료(개인·회사 포함), 다른 사람에게 유료·호스팅 서비스로 제공하는 것만 금지. 2030-09-09에 Apache-2.0 전환.
+- Claude Code 훅 명령(`rtk hook claude`)은 그대로 — `settings.json` 수정 불필요.
+
 > `RTK_TELEMETRY_DISABLED=1`은 `~/.zshrc` 또는 `~/.claude/settings.json`의 `env`에 넣어야 영구 적용된다 (export만으로는 해당 셸에서만 유효).

@@ -26,7 +26,7 @@ for skill in ~/.claude/plugins/repos/marketing-skills/skills/*/; do
 done
 ```
 
-설치 결과: 50개 중 seo-audit 제외 49개 활성화.
+설치 결과: 52개 중 seo-audit 제외 51개 활성화 (2026-10-23 v2.13.0 — 신규 `conversion-tracking`, `link-building` 심링크).
 
 ### 검증된 함정
 - `seo-audit`는 claude-seo와 이름이 겹친다. `~/.claude/skills/seo-audit`는 **claude-seo가 만든 실제 폴더**여야 한다. 마케팅 원본으로 가는 심링크로 두면 claude-seo `install.sh`가 심링크를 따라가 **마케팅 원본 파일을 덮어쓴다**(2026-10-02 실제 발생, 복구함).

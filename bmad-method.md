@@ -45,10 +45,10 @@ Spec Kit·agent-device와 같은 패턴: 전역에는 얇은 래퍼 스킬만 �
 
 ```bash
 # Node 20.12+, uv 필요
-npx -y bmad-method@6.11.0 install --directory . --modules bmm --tools claude-code --yes
+npx -y bmad-method@6.12.4 install --directory . --modules bmm --tools claude-code --yes
 ```
 
-생성물: `.claude/skills/bmad-*/` **49개**(코어 8 + bmm 22 + deprecated shim 19), `_bmad/{_config,bmm,core,custom,scripts}/`, `_bmad-output/`.
+생성물(6.12.4): `.claude/skills/bmad-*/` **29개**, `_bmad/{_config,bmm,core,custom,render,scripts}/`, `config.toml`, `_bmad-output/`.
 `--yes`는 shim까지 설치한다. 대화형(`npx bmad-method install`)으로 돌리면 shim 제외 선택 가능.
 설치 후 `_bmad/bmm/config.yaml`의 `user_name`, `communication_language`(ko) 조정 → 새 세션에서 `/bmad-help`.
 
@@ -77,7 +77,8 @@ mkdir -p ~/.claude/skills/bmad-method
 
 ## 검증 기록
 
-- 2026-08-19: v6.11.0 `npx -y bmad-method@6.11.0 install --directory . --modules bmm --tools claude-code --yes` → 49 스킬 + `_bmad/` 생성 확인. 깨진 전역 심링크 제거, 래퍼 스킬 등록 (부록 A). 레포 클론(`~/.claude/plugins/repos/bmad-method`)은 참고용으로만 남김(remote는 bmad-code-org로 변경).
+- 2026-10-23: v6.12.4 빈 폴더 스모크 설치 → `.claude/skills/bmad-*` **29개**(6.11의 deprecated shim 19개 빠짐) + `_bmad/{_config,bmm,core,custom,render,scripts}` + `config.toml`. 설치 끝에 v7 마이그레이션(`bmad migrate`, 베타) 안내가 나온다
+- 2026-08-19: v6.11.0 `npx -y bmad-method@6.12.4 install --directory . --modules bmm --tools claude-code --yes` → 49 스킬 + `_bmad/` 생성 확인. 깨진 전역 심링크 제거, 래퍼 스킬 등록 (부록 A). 레포 클론(`~/.claude/plugins/repos/bmad-method`)은 참고용으로만 남김(remote는 bmad-code-org로 변경).
 - 2026-05: 구버전 flat 심링크 44개 (폐기)
 
 ## 부록 A: SKILL.md 템플릿
@@ -103,10 +104,10 @@ node -v   # 20.12+ 필요. uv도 필요 (스킬이 uv run _bmad/scripts/*.py 호
 ## 부트스트랩
 
 ```bash
-ls _bmad 2>/dev/null || npx -y bmad-method@6.11.0 install --directory . --modules bmm --tools claude-code --yes
+ls _bmad 2>/dev/null || npx -y bmad-method@6.12.4 install --directory . --modules bmm --tools claude-code --yes
 ```
 
-생성물: `.claude/skills/bmad-*/` (49개, deprecated shim 포함), `_bmad/{_config,bmm,core,custom,scripts}/`, `_bmad-output/`.
+생성물: `.claude/skills/bmad-*/` (29개), `_bmad/{_config,bmm,core,custom,render,scripts}/`, `_bmad-output/`.
 init 직후에는 새 스킬이 현재 세션에 로드되지 않을 수 있다 → 사용자에게 **세션 재시작** 안내.
 `_bmad/bmm/config.yaml`의 `user_name`, `communication_language`(예: ko)를 사용자에게 확인/조정 권유.
 

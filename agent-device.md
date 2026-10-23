@@ -78,7 +78,11 @@ agent-device screenshot out.png
 agent-device close
 ```
 
-## 검증 이력 (2026-08)
+## 검증 이력
+
+- 2026-10-23: 0.21.19 → 0.21.31 (`npm install -g agent-device@latest`). `doctor`가 `Daemon registration ownership could not be verified`로 실패 — **예전 버전 데몬(0.21.19)이 떠 있으면 생긴다.** 업그레이드 전에 쓰던 세션을 끝내고 예전 데몬을 멈춘 뒤 `doctor`를 다시 돌린다(상태 파일 `~/.agent-device/daemon.json`의 `version`·`pid`로 확인)
+
+### 2026-08
 
 - v0.20.3 설치, `doctor` 통과 (Vega CLI 미설치 경고만 — TV 개발 안 하면 무시)
 - 연결된 Android 실기기(Galaxy A34) + AVD + iOS 시뮬레이터 29대 자동 인식

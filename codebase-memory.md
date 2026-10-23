@@ -53,4 +53,6 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/DeusData/codebase-memor
 
 - 제로 디펜던시(Zero Dependency) 단일 바이너리.
 - 자동 분류기는 `curl ... | bash` 패턴을 차단할 수 있으므로 사용자가 직접 실행해야 함.
+- **설치 후 `~/.claude/skills/codebase-memory/SKILL.md`를 이 저장소 `skills/codebase-memory/SKILL.md`로 덮어쓴다.** 인스톨러가 만드는 원본은 description 의 따옴표 없는 콜론 때문에 YAML 파싱이 깨진다(2026-10-23 다시 깨져 있는 것 발견 → 복원). 바이너리만 바꾸는 `--skip-config` 업데이트는 스킬을 건드리지 않는다.
+- 바이너리를 바꾸면 실행 중인 세션의 MCP 연결이 끊긴다 → Claude Code 재시작.
 - PreToolUse 훅이 Read/Grep을 가로채 codebase-memory-mcp 도구로 유도하므로, 단순 텍스트 검색 시에도 게이트 메시지가 출력될 수 있음.
