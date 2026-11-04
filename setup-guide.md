@@ -118,6 +118,8 @@ python3.11 scripts/check-setup.py > .local/setup-check.json
 
 ## 업데이트·복구
 
+- **일괄 최신화: `bash scripts/update-tools.sh`** — brew·npm CLI, clone 스킬(pull + 새 스킬 심링크, 제외 정책 유지), gstack 훅 없는 setup·codex 제거, claude-seo 인스톨러(변경 시), 플러그인, skills CLI, Spec Kit 최신 태그를 올린다. 멱등(새 버전 없으면 ~20초, "바뀐 것 없음"). 외부 설치 스크립트(codebase-memory)는 알리기만 한다. app-auto `/app-pull` 이 이 파일을 찾아 매번 실행한다. 갱신이 있으면 `verification.md` 에 기록. 주기 점검은 없다 — 작업자 지시 또는 `/app-pull` 때.
+
 - 개인 설치 결과·로그는 Git에서 제외한 `.local/`에 보관한다. 공용 문서에는 검증한 버전·명령·제약을 기록한다.
 - 전역 설정/인증 파일은 커밋하지 않는다. 공용 저장소에는 키 없는 예제와 복원용 스킬 원본만 둔다.
 - 독립 clone은 `git status` 확인 → `git pull --ff-only` → 도구 setup 재실행.
