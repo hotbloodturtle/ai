@@ -2,6 +2,19 @@
 
 공용 설치 절차의 근거를 기록한다. 개인 기기의 설치 목록·경로·인증 상태는 Git 제외 `.local/`에 보관한다.
 
+## 2026-11-04 — macOS(MacBook Pro) / Claude Code 2.1.318 (전체 최신화)
+
+| 대상 | 검증 결과 | 검증 범위의 한계 |
+|---|---|---|
+| CLI (brew) | rtk 1.0.1→**1.1.0**, uv 0.13.7, gh 2.103.3, node 26.13.0 | |
+| CLI (npm) | playwright-cli 0.1.23, agent-device 0.21.36 — 옛 데몬(0.21.31, 20시간)이 남아 `doctor` 가 busy 실패 → 연결 기기 없음 확인 후 `daemon stop` → `doctor` warn(hard blocker 없음) | 실제 기기 조작 미실행 |
+| Spec Kit 1.3.0 | `uv tool install ... --force`, 빈 폴더 init 스모크 → `speckit-*` **9개**(1.2.3 은 10개) + `.specify/` | 실제 워크플로 미실행 |
+| clone 스킬 | superpowers v7.0.2(14개 그대로), marketing-skills v2.14.0(신규 `reverse-engineer-marketing` 심링크 → 52개), document-skills ca45fc4(새 스킬 `academy-guide`·`discernment-nudge` 는 정책대로 제외), planning-with-files v3.28.0, bmad-method 클론 022be93(npm 6.12.4 그대로), awesome-design-md fcc7028(84개), claude-seo·cmux 변경 없음. 깨진 심링크 없음 | 각 워크플로 실행 검증 아님 |
+| gstack 1.91.182→**1.95.4** | `git pull` + 훅 없는 setup, settings.json 무변경(shasum), `proactive=false` 유지, `codex` 스킬 삭제 | |
+| skills CLI | `npx skills update -g`: hallmark·archify 갱신, 재실행 시 전부 최신. `archify-review` 재생성 없음 | |
+| 플러그인 | ponytail 5.3.2→5.3.3, claude-hud 0.12.1→0.15.1, slack 1.4.1 최신 | 재시작 후 반영 |
+| codebase-memory-mcp 0.12.1 | GitHub 최신 릴리스와 같음 → 업데이트 없음 | |
+
 ## 2026-10-23 — macOS / Claude Code (전체 최신화)
 
 | 대상 | 검증 결과 | 검증 범위의 한계 |
