@@ -7,7 +7,7 @@
 | 대상 | 검증 결과 | 검증 범위의 한계 |
 |---|---|---|
 | update-tools.sh | /app-pull 경유 실행 → MacBook Pro 기록과 같은 버전으로 수렴: rtk 1.1.0, agent-device 0.21.36(옛 데몬 0.21.31 자동 종료), Spec Kit 1.3.0, claude-hud 0.15.1, ponytail 5.3.3, clone 스킬 5개·skills CLI 3개 갱신, `reverse-engineer-marketing` 신규 심링크, 깨진 심링크 없음 | 각 워크플로 실행 미검증 |
-| gstack | **미갱신 (1.91.182, 원격보다 403커밋 뒤)** — 이 기기는 `~/.claude/skills/gstack` 에 직접 클론돼 있어 스크립트의 `plugins/repos/*` 순회에 안 잡힘 | 작업자가 수동 갱신 필요 |
+| gstack 1.91.182→**1.95.5** | 이 기기는 `~/.claude/skills/gstack` 에 직접 클론돼 있어 스크립트의 `plugins/repos/*` 순회에 안 잡힘(403커밋 뒤) → 작업자가 gstack.md 절차(pull + 훅 없는 setup + `codex` 삭제 + `proactive=false`)로 수동 갱신. settings.json 수정시각 10-28 그대로·gstack 훅 없음, 깨진 심링크 없음 | 스크립트가 이 경로를 아직 못 잡음 |
 
 ## 2026-11-04 — macOS(MacBook Pro) / Claude Code 2.1.318 (전체 최신화)
 
