@@ -92,6 +92,7 @@ Claude Code에선 **가벼운 Node.js 라이프사이클 훅(lifecycle hook)**�
 
 - 설치 경로: `~/.claude/plugins/cache/ponytail/ponytail/<버전>` (`installed_plugins.json`에서 활성 버전 확인).
 - 구성: **명령어 6개**(`commands/*.toml`) + **스킬 6개**(`skills/*/SKILL.md`: ponytail, -audit, -debt, -gain, -help, -review) + **라이프사이클 훅**(v5.3.2: SessionStart·SubagentStart·UserPromptSubmit 3개, 4.x는 5개). MCP 서버(`ponytail-mcp/`)도 동봉되나 Claude Code 플러그인은 훅 기반으로 동작.
+- 2026-11-04: 5.3.2 → 5.3.3.
 - 2026-10-23: 4.10.0 → 5.3.2 (`claude plugin update ponytail@ponytail`). `claude plugin details ponytail@ponytail` 기준 항상 드는 비용 ~641토큰/세션.
 - 세션 시작 시 SessionStart 훅이 "PONYTAIL MODE ACTIVE" 컨텍스트를 주입하면 정상.
 

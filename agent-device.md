@@ -80,6 +80,7 @@ agent-device close
 
 ## 검증 이력
 
+- 2026-11-04: 0.21.31 → 0.21.36. 옛 데몬(0.21.31)이 떠 있어 `doctor` 가 `The running daemon is busy and was not replaced` — 연결 기기 없음 확인 후 `agent-device daemon stop --state-dir ~/.agent-device` → `doctor` warn(hard blocker 없음).
 - 2026-10-23: 0.21.19 → 0.21.31 (`npm install -g agent-device@latest`). `doctor`가 `Daemon registration ownership could not be verified`로 실패 — **예전 버전 데몬(0.21.19)이 떠 있으면 생긴다.** 해결: 쓰던 세션을 끝내고 예전 데몬(`~/.agent-device/daemon.json`의 `pid`)을 종료 → 데몬이 죽어도 남는 `daemon.json`·`daemon.lock`·`daemon-shutdown.json`을 옮긴 뒤 `doctor` 재실행 → `warn`(HarmonyOS `hdc`·Vega CLI 미설치 경고만, 쓰지 않으면 무시), 새 데몬 0.21.31
 
 ### 2026-08

@@ -36,15 +36,15 @@ Spec Kit은 "코드보다 스펙을 먼저" 쓰게 만드는 GitHub 공식 워�
 전역은 CLI만, 스킬은 **프로젝트별**로 들어간다 (전역 `~/.claude/skills`가 아님).
 
 ```bash
-# 1. CLI (Python 3.11+, uv 필요) — 검증 v1.2.3
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.2.3
+# 1. CLI (Python 3.11+, uv 필요) — 검증 v1.3.0
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.3.0
 specify --version
 
 # 2. 프로젝트에 적용
 specify init . --integration claude --script sh     # 기존 프로젝트: --here / 새 프로젝트: specify init <name> --integration claude
 ```
 
-생성물: `.claude/skills/speckit-*/` (10개), `.specify/{memory,scripts,templates,workflows}/`.
+생성물: `.claude/skills/speckit-*/` (9개, v1.3.0), `.specify/{memory,scripts,templates,workflows}/`.
 이후 Claude Code에서 `/speckit-constitution` → `/speckit-specify "..."` 순으로 진행.
 
 주의:
@@ -59,7 +59,7 @@ agent-device와 같은 패턴으로 얇은 전역 래퍼를 두면 "spec kit"이
 
 ```bash
 # 1. CLI
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.2.3
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.3.0
 # 2. 부록 A → ~/.claude/skills/spec-kit/SKILL.md 저장
 mkdir -p ~/.claude/skills/spec-kit
 # 3. 새 세션에서 "spec kit으로 시작해줘" 로 확인
@@ -79,6 +79,7 @@ mkdir -p ~/.claude/skills/spec-kit
 ## 검증 기록
 
 - 2026-08-19: 전역 래퍼 `~/.claude/skills/spec-kit/SKILL.md` 등록 (부록 A)
+- 2026-11-04: v1.3.0로 업그레이드(`uv tool install ... --force`), 빈 폴더 init 스모크 → `speckit-*` 9개 + `.specify/`
 - 2026-10-23: v1.2.3로 업그레이드(`uv tool install ... --force`), 빈 폴더에서 `specify init . --integration claude --script sh --force`로 `speckit-*` 10개 + `.specify/` 생성 확인
 - 2026-10-02: v1.0.13로 업그레이드, `specify init . --integration claude`로 `speckit-*` 10개(신규 `speckit-converge` 포함) + `.specify/` 생성 확인
 - 2026-08-19: v0.16.4 `uv tool install` 전역 설치, `specify init sk-demo --integration claude --script sh` 로 10개 스킬 + `.specify/` 생성 확인
@@ -100,7 +101,7 @@ GitHub 공식 스펙 주도 개발 툴킷. 스킬(`/speckit-*`)은 프로젝트�
 ## 사전 확인
 
 ```bash
-command -v specify || uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.2.3   # Python 3.11+, uv 필요
+command -v specify || uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.3.0   # Python 3.11+, uv 필요
 ```
 
 ## 부트스트랩
@@ -109,7 +110,7 @@ command -v specify || uv tool install specify-cli --from git+https://github.com/
 ls .specify 2>/dev/null || specify init . --integration claude --script sh   # 비어있지 않은 디렉토리면 --force
 ```
 
-생성물: `.claude/skills/speckit-*/` (10개), `.specify/{memory,scripts,templates,workflows}/`.
+생성물: `.claude/skills/speckit-*/` (9개, v1.3.0), `.specify/{memory,scripts,templates,workflows}/`.
 init 직후에는 새 스킬이 현재 세션에 로드되지 않을 수 있다 → 사용자에게 **세션 재시작(또는 새 세션)** 을 안내한다.
 
 ## 이후 순서 (사용자에게 안내)
