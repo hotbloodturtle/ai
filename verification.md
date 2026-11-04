@@ -2,6 +2,14 @@
 
 공용 설치 절차의 근거를 기록한다. 개인 기기의 설치 목록·경로·인증 상태는 Git 제외 `.local/`에 보관한다.
 
+## 2026-11-05 — macOS(MacBook Pro) / Claude Code (`scripts/update-tools.sh` 실행)
+
+| 대상 | 검증 결과 | 검증 범위의 한계 |
+|---|---|---|
+| update-tools.sh | /app-pull 경유 실행 → Mac mini 기록과 같은 버전으로 수렴: rtk 1.1.0, agent-device 0.21.36(옛 데몬 0.21.31 자동 종료), Spec Kit 1.3.0, claude-hud 0.15.1, ponytail 5.3.3, clone 스킬 6개(bmad-method v6.12.0, document-skills, marketing-skills v2.14.0, planning-with-files v3.28.0, superpowers v7.0.2, awesome-design-md)·skills CLI 3개 갱신, `reverse-engineer-marketing` 신규 심링크, 깨진 심링크 없음 | 각 워크플로 실행 미검증, 플러그인은 재시작 후 반영 |
+| cmux | `cmux.sh` 에 커밋 안 된 로컬 변경이 있어 스크립트가 건너뜀 | 미갱신 |
+| gstack 1.91.182 | 이 기기도 `~/.claude/skills/gstack` 직접 클론이라 스크립트가 못 잡음. 자동 모드가 setup 실행을 막아 미갱신 → 작업자 수동 갱신 필요 | 미갱신 |
+
 ## 2026-11-04 — macOS(Mac mini) / Claude Code 2.1.318 (`scripts/update-tools.sh` 첫 실행)
 
 | 대상 | 검증 결과 | 검증 범위의 한계 |
