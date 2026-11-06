@@ -96,7 +96,7 @@ curl -fsSL https://bun.sh/install | bash   # gstack용
 brew install rtk claude-squad
 npm install -g @playwright/cli@latest
 npm install -g agent-device@latest   # 기기 자동화 (Node 22.12+), 설치 후 agent-device doctor
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.3.0   # Spec Kit CLI, 스킬은 프로젝트에서 `specify init . --integration claude` ([spec-kit.md](spec-kit.md))
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.3.1   # Spec Kit CLI, 스킬은 프로젝트에서 `specify init . --integration claude` ([spec-kit.md](spec-kit.md))
 # Claude Agent SDK는 전역 CLI가 아니라 프로젝트별 라이브러리다 → 쓰는 프로젝트에서 `npm install @anthropic-ai/claude-agent-sdk` ([agent-sdk.md](agent-sdk.md))
 ```
 

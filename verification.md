@@ -2,6 +2,13 @@
 
 공용 설치 절차의 근거를 기록한다. 개인 기기의 설치 목록·경로·인증 상태는 Git 제외 `.local/`에 보관한다.
 
+## 2026-11-06 — macOS(Mac mini) / Claude Code 2.1.318 (`scripts/update-tools.sh` 실행)
+
+| 대상 | 검증 결과 | 검증 범위의 한계 |
+|---|---|---|
+| update-tools.sh | /app-pull 경유 실행(ai 리포 1커밋 pull 후): Spec Kit v1.3.0→**v1.3.1**(문서 고정 태그 갱신), skills CLI hallmark 갱신, brew·npm CLI·clone 스킬·플러그인·codebase-memory-mcp 0.12.1 최신, document-skills 새 스킬(`academy-guide`·`discernment-nudge`) 정책대로 미연결 | 각 워크플로 실행 미검증 |
+| Spec Kit 1.3.1 | 빈 폴더 `specify init . --integration claude` 스모크 → `speckit-*` **9개** + `.specify/` | 실제 워크플로 미실행 |
+
 ## 2026-11-05 — macOS(MacBook Pro) / Claude Code 2.1.318 (`scripts/update-tools.sh` 2차 실행)
 
 | 대상 | 검증 결과 | 검증 범위의 한계 |
